@@ -1,0 +1,1 @@
+SpringFuse Provide basic framework and class library based on Spring Framework
