@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.github.herowzz</groupId>
+	<artifactId>springfuse</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+
+	<name>springfuse</name>
+	<url>https://github.com/herowzz/springfuse</url>
+	<description>Provide basic framework and class library based on Spring Framework.</description>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+
+		<springfuse.version>1.0</springfuse.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>3.8.1</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<developers>
+		<developer>
+			<id>springfuse</id>
+			<name>herowzz</name>
+			<email>wzzwxh@gmail.com</email>
+			<roles>
+				<role>Project leader</role>
+			</roles>
+			<timezone>+8</timezone>
+		</developer>
+	</developers>
+
+	<mailingLists>
+		<mailingList>
+			<name>herowzz</name>
+			<post>wzzwxh@gmail.com</post>
+		</mailingList>
+	</mailingLists>
+
+	<issueManagement>
+		<system>Github</system>
+		<url>https://github.com/herowzz/springfuse/issues</url>
+	</issueManagement>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+
+
+	<modules>
+		<module>springfuse-core</module>
+	</modules>
+	
+</project>
