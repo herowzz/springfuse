@@ -14,6 +14,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.lang.NonNull;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
@@ -36,7 +37,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @throws javax.persistence.EntityNotFoundException if no entity exists for given {@code id}.
 	 */
 	@Transactional(readOnly = true)
-	public T findById(ID id) {
+	public T findById(@NonNull ID id) {
 		return getEntityDao().getOne(id);
 	}
 
@@ -51,7 +52,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * 更新实体
 	 * @param entity 实体对象
 	 */
-	public <S extends T> S saveAndFlush(S entity) {
+	public <S extends T> S saveAndFlush(@NonNull S entity) {
 		return getEntityDao().saveAndFlush(entity);
 	}
 
@@ -59,7 +60,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * 更新实体
 	 * @param entity 实体对象
 	 */
-	public <S extends T> S save(S entity) {
+	public <S extends T> S save(@NonNull S entity) {
 		return getEntityDao().save(entity);
 	}
 
@@ -67,7 +68,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * 批量更新实体
 	 * @param entityList 实体列表
 	 */
-	public <S extends T> List<S> saveAll(Iterable<S> entities) {
+	public <S extends T> List<S> saveAll(@NonNull Iterable<S> entities) {
 		return getEntityDao().saveAll(entities);
 	}
 
@@ -75,7 +76,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * 批量更新实体
 	 * @param entityList 实体列表
 	 */
-	public <S extends T> List<S> saveAll(S[] entities) {
+	public <S extends T> List<S> saveAll(@NonNull S[] entities) {
 		return saveAll(Arrays.asList(entities));
 	}
 
@@ -83,7 +84,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * 删除实体
 	 * @param entity 实体对象
 	 */
-	public void delete(T entity) {
+	public void delete(@NonNull T entity) {
 		getEntityDao().delete(entity);
 	}
 
@@ -91,14 +92,14 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * 根据Id删除实体
 	 * @param id
 	 */
-	public void deleteById(ID id) {
+	public void deleteById(@NonNull ID id) {
 		getEntityDao().deleteById(id);
 	}
 
 	/**
 	 * 根据Id数组批量删除实体
 	 */
-	public void delete(ID[] ids) {
+	public void delete(@NonNull ID[] ids) {
 		for (ID id : ids) {
 			deleteById(id);
 		}
@@ -107,14 +108,14 @@ public abstract class BaseService<T, ID extends Serializable> {
 	/**
 	 * 根据实体列表批量删除
 	 */
-	public void deleteAll(Iterable<? extends T> entities) {
+	public void deleteAll(@NonNull Iterable<? extends T> entities) {
 		getEntityDao().deleteAll(entities);
 	}
 
 	/**
 	 * 根据实体列表批量删除
 	 */
-	public void deleteAll(T[] entities) {
+	public void deleteAll(@NonNull T[] entities) {
 		for (T entity : entities) {
 			getEntityDao().delete(entity);
 		}
@@ -130,7 +131,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	/**
 	 * 删除所有实体(批量)
 	 */
-	public void deleteInBatch(Iterable<T> entities) {
+	public void deleteInBatch(@NonNull Iterable<T> entities) {
 		getEntityDao().deleteInBatch(entities);
 	}
 
@@ -176,7 +177,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return 存在返回true
 	 */
 	@Transactional(readOnly = true)
-	public boolean exists(ID id) {
+	public boolean exists(@NonNull ID id) {
 		return getEntityDao().existsById(id);
 	}
 
@@ -325,7 +326,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return 单个对象，没有则返回Null
 	 */
 	@Transactional(readOnly = true)
-	public Optional<T> findOneEq(String param, Object value) {
+	public Optional<T> findOneEq(@NonNull String param, @NonNull Object value) {
 		return getEntityDao().findOne((root, query, cb) -> cb.equal(root.get(param), value));
 	}
 
@@ -336,7 +337,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return List 查询结果集
 	 */
 	@Transactional(readOnly = true)
-	public List<T> findAllEq(String queryName, Object queryValue) {
+	public List<T> findAllEq(@NonNull String queryName, @NonNull Object queryValue) {
 		return getEntityDao().findAll((root, query, cb) -> {
 			if (StringUtils.hasText(queryName) && queryValue != null) {
 				String[] names = queryName.split("\\.");
@@ -358,7 +359,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return List 查询结果集
 	 */
 	@Transactional(readOnly = true)
-	public Page<T> findPageEq(Pageable pageable, String queryName, Object queryValue) {
+	public Page<T> findPageEq(Pageable pageable, @NonNull String queryName, @NonNull Object queryValue) {
 		return getEntityDao().findAll((root, query, cb) -> {
 			if (StringUtils.hasText(queryName) && queryValue != null) {
 				String[] names = queryName.split("\\.");
@@ -379,7 +380,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return 查询结果列表
 	 */
 	@Transactional(readOnly = true)
-	public List<T> findAllLike(String queryName, String queryValue) {
+	public List<T> findAllLike(@NonNull String queryName, @NonNull String queryValue) {
 		return getEntityDao().findAll((root, query, cb) -> {
 			if (StringUtils.hasText(queryValue) && StringUtils.hasText(queryName)) {
 				String[] names = queryName.split("\\.");
@@ -401,7 +402,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return 分页列表
 	 */
 	@Transactional(readOnly = true)
-	public Page<T> findPageLike(Pageable pageable, String queryName, String queryValue) {
+	public Page<T> findPageLike(Pageable pageable, @NonNull String queryName, @NonNull String queryValue) {
 		return getEntityDao().findAll((root, query, cb) -> {
 			if (StringUtils.hasText(queryValue) && StringUtils.hasText(queryName)) {
 				String[] names = queryName.split("\\.");
@@ -425,7 +426,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return 分页列表
 	 */
 	@Transactional(readOnly = true)
-	public Page<T> findPageLikeOrder(Pageable pageable, String queryName, String queryValue, String orderBy, String orderDirect) {
+	public Page<T> findPageLikeOrder(Pageable pageable, @NonNull String queryName, @NonNull String queryValue, @NonNull String orderBy, @NonNull String orderDirect) {
 		return getEntityDao().findAll((root, query, cb) -> {
 			if (StringUtils.hasText(orderBy)) {
 				if (StringUtils.hasText(orderDirect)) {
@@ -457,7 +458,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return 对象列表
 	 */
 	@Transactional(readOnly = true)
-	public List<T> findAllByDateBetween(String dateName, Date beginDate, Date endDate) {
+	public List<T> findAllByDateBetween(@NonNull String dateName, @NonNull Date beginDate, @NonNull Date endDate) {
 		return getEntityDao().findAll((root, query, cb) -> {
 			Path<?> expression = root.get(dateName);
 			Predicate dateWhere = cb.between(expression.as(Date.class), beginDate, endDate);
@@ -476,7 +477,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return 对象分页列表
 	 */
 	@Transactional(readOnly = true)
-	public Page<T> findPageByDateBetween(Pageable pageable, String dateName, Date beginDate, Date endDate) {
+	public Page<T> findPageByDateBetween(@NonNull Pageable pageable, @NonNull String dateName, @NonNull Date beginDate, @NonNull Date endDate) {
 		return getEntityDao().findAll((root, query, cb) -> {
 			Path<?> expression = root.get(dateName);
 			Predicate dateWhere = cb.between(expression.as(Date.class), beginDate, endDate);
@@ -497,7 +498,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return 对象分页列表
 	 */
 	@Transactional(readOnly = true)
-	public Page<T> findPageByDateBetweenAndObject(Pageable pageable, String dateName, Date beginDate, Date endDate, String objectName, Object objectValue) {
+	public Page<T> findPageByDateBetweenAndObject(@NonNull Pageable pageable, @NonNull String dateName, @NonNull Date beginDate, @NonNull Date endDate, @NonNull String objectName, @NonNull Object objectValue) {
 		if (beginDate == null || endDate == null) {
 			return this.findPageByDateDesc(pageable, dateName);
 		}
@@ -510,16 +511,31 @@ public abstract class BaseService<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 分页按时间倒叙
+	 * 分页按时间倒序
 	 * @param pageable 分页参数
 	 * @param dateName 需要排序的日期字段
 	 * @return 对象分页列表
 	 */
 	@Transactional(readOnly = true)
-	public Page<T> findPageByDateDesc(Pageable pageable, String dateName) {
+	public Page<T> findPageByDateDesc(@NonNull Pageable pageable, @NonNull String dateName) {
 		return getEntityDao().findAll((root, query, cb) -> {
 			Path<?> expression = root.get(dateName);
 			query.orderBy(cb.desc(expression.as(Date.class)));
+			return cb.conjunction();
+		}, pageable);
+	}
+
+	/**
+	 * 分页按时间正序
+	 * @param pageable 分页参数
+	 * @param dateName 需要排序的日期字段
+	 * @return 对象分页列表
+	 */
+	@Transactional(readOnly = true)
+	public Page<T> findPageByDateAsc(@NonNull Pageable pageable, @NonNull String dateName) {
+		return getEntityDao().findAll((root, query, cb) -> {
+			Path<?> expression = root.get(dateName);
+			query.orderBy(cb.asc(expression.as(Date.class)));
 			return cb.conjunction();
 		}, pageable);
 	}
