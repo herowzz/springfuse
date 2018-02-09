@@ -53,7 +53,6 @@
 		<module>springfuse-core</module>
 		<module>springfuse-jpa</module>
 		<module>springfuse-rest</module>
-		<module>springfuse-example</module>
 	</modules>
 
 	<dependencyManagement>
