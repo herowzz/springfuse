@@ -1,7 +1,9 @@
 package com.github.herowzz.springfuse.example.controller;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -9,24 +11,26 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
 
 import com.github.herowzz.springfuse.example.domain.Book;
 import com.github.herowzz.springfuse.example.domain.refrence.BookType;
-import com.github.herowzz.springfuse.example.dto.book.BookDto;
 import com.github.herowzz.springfuse.example.service.BookService;
-import com.github.herowzz.springfuse.rest.dto.ResultDTO;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@WebMvcTest(BookController.class)
 public class BookControllerTest {
 
-	@Mock
-	private BookService bookService;
+	@Autowired
+	private MockMvc mvc;
 
-	@InjectMocks
-	private BookController bookController = new BookController();
+	@MockBean
+	private BookService bookService;
 
 	@Test
 	public void testList() throws Exception {
@@ -40,13 +44,8 @@ public class BookControllerTest {
 
 		given(bookService.findAll()).willReturn(bookList);
 
-		ResultDTO<List<BookDto>> resultDto = bookController.list();
-		assertThat(resultDto.code).isEqualTo(1);
-
-		List<BookDto> bookDtoList = resultDto.data;
-		assertThat(bookDtoList.size()).isEqualTo(1);
-		assertThat(bookDtoList.get(0).name).isEqualTo("aaa");
-
+		mvc.perform(get("/book/list").accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk())
+				.andExpect(jsonPath("$.code").value(1)).andExpect(jsonPath("$.data[0].name").value("aaa"));
 	}
 
 }
