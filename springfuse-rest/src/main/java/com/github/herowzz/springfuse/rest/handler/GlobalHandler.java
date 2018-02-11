@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.github.herowzz.springfuse.core.exception.service.ServiceException;
 import com.github.herowzz.springfuse.rest.dto.ResultDTO;
 
@@ -58,6 +59,12 @@ public class GlobalHandler {
 		if (ex.getCause() instanceof IllegalArgumentException || ex instanceof JsonProcessingException || ex instanceof JsonMappingException) {
 			dto = ResultDTO.paramError();
 			dto.msg += "(类型异常:" + ex.getLocalizedMessage() + ")";
+			return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.OK);
+		}
+		if (ex.getCause() instanceof InvalidFormatException) {
+			InvalidFormatException ife = ((InvalidFormatException) ex.getCause());
+			dto = ResultDTO.paramError();
+			dto.msg += "(类型异常:参数[" + ife.getPathReference() + "] 数据类型是'" + ife.getTargetType() + "',传入参数的值是:'" + ife.getValue() + "')  " + ex.getLocalizedMessage() + ")";
 			return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.OK);
 		}
 		dto = ResultDTO.serverError();
