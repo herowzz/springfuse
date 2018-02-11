@@ -14,7 +14,11 @@ public enum ApiResultCode {
 
 	InvalidToken(4002, "无效Token"),
 
-	AuthFailed(4003, "权限认证失败");
+	AuthFailed(4003, "权限认证失败"),
+
+	HttpMethodNotSupport(4005, "Http方法不支持"),
+
+	HttpMediaTypeNotSupport(4006, "Http类型MIME不支持");
 
 	private int code;
 	private String msg;
