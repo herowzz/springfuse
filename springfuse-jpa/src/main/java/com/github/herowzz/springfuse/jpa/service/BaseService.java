@@ -33,12 +33,22 @@ public abstract class BaseService<T, ID extends Serializable> {
 	/**
 	 * 根据Id查询实体<br>
 	 * @param id
-	 * @return 实体Optional
+	 * @return 实体
 	 * @throws javax.persistence.EntityNotFoundException if no entity exists for given {@code id}.
 	 */
 	@Transactional(readOnly = true)
-	public T findById(@NonNull ID id) {
+	public T getOne(@NonNull ID id) {
 		return getEntityDao().getOne(id);
+	}
+
+	/**
+	 * 根据Id查询实体<br>
+	 * @param id
+	 * @return 实体Optional
+	 */
+	@Transactional(readOnly = true)
+	public Optional<T> findById(ID id) {
+		return getEntityDao().findById(id);
 	}
 
 	/**
