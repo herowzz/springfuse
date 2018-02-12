@@ -19,8 +19,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.github.herowzz.springfuse.core.exception.service.ServiceException;
-import com.github.herowzz.springfuse.rest.dto.ResultDTO;
-import com.github.herowzz.springfuse.rest.dto.refrence.ApiResultCode;
+import com.github.herowzz.springfuse.rest.dto.ApiResult;
+import com.github.herowzz.springfuse.rest.dto.refrence.ApiResultCodeEnum;
 
 import io.jsonwebtoken.JwtException;
 
@@ -29,35 +29,35 @@ public class GlobalHandler {
 	private static Logger logger = LoggerFactory.getLogger(GlobalHandler.class);
 
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<ResultDTO<?>> error(HttpServletRequest request, Exception ex) {
+	public ResponseEntity<ApiResult<?>> error(HttpServletRequest request, Exception ex) {
 		logger.error("Rest request error! URL: " + request.getRequestURI(), ex);
-		ResultDTO<?> dto = new ResultDTO<>();
+		ApiResult<?> dto = new ApiResult<>();
 		if (ex.getCause() instanceof IllegalArgumentException || ex instanceof JsonProcessingException || ex instanceof JsonMappingException) {
-			dto = ResultDTO.paramError();
+			dto = ApiResult.paramError();
 			dto.msg += "(类型异常:" + ex.getLocalizedMessage() + ")";
-			return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.OK);
+			return new ResponseEntity<ApiResult<?>>(dto, HttpStatus.OK);
 		}
 		if (ex.getCause() instanceof InvalidFormatException) {
 			InvalidFormatException ife = ((InvalidFormatException) ex.getCause());
-			dto = ResultDTO.paramError();
+			dto = ApiResult.paramError();
 			dto.msg += "(类型异常:参数[" + ife.getPathReference() + "] 数据类型是'" + ife.getTargetType() + "',传入参数的值是:'" + ife.getValue() + "')  " + ex.getLocalizedMessage() + ")";
-			return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.OK);
+			return new ResponseEntity<ApiResult<?>>(dto, HttpStatus.OK);
 		}
-		dto = ResultDTO.serverError();
+		dto = ApiResult.serverError();
 		dto.msg += "(" + ex.getLocalizedMessage() + ")";
-		return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<ApiResult<?>>(dto, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 	@ExceptionHandler(HttpMessageNotReadableException.class)
-	public ResponseEntity<ResultDTO<?>> HttpMessageNotReadableException(HttpServletRequest request, HttpMessageNotReadableException ex) {
-		ResultDTO<?> dto = ResultDTO.paramError();
+	public ResponseEntity<ApiResult<?>> HttpMessageNotReadableException(HttpServletRequest request, HttpMessageNotReadableException ex) {
+		ApiResult<?> dto = ApiResult.paramError();
 		dto.msg += " 请求数据无法转换成正确格式. (" + ex.getLocalizedMessage() + ")";
-		return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.OK);
+		return new ResponseEntity<ApiResult<?>>(dto, HttpStatus.OK);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<ResultDTO<?>> MethodArgumentNotValidException(HttpServletRequest request, MethodArgumentNotValidException ex) {
-		ResultDTO<?> dto = ResultDTO.paramError();
+	public ResponseEntity<ApiResult<?>> MethodArgumentNotValidException(HttpServletRequest request, MethodArgumentNotValidException ex) {
+		ApiResult<?> dto = ApiResult.paramError();
 		StringBuilder sb = new StringBuilder();
 		sb.append(dto.msg).append("(");
 		BindingResult bindingResult = ((MethodArgumentNotValidException) ex).getBindingResult();
@@ -67,44 +67,44 @@ public class GlobalHandler {
 		sb.deleteCharAt(sb.length() - 1);
 		sb.append(")");
 		dto.msg = sb.toString();
-		return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.OK);
+		return new ResponseEntity<ApiResult<?>>(dto, HttpStatus.OK);
 	}
 
 	@ExceptionHandler(MissingServletRequestParameterException.class)
-	public ResponseEntity<ResultDTO<?>> MissingServletRequestParameterException(HttpServletRequest request, MissingServletRequestParameterException ex) {
-		ResultDTO<?> dto = ResultDTO.paramError();
+	public ResponseEntity<ApiResult<?>> MissingServletRequestParameterException(HttpServletRequest request, MissingServletRequestParameterException ex) {
+		ApiResult<?> dto = ApiResult.paramError();
 		dto.msg = ((MissingServletRequestParameterException) ex).getMessage();
-		return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.OK);
+		return new ResponseEntity<ApiResult<?>>(dto, HttpStatus.OK);
 	}
 
 	@ExceptionHandler(ServiceException.class)
-	public ResponseEntity<ResultDTO<?>> ServiceException(HttpServletRequest request, ServiceException ex) {
-		ResultDTO<?> dto = new ResultDTO<>();
+	public ResponseEntity<ApiResult<?>> ServiceException(HttpServletRequest request, ServiceException ex) {
+		ApiResult<?> dto = new ApiResult<>();
 		dto.msg = ((ServiceException) ex).getMessage();
 		dto.code = ((ServiceException) ex).getCode();
-		return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.OK);
+		return new ResponseEntity<ApiResult<?>>(dto, HttpStatus.OK);
 	}
 
 	@ExceptionHandler(JwtException.class)
-	public ResponseEntity<ResultDTO<?>> JwtException(HttpServletRequest request, JwtException ex) {
-		ResultDTO<?> dto = ResultDTO.invalidToken();
-		return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.OK);
+	public ResponseEntity<ApiResult<?>> JwtException(HttpServletRequest request, JwtException ex) {
+		ApiResult<?> dto = ApiResult.invalidToken();
+		return new ResponseEntity<ApiResult<?>>(dto, HttpStatus.OK);
 	}
 
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-	public ResponseEntity<ResultDTO<?>> HttpRequestMethodNotSupportedException(HttpServletRequest request, HttpRequestMethodNotSupportedException ex) {
-		ResultDTO<?> dto = new ResultDTO<>();
-		dto.code = ApiResultCode.HttpMethodNotSupport.getCode();
-		dto.msg = ApiResultCode.HttpMethodNotSupport.getMsg() + "(" + ex.getMessage() + ")";
-		return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.OK);
+	public ResponseEntity<ApiResult<?>> HttpRequestMethodNotSupportedException(HttpServletRequest request, HttpRequestMethodNotSupportedException ex) {
+		ApiResult<?> dto = new ApiResult<>();
+		dto.code = ApiResultCodeEnum.HTTP_METHOD_NOT_SUPPORT.getCode();
+		dto.msg = ApiResultCodeEnum.HTTP_METHOD_NOT_SUPPORT.getMsg() + "(" + ex.getMessage() + ")";
+		return new ResponseEntity<ApiResult<?>>(dto, HttpStatus.OK);
 	}
 
 	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-	public ResponseEntity<ResultDTO<?>> HttpRequestMethodNotSupportedException2(HttpServletRequest request, HttpMediaTypeNotSupportedException ex) {
-		ResultDTO<?> dto = new ResultDTO<>();
-		dto.code = ApiResultCode.HttpMediaTypeNotSupport.getCode();
-		dto.msg = ApiResultCode.HttpMediaTypeNotSupport.getMsg() + "(" + ex.getMessage() + ")";
-		return new ResponseEntity<ResultDTO<?>>(dto, HttpStatus.OK);
+	public ResponseEntity<ApiResult<?>> HttpRequestMethodNotSupportedException2(HttpServletRequest request, HttpMediaTypeNotSupportedException ex) {
+		ApiResult<?> dto = new ApiResult<>();
+		dto.code = ApiResultCodeEnum.HTTP_MEDIATYPE_NOT_SUPPORT.getCode();
+		dto.msg = ApiResultCodeEnum.HTTP_MEDIATYPE_NOT_SUPPORT.getMsg() + "(" + ex.getMessage() + ")";
+		return new ResponseEntity<ApiResult<?>>(dto, HttpStatus.OK);
 	}
 
 }

@@ -2,13 +2,13 @@ package com.github.herowzz.springfuse.rest.dto;
 
 import java.io.Serializable;
 
-import com.github.herowzz.springfuse.rest.dto.refrence.ApiResultCode;
+import com.github.herowzz.springfuse.rest.dto.refrence.ApiResultCodeEnum;
 
 /**
  * 访问结果基类
  * @author wangzz
  */
-public class ResultDTO<T> implements Serializable {
+public class ApiResult<T> implements Serializable {
 
 	private static final long serialVersionUID = -7860411875580619118L;
 
@@ -34,64 +34,73 @@ public class ResultDTO<T> implements Serializable {
 	 */
 	public T data;
 
-	public ResultDTO() {
+	public ApiResult() {
 	}
 
-	public ResultDTO(T data) {
+	public ApiResult(T data) {
 		this.data = data;
 		this.result = 1;
 		this.code = 1;
 		this.msg = "ok";
 	}
 
-	public static ResultDTO<?> ok() {
-		ResultDTO<?> dto = new ResultDTO<>();
+	public static <T> ApiResult<T> build(T data) {
+		ApiResult<T> dto = new ApiResult<>();
+		dto.data = data;
 		dto.result = 1;
 		dto.code = 1;
 		dto.msg = "ok";
 		return dto;
 	}
 
-	public static ResultDTO<?> error(int code, String msg) {
-		ResultDTO<?> dto = new ResultDTO<>();
+	public static ApiResult<?> ok() {
+		ApiResult<?> dto = new ApiResult<>();
+		dto.result = 1;
+		dto.code = 1;
+		dto.msg = "ok";
+		return dto;
+	}
+
+	public static ApiResult<?> error(int code, String msg) {
+		ApiResult<?> dto = new ApiResult<>();
 		dto.result = 0;
 		dto.code = code;
 		dto.msg = msg;
 		return dto;
 	}
 
-	public static ResultDTO<?> serverError() {
-		ApiResultCode resCode = ApiResultCode.ServerError;
+	public static ApiResult<?> serverError() {
+		ApiResultCodeEnum resCode = ApiResultCodeEnum.SERVER_ERROR;
 		return error(resCode.getCode(), resCode.getMsg());
 	}
 
-	public static ResultDTO<?> invalidToken() {
-		ApiResultCode resCode = ApiResultCode.InvalidToken;
+	public static ApiResult<?> invalidToken() {
+		ApiResultCodeEnum resCode = ApiResultCodeEnum.INVALID_TOKEN;
 		return error(resCode.getCode(), resCode.getMsg());
 	}
 
-	public static ResultDTO<?> paramError() {
-		ApiResultCode resCode = ApiResultCode.ParamError;
+	public static ApiResult<?> paramError() {
+		ApiResultCodeEnum resCode = ApiResultCodeEnum.PARAM_ERROR;
 		return error(resCode.getCode(), resCode.getMsg());
 	}
 
-	public static ResultDTO<?> authFailed() {
-		ApiResultCode resCode = ApiResultCode.AuthFailed;
+	public static ApiResult<?> authFailed() {
+		ApiResultCodeEnum resCode = ApiResultCodeEnum.AUTH_FAILED;
 		return error(resCode.getCode(), resCode.getMsg());
 	}
 
-	public static ResultDTO<?> repeatAdd() {
-		ApiResultCode resCode = ApiResultCode.RepeatAdd;
+	public static ApiResult<?> repeatAdd() {
+		ApiResultCodeEnum resCode = ApiResultCodeEnum.REPEAT_ADD;
 		return error(resCode.getCode(), resCode.getMsg());
 	}
 
-	public static ResultDTO<?> objectNotFound() {
-		ApiResultCode resCode = ApiResultCode.ObjectNotFound;
+	public static ApiResult<?> objectNotFound() {
+		ApiResultCodeEnum resCode = ApiResultCodeEnum.OBJECT_NOT_FOUND;
 		return error(resCode.getCode(), resCode.getMsg());
 	}
 
-	public static ResultDTO<?> notAuthOperate() {
-		ApiResultCode resCode = ApiResultCode.NotAuthOperate;
+	public static ApiResult<?> notAuthOperate() {
+		ApiResultCodeEnum resCode = ApiResultCodeEnum.NO_AUTH_OPERATE;
 		return error(resCode.getCode(), resCode.getMsg());
 	}
 
