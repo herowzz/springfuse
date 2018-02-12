@@ -66,4 +66,27 @@ public class Book extends BaseUidEntity {
 		this.shop = shop;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Book [id=");
+		builder.append(id);
+		builder.append(", createTime=");
+		builder.append(createTime);
+		builder.append(", updateTime=");
+		builder.append(updateTime);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", bookType=");
+		builder.append(bookType);
+		builder.append(", page=");
+		builder.append(page);
+		builder.append(", pubDate=");
+		builder.append(pubDate);
+		builder.append(", shop=");
+		builder.append(shop.getId());
+		builder.append("]");
+		return builder.toString();
+	}
+
 }

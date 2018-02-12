@@ -29,4 +29,21 @@ public class Shop extends BaseUidEntity {
 		this.address = address;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("Shop [id=");
+		builder.append(id);
+		builder.append(", createTime=");
+		builder.append(createTime);
+		builder.append(", updateTime=");
+		builder.append(updateTime);
+		builder.append(", name=");
+		builder.append(name);
+		builder.append(", address=");
+		builder.append(address);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }
