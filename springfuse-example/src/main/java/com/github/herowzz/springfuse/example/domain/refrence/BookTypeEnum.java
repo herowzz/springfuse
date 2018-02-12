@@ -1,11 +1,11 @@
 package com.github.herowzz.springfuse.example.domain.refrence;
 
-public enum BookType {
+public enum BookTypeEnum {
 
-	Literature,
+	LITERATURE,
 
-	Political,
+	POLITICAL,
 
-	Economic
+	ECONOMIC
 
 }

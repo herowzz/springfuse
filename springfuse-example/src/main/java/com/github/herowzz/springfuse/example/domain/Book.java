@@ -1,41 +1,30 @@
 package com.github.herowzz.springfuse.example.domain;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import com.github.herowzz.springfuse.example.domain.refrence.BookType;
+import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
+import com.github.herowzz.springfuse.jpa.domain.BaseUidEntity;
 
 @Entity
-public class Book implements Serializable {
+public class Book extends BaseUidEntity {
 
-	private static final long serialVersionUID = 1989855612074165969L;
-
-	@Id
-	@GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
-	@GeneratedValue(generator = "uuid")
-	private String id;
+	private static final long serialVersionUID = -7001927790018290769L;
 
 	private String name;
-	
-	private BookType bookType;
+
+	private BookTypeEnum bookType;
 
 	private int page;
 
 	private LocalDateTime pubDate;
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
+	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	private Shop shop;
 
 	public String getName() {
 		return name;
@@ -61,12 +50,20 @@ public class Book implements Serializable {
 		this.pubDate = pubDate;
 	}
 
-	public BookType getBookType() {
+	public BookTypeEnum getBookType() {
 		return bookType;
 	}
 
-	public void setBookType(BookType bookType) {
+	public void setBookType(BookTypeEnum bookType) {
 		this.bookType = bookType;
+	}
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 
 }

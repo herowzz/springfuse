@@ -13,57 +13,57 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.github.herowzz.springfuse.example.domain.Book;
-import com.github.herowzz.springfuse.example.dto.book.BookDto;
-import com.github.herowzz.springfuse.example.dto.book.param.AddBookParam;
-import com.github.herowzz.springfuse.example.dto.book.param.UpdateBookParam;
-import com.github.herowzz.springfuse.example.service.BookService;
+import com.github.herowzz.springfuse.example.domain.Shop;
+import com.github.herowzz.springfuse.example.dto.shop.ShopDto;
+import com.github.herowzz.springfuse.example.dto.shop.param.AddShopParam;
+import com.github.herowzz.springfuse.example.dto.shop.param.UpdateShopParam;
+import com.github.herowzz.springfuse.example.service.ShopService;
 import com.github.herowzz.springfuse.rest.dto.IdParam;
 import com.github.herowzz.springfuse.rest.dto.ApiResult;
 
 @RestController
-@RequestMapping(value = "/book")
-public class BookController {
+@RequestMapping(value = "/shop")
+public class ShopController {
 
 	@Autowired
-	private BookService bookService;
+	private ShopService shopService;
 
 	@PostMapping(value = "/list")
 	public ApiResult<?> list() {
-		List<Book> bookList = bookService.findAll();
-		List<BookDto> dtoList = bookList.stream().map(e -> BookDto.copy(e)).collect(Collectors.toList());
+		List<Shop> shopList = shopService.findAll();
+		List<ShopDto> dtoList = shopList.stream().map(e -> ShopDto.copy(e)).collect(Collectors.toList());
 		return ApiResult.build(dtoList);
 	}
 
 	@PostMapping(value = "/add")
-	public ApiResult<?> add(@RequestBody @Valid AddBookParam param) {
-		Book book = param.copy();
-		bookService.save(book);
+	public ApiResult<?> add(@RequestBody @Valid AddShopParam param) {
+		Shop Shop = param.copy();
+		shopService.save(Shop);
 		return ApiResult.ok();
 	}
 
 	@PostMapping(value = "/{id}")
 	public ApiResult<?> show(@PathVariable("id") String id) {
-		Optional<Book> bookOptional = bookService.findById(id);
-		if (!bookOptional.isPresent()) {
+		Optional<Shop> ShopOptional = shopService.findById(id);
+		if (!ShopOptional.isPresent()) {
 			return ApiResult.objectNotFound();
 		}
-		return ApiResult.build(BookDto.copy(bookOptional.get()));
+		return ApiResult.build(ShopDto.copy(ShopOptional.get()));
 	}
 
 	@PostMapping(value = "/update")
-	public ApiResult<?> update(@RequestBody @Valid UpdateBookParam param) {
-		Optional<Book> bookOptional = bookService.findById(param.id);
-		if (!bookOptional.isPresent()) {
+	public ApiResult<?> update(@RequestBody @Valid UpdateShopParam param) {
+		Optional<Shop> ShopOptional = shopService.findById(param.id);
+		if (!ShopOptional.isPresent()) {
 			return ApiResult.objectNotFound();
 		}
-		bookService.save(param.copy(bookOptional.get()));
+		shopService.save(param.copy(ShopOptional.get()));
 		return ApiResult.ok();
 	}
 
 	@PostMapping(value = "/delete")
 	public ApiResult<?> delete(@RequestBody @Valid IdParam param) {
-		bookService.delete(param.id);
+		shopService.delete(param.id);
 		return ApiResult.ok();
 	}
 

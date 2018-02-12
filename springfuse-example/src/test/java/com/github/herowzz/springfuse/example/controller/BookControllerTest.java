@@ -1,7 +1,7 @@
 package com.github.herowzz.springfuse.example.controller;
 
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -10,24 +10,17 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
 
 import com.github.herowzz.springfuse.example.domain.Book;
-import com.github.herowzz.springfuse.example.domain.refrence.BookType;
+import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 import com.github.herowzz.springfuse.example.service.BookService;
+import com.github.herowzz.springfuse.rest.test.BaseControllerTest;
 
-@RunWith(SpringRunner.class)
 @WebMvcTest(BookController.class)
-public class BookControllerTest {
-
-	@Autowired
-	private MockMvc mvc;
+public class BookControllerTest extends BaseControllerTest {
 
 	@MockBean
 	private BookService bookService;
@@ -35,7 +28,7 @@ public class BookControllerTest {
 	@Test
 	public void testList() throws Exception {
 		Book book1 = new Book();
-		book1.setBookType(BookType.Economic);
+		book1.setBookType(BookTypeEnum.ECONOMIC);
 		book1.setName("aaa");
 		book1.setId("001");
 		book1.setPage(100);
@@ -44,8 +37,7 @@ public class BookControllerTest {
 
 		given(bookService.findAll()).willReturn(bookList);
 
-		mvc.perform(get("/book/list").accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk())
-				.andExpect(jsonPath("$.code").value(1)).andExpect(jsonPath("$.data[0].name").value("aaa"));
+		mvc.perform(post("/book/list").accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk()).andExpect(jsonPath("$.code").value(1)).andExpect(jsonPath("$.data[0].name").value("aaa"));
 	}
 
 }

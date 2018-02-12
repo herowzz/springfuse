@@ -12,4 +12,6 @@
 		<appender-ref ref="CONSOLE" />
 	</root>
 
+	<logger name="jdbc.sqltiming" level="INFO" />
+
 </configuration>

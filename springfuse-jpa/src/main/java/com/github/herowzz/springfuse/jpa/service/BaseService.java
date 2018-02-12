@@ -102,8 +102,11 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * 根据Id删除实体
 	 * @param id
 	 */
-	public void deleteById(@NonNull ID id) {
-		getEntityDao().deleteById(id);
+	public void delete(@NonNull ID id) {
+		Optional<T> optionalT = this.findById(id);
+		if (optionalT.isPresent()) {
+			this.delete(optionalT.get());
+		}
 	}
 
 	/**
@@ -111,7 +114,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 */
 	public void delete(@NonNull ID[] ids) {
 		for (ID id : ids) {
-			deleteById(id);
+			delete(id);
 		}
 	}
 

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.github.herowzz.springfuse.example.domain.Book;
-import com.github.herowzz.springfuse.example.domain.refrence.BookType;
+import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 
 public class BookDto {
 
@@ -12,7 +12,7 @@ public class BookDto {
 
 	public String name;
 
-	public BookType bookType;
+	public BookTypeEnum bookType;
 
 	public int page;
 
