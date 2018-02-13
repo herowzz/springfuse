@@ -9,7 +9,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 /**
  * BaseDao extends spring data interface.<br>
  * Provide data access curd and more method.<br>
- * Your domain dao class can extends this that can use common data access method.
+ * Your domain dao interface can extends this that can use common data access method.
  * @author wangzz
  *
  * @param <T> Model Class Type
