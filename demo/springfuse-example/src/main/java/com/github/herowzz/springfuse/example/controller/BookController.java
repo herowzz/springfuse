@@ -6,7 +6,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.herowzz.springfuse.api.dto.ApiResult;
 import com.github.herowzz.springfuse.api.dto.param.IdParam;
 import com.github.herowzz.springfuse.api.dto.param.PageParam;
+import com.github.herowzz.springfuse.core.bean.page.PageCommon;
 import com.github.herowzz.springfuse.example.domain.Book;
 import com.github.herowzz.springfuse.example.dto.book.BookDto;
 import com.github.herowzz.springfuse.example.dto.book.param.AddBookParam;
@@ -31,8 +31,7 @@ public class BookController {
 
 	@PostMapping(value = "/list")
 	public ApiResult list(@RequestBody(required = false) PageParam pageParam) {
-		System.out.println(pageParam);
-		Page<Book> bookPage = bookService.findPage(PageRequest.of(pageParam.pageNo - 1, pageParam.pageSize));
+		Page<Book> bookPage = bookService.findPage(PageCommon.getPage(pageParam));
 		Page<BookDto> bookDtoPage = bookPage.map(e -> BookDto.copy(e));
 		return ApiResult.build(bookDtoPage);
 	}

@@ -16,4 +16,22 @@ public class PageParam {
 	 */
 	public int pageSize = 10;
 
+	public PageParam() {
+	}
+
+	public PageParam(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("PageParam [pageNo=");
+		builder.append(pageNo);
+		builder.append(", pageSize=");
+		builder.append(pageSize);
+		builder.append("]");
+		return builder.toString();
+	}
+
 }
