@@ -2,30 +2,31 @@ package com.github.herowzz.springfuse.jpa.domain;
 
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
- * 实体类基类,主键为Auto生成方式
+ * 实体类基类,主键为递增生成方式
  * @author wangzz
  */
-@MappedSuperclass
+@MappedSuperclass 
 @EntityListeners(AuditingEntityListener.class)
-public abstract class BaseAutoEntity extends BaseEntity {
+public abstract class BaseIncreaseEntity extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
-	protected String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	protected Long id;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
