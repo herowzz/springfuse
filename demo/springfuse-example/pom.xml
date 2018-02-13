@@ -1,16 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
 	<groupId>com.github.herowzz</groupId>
-	<artifactId>springfuse</artifactId>
+	<artifactId>springfuse-example</artifactId>
+	<modelVersion>4.0.0</modelVersion>
 	<version>1.0</version>
 	<packaging>jar</packaging>
-
-	<name>springfuse</name>
-	<url>https://github.com/herowzz/springfuse</url>
-	<description>Provide basic framework and class library based on Spring Framework.</description>
+	<name>springfuse-example</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,62 +16,32 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 	</properties>
 
-	<developers>
-		<developer>
-			<id>springfuse</id>
-			<name>herowzz</name>
-			<email>wzzwxh@gmail.com</email>
-			<roles>
-				<role>Project leader</role>
-			</roles>
-			<timezone>+8</timezone>
-		</developer>
-	</developers>
-
-	<mailingLists>
-		<mailingList>
-			<name>herowzz</name>
-			<post>wzzwxh@gmail.com</post>
-		</mailingList>
-	</mailingLists>
-
-	<issueManagement>
-		<system>Github</system>
-		<url>https://github.com/herowzz/springfuse/issues</url>
-	</issueManagement>
-
-	<licenses>
-		<license>
-			<name>Apache License, Version 2.0</name>
-			<url>http://www.apache.org/licenses/LICENSE-2.0</url>
-		</license>
-	</licenses>
-
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-java8</artifactId>
+			<groupId>com.github.herowzz</groupId>
+			<artifactId>springfuse</artifactId>
+			<version>1.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-devtools</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.9.0</version>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-text</artifactId>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.googlecode.log4jdbc</groupId>
+			<artifactId>log4jdbc</artifactId>
 			<version>1.2</version>
 		</dependency>
 
@@ -82,6 +50,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
 	</dependencies>
 
 	<dependencyManagement>
