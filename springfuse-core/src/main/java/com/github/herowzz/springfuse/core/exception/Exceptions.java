@@ -37,10 +37,12 @@ public class Exceptions {
 	 * 获取组合本异常信息与底层异常信息的异常描述, 适用于本异常为统一包装异常类，底层异常才是根本原因的情况。
 	 */
 	public static String getErrorMessageWithNestedException(Throwable ex) {
+		StringBuilder sb = new StringBuilder().append(ex.getMessage());
 		Throwable nestedException = ex.getCause();
-		return new StringBuilder().append(ex.getMessage()).append(" nested exception is ")
-				.append(nestedException.getClass().getName()).append(":").append(nestedException.getMessage())
-				.toString();
+		if (nestedException == null) {
+			return sb.toString();
+		}
+		return sb.append(" nested exception is ").append(nestedException.getClass().getName()).append(":").append(nestedException.getMessage()).toString();
 	}
 
 	/**

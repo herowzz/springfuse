@@ -296,7 +296,7 @@ public abstract class DateUtils {
 	/**
 	 * 判断给定日期是否在当前日期后
 	 */
-	public static Boolean isAfterToday(LocalDateTime date) {
+	public static boolean isAfterToday(LocalDateTime date) {
 		LocalDateTime today = LocalDateTime.now();
 		return date.isAfter(today);
 	}
@@ -304,7 +304,7 @@ public abstract class DateUtils {
 	/**
 	 * 判断给定日期是否在当前日期后
 	 */
-	public static Boolean isAfterToday(LocalDate date) {
+	public static boolean isAfterToday(LocalDate date) {
 		LocalDate today = LocalDate.now();
 		return date.isAfter(today);
 	}
@@ -312,7 +312,7 @@ public abstract class DateUtils {
 	/**
 	 * 判断给定日期是否在当前日期前
 	 */
-	public static Boolean isBeforeToday(LocalDateTime date) {
+	public static boolean isBeforeToday(LocalDateTime date) {
 		LocalDateTime today = LocalDateTime.now();
 		return date.isBefore(today);
 	}
@@ -320,7 +320,7 @@ public abstract class DateUtils {
 	/**
 	 * 判断给定日期是否在当前日期前
 	 */
-	public static Boolean isBeforeToday(LocalDate date) {
+	public static boolean isBeforeToday(LocalDate date) {
 		LocalDate today = LocalDate.now();
 		return date.isBefore(today);
 	}
@@ -331,7 +331,7 @@ public abstract class DateUtils {
 	 * @param format 需要返回的格式
 	 * @return 格式化字符串
 	 */
-	public static String getDateTimeInFormat(LocalDateTime date, String format) {
+	public static String getDateTimeFormat(LocalDateTime date, String format) {
 		return date.format(DateTimeFormatter.ofPattern(format));
 	}
 
@@ -342,7 +342,7 @@ public abstract class DateUtils {
 	 * @return 格式化字符串
 	 */
 	public static String getDateTimeInFormat(LocalDateTime date) {
-		return getDateTimeInFormat(date, DATATIMEF_IN_FORMAT);
+		return getDateTimeFormat(date, DATATIMEF_IN_FORMAT);
 	}
 
 	/**
