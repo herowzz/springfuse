@@ -1,6 +1,6 @@
 package com.github.herowzz.springfuse.example.dao;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import java.time.LocalDateTime;
 import java.util.List;

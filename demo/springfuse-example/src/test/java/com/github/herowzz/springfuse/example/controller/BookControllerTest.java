@@ -13,10 +13,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.github.herowzz.springfuse.core.bean.page.PageCommon;
 import com.github.herowzz.springfuse.example.domain.Book;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 import com.github.herowzz.springfuse.example.service.BookService;
@@ -24,9 +27,9 @@ import com.github.herowzz.springfuse.example.service.BookService;
 @RunWith(SpringRunner.class)
 @WebMvcTest(BookController.class)
 public class BookControllerTest {
-	
+
 	@Autowired
-    private MockMvc mvc;
+	private MockMvc mvc;
 
 	@MockBean
 	private BookService bookService;
@@ -40,10 +43,11 @@ public class BookControllerTest {
 		book1.setPage(100);
 		book1.setPubDate(LocalDateTime.now());
 		List<Book> bookList = Arrays.asList(book1);
+		Page<Book> page = new PageImpl<>(bookList);
 
-		given(bookService.findAll()).willReturn(bookList);
+		given(bookService.findPage(PageCommon.getPage(null))).willReturn(page);
 
-		mvc.perform(post("/book/list").accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk()).andExpect(jsonPath("$.code").value(1)).andExpect(jsonPath("$.data[0].name").value("aaa"));
+		mvc.perform(post("/book/list").accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk()).andExpect(jsonPath("$.code").value(1)).andExpect(jsonPath("$.data.content[0].name").value("aaa"));
 	}
 
 }
