@@ -1,5 +1,6 @@
 package com.github.herowzz.springfuse.example.domain;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,8 @@ public class Book extends BaseUidEntity {
 	private BookTypeEnum bookType;
 
 	private int page;
+
+	private BigDecimal sellPrice;
 
 	private LocalDateTime pubDate;
 
@@ -66,25 +69,29 @@ public class Book extends BaseUidEntity {
 		this.shop = shop;
 	}
 
+	public BigDecimal getSellPrice() {
+		return sellPrice;
+	}
+
+	public void setSellPrice(BigDecimal sellPrice) {
+		this.sellPrice = sellPrice;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Book [id=");
-		builder.append(id);
-		builder.append(", createTime=");
-		builder.append(createTime);
-		builder.append(", updateTime=");
-		builder.append(updateTime);
-		builder.append(", name=");
+		builder.append("Book [name=");
 		builder.append(name);
 		builder.append(", bookType=");
 		builder.append(bookType);
 		builder.append(", page=");
 		builder.append(page);
+		builder.append(", sellPrice=");
+		builder.append(sellPrice);
 		builder.append(", pubDate=");
 		builder.append(pubDate);
 		builder.append(", shop=");
-		builder.append(shop.getId());
+		builder.append(shop);
 		builder.append("]");
 		return builder.toString();
 	}

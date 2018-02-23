@@ -48,7 +48,7 @@ public class BookController {
 		if (book == null) {
 			return ApiResult.objectNotFound();
 		}
-		return ApiResult.build(BookDto.copy(null));
+		return ApiResult.build(BookDto.copy(book));
 	}
 
 	@PostMapping(value = "/update")

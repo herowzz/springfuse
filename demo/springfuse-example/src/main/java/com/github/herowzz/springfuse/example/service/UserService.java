@@ -5,18 +5,18 @@ import org.springframework.stereotype.Service;
 
 import com.github.herowzz.springfuse.data.jpa.dao.IBaseDao;
 import com.github.herowzz.springfuse.data.jpa.service.BaseService;
-import com.github.herowzz.springfuse.example.dao.ShopDao;
-import com.github.herowzz.springfuse.example.domain.Shop;
+import com.github.herowzz.springfuse.example.dao.UserDao;
+import com.github.herowzz.springfuse.example.domain.User;
 
 @Service
-public class ShopService extends BaseService<Shop, String> {
+public class UserService extends BaseService<User, Long> {
 
 	@Autowired
-	private ShopDao shopDao;
+	private UserDao userDao;
 
 	@Override
-	protected IBaseDao<Shop, String> getEntityDao() {
-		return shopDao;
+	protected IBaseDao<User, Long> getEntityDao() {
+		return userDao;
 	}
 
 }
