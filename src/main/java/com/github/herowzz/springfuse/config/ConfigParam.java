@@ -4,7 +4,7 @@ package com.github.herowzz.springfuse.config;
  * 配置参数
  * @author wangzz
  */
-public class ConfigParam {
+public abstract class ConfigParam {
 
 	/**
 	 * 一页查询多少条记录
