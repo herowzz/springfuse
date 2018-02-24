@@ -13,41 +13,41 @@ public class PageCommon {
 		if (pageParam == null) {
 			pageParam = new PageParam(ConfigParam.pageSize);
 		}
-		return PageRequest.of(pageParam.pageNo - 1, pageParam.pageSize);
+		return PageRequest.of(pageParam.getPageNo(), pageParam.getPageSize());
 	}
 
 	public static PageRequest getPage(PageParam pageParam, int pageSize) {
 		if (pageParam == null) {
 			pageParam = new PageParam(pageSize);
 		}
-		return PageRequest.of(pageParam.pageNo - 1, pageParam.pageSize);
+		return PageRequest.of(pageParam.getPageNo(), pageParam.getPageSize());
 	}
 
 	public static PageRequest getPage(PageParam pageParam, Sort sort) {
 		if (pageParam == null) {
 			pageParam = new PageParam(ConfigParam.pageSize);
 		}
-		return PageRequest.of(pageParam.pageNo - 1, pageParam.pageSize, sort);
+		return PageRequest.of(pageParam.getPageNo(), pageParam.getPageSize(), sort);
 	}
 
 	public static PageRequest getPage(PageParam pageParam, int pageSize, Sort sort) {
 		if (pageParam == null) {
 			pageParam = new PageParam(pageSize);
 		}
-		return PageRequest.of(pageParam.pageNo - 1, pageParam.pageSize, sort);
+		return PageRequest.of(pageParam.getPageNo(), pageParam.getPageSize(), sort);
 	}
 
 	public static PageRequest getPage(PageParam pageParam, Direction direction, String... properties) {
 		if (pageParam == null) {
 			pageParam = new PageParam(ConfigParam.pageSize);
 		}
-		return PageRequest.of(pageParam.pageNo - 1, pageParam.pageSize, direction, properties);
+		return PageRequest.of(pageParam.getPageNo(), pageParam.getPageSize(), direction, properties);
 	}
 
 	public static PageRequest getPage(PageParam pageParam, int pageSize, Direction direction, String... properties) {
 		if (pageParam == null) {
 			pageParam = new PageParam(pageSize);
 		}
-		return PageRequest.of(pageParam.pageNo - 1, pageParam.pageSize, direction, properties);
+		return PageRequest.of(pageParam.getPageNo(), pageParam.getPageSize(), direction, properties);
 	}
 }

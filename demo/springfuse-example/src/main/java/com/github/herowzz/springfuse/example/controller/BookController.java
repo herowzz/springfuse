@@ -30,7 +30,7 @@ public class BookController {
 	private BookService bookService;
 
 	@PostMapping(value = "/list")
-	public ApiResult list(@RequestBody(required = false) PageParam pageParam) {
+	public ApiResult list(@RequestBody(required = false) @Valid PageParam pageParam) {
 		Page<Book> bookPage = bookService.findPage(PageCommon.getPage(pageParam));
 		Page<BookDto> bookDtoPage = bookPage.map(e -> BookDto.copy(e));
 		return ApiResult.build(bookDtoPage);
