@@ -88,7 +88,7 @@ public class SpringFuseGenerator {
 		}
 	}
 
-	private void exportByType(ExportType exportType, String packageName, String autowiredPackege) {
+	private void exportByType(ExportType exportType, String packageName, String autowiredPackege, String dtoPackage) {
 		try {
 			File filePath = new File(outputPath);
 			if (!filePath.exists() || !filePath.isDirectory()) {
@@ -115,6 +115,7 @@ public class SpringFuseGenerator {
 				root.put("entityPackageRoot", entityPackageRoot); // 实体所在包的根路径
 				root.put("entitySimpleName", entitySimpleName); // 实体名称(小写)
 				root.put("autowiredPackege", autowiredPackege); // 需要注入的类所属包名
+				root.put("dtoPackage", dtoPackage);
 
 				List<DtoField> fieldList = new ArrayList<>();
 				Set<String> dtoImportSet = new HashSet<>();
@@ -161,29 +162,38 @@ public class SpringFuseGenerator {
 	 * 生成dao文件
 	 */
 	public void buildDao(String daoPackage) {
-		exportByType(ExportType.Dao, daoPackage, "");
+		exportByType(ExportType.Dao, daoPackage, "", "");
 	}
 
 	/**
 	 * 生成Service文件
 	 */
 	public void buildService(String servicePackage, String daoPackage) {
-		exportByType(ExportType.Service, servicePackage, daoPackage);
+		exportByType(ExportType.Service, servicePackage, daoPackage, "");
 	}
 
 	/**
 	 * 生成Dto文件
 	 */
 	public void buildDto(String dtoPackage) {
-		exportByType(ExportType.Dto, dtoPackage, "");
+		exportByType(ExportType.Dto, dtoPackage, "", "");
+	}
+
+	/**
+	 * 生成Controller文件
+	 */
+	public void buildController(String controllerPackage, String servicePackage, String dtoPackage) {
+		exportByType(ExportType.Controller, controllerPackage, servicePackage, dtoPackage);
 	}
 
 	public void buildAll(String packageName) {
 		String daoPackage = packageName + ".dao";
 		String servicePackage = packageName + ".service";
+		String dtoPackage = packageName + ".dto";
 		buildDao(daoPackage);
 		buildService(servicePackage, daoPackage);
-		buildDto(packageName + ".dto");
+		buildDto(dtoPackage);
+		buildController(packageName + ".controller", servicePackage, dtoPackage);
 	}
 
 	enum ExportType {

@@ -1,5 +1,6 @@
 package ${packageName};
 
+import ${entityPackageName};
 <#list dtoImportSet as importName>
 import ${importName};
 </#list>
@@ -13,7 +14,6 @@ public class ${entityName}Dto {
 	public ${field.classType} ${field.name};
 	
 	</#list>
-	
 	public static ${entityName}Dto copy(${entityName} ${entitySimpleName}) {
 		${entityName}Dto dto = new ${entityName}Dto();
 		<#list fieldList as field>
