@@ -1,5 +1,6 @@
 package com.github.herowzz.springfuse.example.dto.book.param;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import javax.validation.constraints.Max;
@@ -32,23 +33,40 @@ public class AddBookParam {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public LocalDateTime pubDate;
 
+	public BigDecimal sellPrice;
+
 	public Book copy() {
 		Book book = new Book();
 		book.setName(this.name);
 		book.setPage(this.page);
 		book.setBookType(this.bookType);
 		book.setPubDate(this.pubDate);
-		
+		book.setSellPrice(this.sellPrice);
+
 		Shop shop = new Shop();
 		shop.setId(this.shopId);
 		book.setShop(shop);
-		
+
 		return book;
 	}
 
 	@Override
 	public String toString() {
-		return "AddBookParam [name=" + name + ", shopId=" + shopId + ", page=" + page + ", bookType=" + bookType + ", pubDate=" + pubDate + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("AddBookParam [name=");
+		builder.append(name);
+		builder.append(", shopId=");
+		builder.append(shopId);
+		builder.append(", page=");
+		builder.append(page);
+		builder.append(", bookType=");
+		builder.append(bookType);
+		builder.append(", pubDate=");
+		builder.append(pubDate);
+		builder.append(", sellPrice=");
+		builder.append(sellPrice);
+		builder.append("]");
+		return builder.toString();
 	}
 
 }

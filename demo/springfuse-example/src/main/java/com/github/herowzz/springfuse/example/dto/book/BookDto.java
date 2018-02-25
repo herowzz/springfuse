@@ -1,5 +1,6 @@
 package com.github.herowzz.springfuse.example.dto.book;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -16,6 +17,8 @@ public class BookDto {
 
 	public int page;
 
+	public BigDecimal sellPrice;
+
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public LocalDateTime pubDate;
 
@@ -26,6 +29,7 @@ public class BookDto {
 		dto.bookType = book.getBookType();
 		dto.page = book.getPage();
 		dto.pubDate = book.getPubDate();
+		dto.sellPrice = book.getSellPrice();
 		return dto;
 	}
 

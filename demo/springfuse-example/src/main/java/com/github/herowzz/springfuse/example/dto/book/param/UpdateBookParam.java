@@ -1,5 +1,7 @@
 package com.github.herowzz.springfuse.example.dto.book.param;
 
+import java.math.BigDecimal;
+
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
@@ -28,10 +30,15 @@ public class UpdateBookParam {
 	@NotNull
 	public BookTypeEnum bookType;
 
+	public BigDecimal sellPrice;
+
 	public Book copy(Book book) {
 		book.setName(this.name);
 		book.setPage(this.page);
 		book.setBookType(this.bookType);
+
+		if (this.sellPrice != null)
+			book.setSellPrice(this.sellPrice);
 
 		Shop shop = new Shop();
 		shop.setId(this.shopId);
