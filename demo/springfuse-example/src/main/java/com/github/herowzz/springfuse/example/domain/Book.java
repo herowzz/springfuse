@@ -6,12 +6,21 @@ import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.envers.Audited;
 
 import com.github.herowzz.springfuse.data.jpa.domain.BaseUidEntity;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 
 @Entity
+@Audited
+@DynamicInsert
+@DynamicUpdate
 public class Book extends BaseUidEntity {
 
 	private static final long serialVersionUID = -7001927790018290769L;
@@ -27,6 +36,7 @@ public class Book extends BaseUidEntity {
 	private LocalDateTime pubDate;
 
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
+	@JoinColumn(foreignKey = @ForeignKey(name = "none"))
 	private Shop shop;
 
 	public String getName() {
@@ -80,7 +90,15 @@ public class Book extends BaseUidEntity {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Book [name=");
+		builder.append("Book [id=");
+		builder.append(id);
+		builder.append(", deleted=");
+		builder.append(deleted);
+		builder.append(", createTime=");
+		builder.append(createTime);
+		builder.append(", updateTime=");
+		builder.append(updateTime);
+		builder.append(", name=");
 		builder.append(name);
 		builder.append(", bookType=");
 		builder.append(bookType);
@@ -94,6 +112,61 @@ public class Book extends BaseUidEntity {
 		builder.append(shop);
 		builder.append("]");
 		return builder.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((bookType == null) ? 0 : bookType.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + page;
+		result = prime * result + ((pubDate == null) ? 0 : pubDate.hashCode());
+		result = prime * result + ((sellPrice == null) ? 0 : sellPrice.hashCode());
+		result = prime * result + ((shop == null) ? 0 : shop.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Book other = (Book) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (bookType != other.bookType)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (page != other.page)
+			return false;
+		if (pubDate == null) {
+			if (other.pubDate != null)
+				return false;
+		} else if (!pubDate.equals(other.pubDate))
+			return false;
+		if (sellPrice == null) {
+			if (other.sellPrice != null)
+				return false;
+		} else if (sellPrice.compareTo(other.sellPrice) != 0)
+			return false;
+		if (shop == null) {
+			if (other.shop != null)
+				return false;
+		} else if (!shop.equals(other.shop))
+			return false;
+		return true;
 	}
 
 }
