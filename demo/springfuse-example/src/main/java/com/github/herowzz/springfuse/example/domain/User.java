@@ -31,6 +31,9 @@ public class User extends BaseIncreaseEntity {
 	@Column(length = 50)
 	private String nickname;
 
+	@Column(length = 200)
+	private String avatar;
+
 	private EnableEnum enableType;
 
 	private LocalDateTime lastLoginTime;
@@ -108,6 +111,14 @@ public class User extends BaseIncreaseEntity {
 
 	public void setEnableType(EnableEnum enableType) {
 		this.enableType = enableType;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 
 }

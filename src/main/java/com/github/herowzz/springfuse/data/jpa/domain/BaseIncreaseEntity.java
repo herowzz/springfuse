@@ -6,13 +6,15 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import org.hibernate.envers.Audited;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * 实体类基类,主键为递增生成方式
  * @author wangzz
  */
-@MappedSuperclass 
+@MappedSuperclass
+@Audited
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseIncreaseEntity extends BaseEntity {
 

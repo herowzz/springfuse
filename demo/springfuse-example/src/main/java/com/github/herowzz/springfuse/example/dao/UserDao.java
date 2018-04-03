@@ -5,4 +5,6 @@ import com.github.herowzz.springfuse.example.domain.User;
 
 public interface UserDao extends IBaseDao<User, Long> {
 
+	User findByUsernameAndPassword(String username, String password);
+
 }

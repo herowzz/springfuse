@@ -7,11 +7,13 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.envers.Audited;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-
-import com.github.herowzz.springfuse.data.jpa.domain.support.AuditEntityListener;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 /**
  * 实体类基类,提供常用基础参数
@@ -19,30 +21,37 @@ import com.github.herowzz.springfuse.data.jpa.domain.support.AuditEntityListener
  */
 @MappedSuperclass
 @Audited
-@EntityListeners(AuditEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * 是否删除<br>
-	 * 0:未删除; 1:已删除
-	 */
-	@Column(name = "is_deleted")
-	protected Boolean deleted = false;
-
-	/**
 	 * 创建时间
 	 */
 	@CreatedDate
-	@Column(updatable = false)
+	@CreationTimestamp
+	@Column(updatable = false, nullable = false)
 	protected LocalDateTime createTime;
+	
+	/**
+	 * 创建人
+	 */
+	@CreatedBy
+    private String createUser;
 
 	/**
 	 * 修改时间
 	 */
 	@LastModifiedDate
+	@Column(nullable = false)
 	protected LocalDateTime updateTime;
+	
+	/**
+	 * 修改人
+	 */
+	@LastModifiedBy
+    private String updateUser;
 
 	public LocalDateTime getCreateTime() {
 		return createTime;
@@ -60,12 +69,20 @@ public abstract class BaseEntity implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	public Boolean isDeleted() {
-		return deleted;
+	public String getCreateUser() {
+		return createUser;
 	}
 
-	public void setDeleted(Boolean deleted) {
-		this.deleted = deleted;
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public String getUpdateUser() {
+		return updateUser;
+	}
+
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
 	}
 
 }

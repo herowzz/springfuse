@@ -9,9 +9,9 @@ import org.hibernate.envers.Audited;
 import com.github.herowzz.springfuse.data.jpa.domain.BaseUidEntity;
 
 @Entity
-@Audited
 @DynamicInsert
 @DynamicUpdate
+@Audited
 public class Shop extends BaseUidEntity {
 
 	private static final long serialVersionUID = -1423036044397574897L;

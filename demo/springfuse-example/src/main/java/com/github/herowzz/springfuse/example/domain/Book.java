@@ -18,9 +18,9 @@ import com.github.herowzz.springfuse.data.jpa.domain.BaseUidEntity;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 
 @Entity
-@Audited
 @DynamicInsert
 @DynamicUpdate
+@Audited
 public class Book extends BaseUidEntity {
 
 	private static final long serialVersionUID = -7001927790018290769L;
@@ -92,8 +92,6 @@ public class Book extends BaseUidEntity {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Book [id=");
 		builder.append(id);
-		builder.append(", deleted=");
-		builder.append(deleted);
 		builder.append(", createTime=");
 		builder.append(createTime);
 		builder.append(", updateTime=");

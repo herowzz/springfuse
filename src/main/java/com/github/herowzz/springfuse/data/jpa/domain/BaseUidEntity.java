@@ -5,13 +5,11 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.envers.Audited;
 
 /**
  * 实体类基类,主键为UUID生成方式
  * @author wangzz
  */
-@Audited
 @MappedSuperclass
 public abstract class BaseUidEntity extends BaseEntity {
 

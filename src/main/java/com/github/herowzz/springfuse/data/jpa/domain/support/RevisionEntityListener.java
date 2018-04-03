@@ -1,4 +1,4 @@
-package com.github.herowzz.springfuse.example.domain;
+package com.github.herowzz.springfuse.data.jpa.domain.support;
 
 import java.io.Serializable;
 
@@ -9,10 +9,9 @@ public class RevisionEntityListener implements EntityTrackingRevisionListener {
 
 	@Override
 	public void newRevision(Object revisionEntity) {
-		if (revisionEntity instanceof BaseRevisionEntity) {
-			BaseRevisionEntity entity = (BaseRevisionEntity) revisionEntity;
-			entity.setUsername("wzz");
-		}
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&]");
+		System.out.println(revisionEntity);
+		System.out.println("&&&&&&&&&&&&&&&&&&&&&&&]");
 	}
 
 	@Override

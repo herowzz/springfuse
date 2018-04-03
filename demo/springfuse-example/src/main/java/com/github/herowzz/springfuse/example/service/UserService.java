@@ -19,4 +19,8 @@ public class UserService extends BaseService<User, Long> {
 		return userDao;
 	}
 
+	public User findByUsernameAndPassword(String username, String password) {
+		return userDao.findByUsernameAndPassword(username, password);
+	}
+
 }
