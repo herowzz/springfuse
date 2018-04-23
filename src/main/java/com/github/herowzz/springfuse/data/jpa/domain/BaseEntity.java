@@ -44,7 +44,6 @@ public abstract class BaseEntity implements Serializable {
 	 * 修改时间
 	 */
 	@LastModifiedDate
-	@Column(nullable = false)
 	protected LocalDateTime updateTime;
 	
 	/**
