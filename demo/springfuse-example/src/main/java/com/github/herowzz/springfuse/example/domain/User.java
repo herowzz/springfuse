@@ -6,10 +6,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 
 import com.github.herowzz.springfuse.core.bean.enumtype.EnableEnum;
-import com.github.herowzz.springfuse.data.jpa.domain.BaseIncreaseEntity;
+import com.github.herowzz.springfuse.data.jpa.domain.BaseUidEntity;
 
 @Entity
-public class User extends BaseIncreaseEntity {
+public class User extends BaseUidEntity {
 
 	private static final long serialVersionUID = 7541116354582183048L;
 
