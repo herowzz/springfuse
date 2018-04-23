@@ -1,5 +1,6 @@
 package com.github.herowzz.springfuse.example.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +30,15 @@ public class AuthController {
 	private ITokenManager tokenManager;
 
 	@RequestMapping(value = "/login")
-	public ApiResult login(@RequestBody @Valid LoginParam param) {
-		User user = userService.findByUsernameAndPassword(param.username, param.password);
+	public ApiResult login(@RequestBody @Valid LoginParam param, HttpServletRequest request) {
+		User user = userService.login(param.username, param.password);
 		if (user == null)
 			return ResultEnum.USER_PASSWORD_ERROR.toResult();
 		if (user.getEnableType() == EnableEnum.Disable)
 			return ResultEnum.USER_IS_DISABLED.toResult();
 
 		TokenModel tokenModel = tokenManager.createToken(user.getId());
+		userService.updateLoginInfo(user, request.getRemoteAddr());
 		return ApiResult.build(LoginResultDto.build(user, tokenModel.getToken(), tokenModel.getExpireTime()));
 	}
 
