@@ -2,6 +2,11 @@ package com.github.herowzz.springfuse.api.dto;
 
 import java.io.Serializable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.herowzz.springfuse.api.dto.refrence.ApiResultCodeEnum;
 
 /**
@@ -9,6 +14,8 @@ import com.github.herowzz.springfuse.api.dto.refrence.ApiResultCodeEnum;
  * @author wangzz
  */
 public class ApiResult implements Serializable {
+
+	private static Logger logger = LoggerFactory.getLogger(ApiResult.class);
 
 	private static final long serialVersionUID = -7860411875580619118L;
 
@@ -102,6 +109,17 @@ public class ApiResult implements Serializable {
 	public static ApiResult notAuthOperate() {
 		ApiResultCodeEnum resCode = ApiResultCodeEnum.NO_AUTH_OPERATE;
 		return error(resCode.getCode(), resCode.getMsg());
+	}
+
+	public String toJsonString() {
+		String resultJson = "";
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			resultJson = mapper.writeValueAsString(this);
+		} catch (JsonProcessingException e) {
+			logger.error("ApiResult format json error!", e);
+		}
+		return resultJson;
 	}
 
 }
