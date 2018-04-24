@@ -1,14 +1,17 @@
 package com.github.herowzz.springfuse.example.config;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestHeader;
 
+import com.github.herowzz.springfuse.api.dto.refrence.ApiResultCodeEnum;
 import com.github.herowzz.springfuse.api.handler.GlobalHandler;
 import com.github.herowzz.springfuse.core.exception.service.ServiceException;
+import com.github.herowzz.springfuse.example.domain.User;
 import com.github.herowzz.springfuse.example.service.UserService;
 import com.github.herowzz.springfuse.security.manager.ITokenManager;
 
@@ -16,19 +19,20 @@ import com.github.herowzz.springfuse.security.manager.ITokenManager;
 public class ResourceHandler extends GlobalHandler {
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
 	private ITokenManager tokenManager;
 
+	@Autowired
+	private UserService userService;
+
 	@ModelAttribute
-	public void addAttributes(Model model, @RequestHeader(name = "auth", required = false) String token) {
-		if (StringUtils.hasText(token)) {
+	public void addAttributes(Model model, @RequestHeader(name = "token", required = false) String token) {
+		if (token != null) {
 			String uid = tokenManager.getUidByToken(token);
-			if (uid == null) {
-				throw new ServiceException("Permission Error(Incorrect auth)");
+			Optional<User> userOptional = userService.findById(uid);
+			if (!userOptional.isPresent()) {
+				throw new ServiceException("Permission Error(Incorrect token), token: " + token + "find user id:" + uid + ", find user is not exist!", ApiResultCodeEnum.OBJECT_NOT_FOUND.code);
 			}
-			
+			model.addAttribute("user", userOptional.get());
 		}
 	}
 

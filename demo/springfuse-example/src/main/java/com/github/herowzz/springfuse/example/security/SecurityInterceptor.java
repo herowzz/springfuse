@@ -25,16 +25,16 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=utf-8");
-		String token = request.getHeader("auth");
+		String token = request.getHeader("token");
 		if (!StringUtils.hasText(token)) {
-			logger.warn("Remote IP:{} Request Url:{} Not Authorized, not has auth.", request.getRemoteAddr(), request.getRequestURI());
+			logger.warn("Remote IP:{}, Request Url:{} Not Authorized, not has token.", request.getRemoteAddr(), request.getRequestURI());
 			response.getWriter().write(ApiResult.invalidToken().toJsonString());
 			response.getWriter().flush();
 			return false;
 		} else {
 			String uid = tokenManager.getUidByToken(token);
 			if (uid == null) {
-				logger.warn("Remote IP:{} Request Url:{} Not Authorized, token is invalid!", request.getRemoteAddr(), request.getRequestURI());
+				logger.warn("Remote IP:{}, Request Url:{} Not Authorized, token:{} is invalid!", request.getRemoteAddr(), request.getRequestURI(), token);
 				response.getWriter().write(ApiResult.invalidToken().toJsonString());
 				response.getWriter().flush();
 				return false;

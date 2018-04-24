@@ -5,10 +5,15 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.github.herowzz.springfuse.core.bean.enumtype.EnableEnum;
 import com.github.herowzz.springfuse.data.jpa.domain.BaseUidEntity;
 
 @Entity
+@DynamicInsert
+@DynamicUpdate
 public class User extends BaseUidEntity {
 
 	private static final long serialVersionUID = 7541116354582183048L;

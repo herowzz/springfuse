@@ -11,13 +11,13 @@ import com.github.herowzz.springfuse.example.dao.UserDao;
 import com.github.herowzz.springfuse.example.domain.User;
 
 @Service
-public class UserService extends BaseService<User, Long> {
+public class UserService extends BaseService<User, String> {
 
 	@Autowired
 	private UserDao userDao;
 
 	@Override
-	protected IBaseDao<User, Long> getEntityDao() {
+	protected IBaseDao<User, String> getEntityDao() {
 		return userDao;
 	}
 

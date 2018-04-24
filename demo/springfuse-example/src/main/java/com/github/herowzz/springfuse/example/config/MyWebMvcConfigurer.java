@@ -1,7 +1,9 @@
 package com.github.herowzz.springfuse.example.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
@@ -10,6 +12,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.github.herowzz.springfuse.example.security.SecurityInterceptor;
 
 @Configuration
+@EnableWebMvc
 public class MyWebMvcConfigurer implements WebMvcConfigurer {
 
 	@Override
@@ -22,15 +25,19 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		configurer.setUseSuffixPatternMatch(false).setUseTrailingSlashMatch(true);
 	}
 
+	@Bean
+	public SecurityInterceptor securityInterceptor() {
+		return new SecurityInterceptor();
+	}
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		InterceptorRegistration interceptor = registry.addInterceptor(new SecurityInterceptor());
+		InterceptorRegistration interceptor = registry.addInterceptor(securityInterceptor());
 		interceptor.addPathPatterns("/**");
-		interceptor.excludePathPatterns("/login/**");
+		interceptor.excludePathPatterns("/auth/**");
 		interceptor.excludePathPatterns("/static/**");
 		interceptor.excludePathPatterns("/regiest/**");
 		interceptor.excludePathPatterns("/randomImage/**");
-		interceptor.excludePathPatterns("/exit/**");
 	}
 
 }
