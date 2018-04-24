@@ -20,19 +20,12 @@ public enum ApiResultCodeEnum {
 
 	HTTP_MEDIATYPE_NOT_SUPPORT(4006, "Http类型MIME不支持");
 
-	private int code;
-	private String msg;
+	public int code;
+	public String msg;
 
 	private ApiResultCodeEnum(int code, String msg) {
 		this.code = code;
 		this.msg = msg;
 	}
 
-	public int getCode() {
-		return code;
-	}
-
-	public String getMsg() {
-		return msg;
-	}
 }

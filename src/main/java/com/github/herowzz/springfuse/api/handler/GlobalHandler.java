@@ -94,16 +94,16 @@ public class GlobalHandler {
 	@ExceptionHandler(HttpRequestMethodNotSupportedException.class)
 	public ResponseEntity<ApiResult> HttpRequestMethodNotSupportedException(HttpServletRequest request, HttpRequestMethodNotSupportedException ex) {
 		ApiResult dto = new ApiResult();
-		dto.code = ApiResultCodeEnum.HTTP_METHOD_NOT_SUPPORT.getCode();
-		dto.msg = ApiResultCodeEnum.HTTP_METHOD_NOT_SUPPORT.getMsg() + "(" + ex.getMessage() + ")";
+		dto.code = ApiResultCodeEnum.HTTP_METHOD_NOT_SUPPORT.code;
+		dto.msg = ApiResultCodeEnum.HTTP_METHOD_NOT_SUPPORT.msg + "(" + ex.getMessage() + ")";
 		return new ResponseEntity<ApiResult>(dto, HttpStatus.OK);
 	}
 
 	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
 	public ResponseEntity<ApiResult> HttpRequestMethodNotSupportedException2(HttpServletRequest request, HttpMediaTypeNotSupportedException ex) {
 		ApiResult dto = new ApiResult();
-		dto.code = ApiResultCodeEnum.HTTP_MEDIATYPE_NOT_SUPPORT.getCode();
-		dto.msg = ApiResultCodeEnum.HTTP_MEDIATYPE_NOT_SUPPORT.getMsg() + "(" + ex.getMessage() + ")";
+		dto.code = ApiResultCodeEnum.HTTP_MEDIATYPE_NOT_SUPPORT.code;
+		dto.msg = ApiResultCodeEnum.HTTP_MEDIATYPE_NOT_SUPPORT.msg + "(" + ex.getMessage() + ")";
 		return new ResponseEntity<ApiResult>(dto, HttpStatus.OK);
 	}
 

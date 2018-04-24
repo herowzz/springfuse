@@ -78,37 +78,37 @@ public class ApiResult implements Serializable {
 
 	public static ApiResult serverError() {
 		ApiResultCodeEnum resCode = ApiResultCodeEnum.SERVER_ERROR;
-		return error(resCode.getCode(), resCode.getMsg());
+		return error(resCode.code, resCode.msg);
 	}
 
 	public static ApiResult invalidToken() {
 		ApiResultCodeEnum resCode = ApiResultCodeEnum.INVALID_TOKEN;
-		return error(resCode.getCode(), resCode.getMsg());
+		return error(resCode.code, resCode.msg);
 	}
 
 	public static ApiResult paramError() {
 		ApiResultCodeEnum resCode = ApiResultCodeEnum.PARAM_ERROR;
-		return error(resCode.getCode(), resCode.getMsg());
+		return error(resCode.code, resCode.msg);
 	}
 
 	public static ApiResult authFailed() {
 		ApiResultCodeEnum resCode = ApiResultCodeEnum.AUTH_FAILED;
-		return error(resCode.getCode(), resCode.getMsg());
+		return error(resCode.code, resCode.msg);
 	}
 
 	public static ApiResult repeatAdd() {
 		ApiResultCodeEnum resCode = ApiResultCodeEnum.REPEAT_ADD;
-		return error(resCode.getCode(), resCode.getMsg());
+		return error(resCode.code, resCode.msg);
 	}
 
 	public static ApiResult objectNotFound() {
 		ApiResultCodeEnum resCode = ApiResultCodeEnum.OBJECT_NOT_FOUND;
-		return error(resCode.getCode(), resCode.getMsg());
+		return error(resCode.code, resCode.msg);
 	}
 
 	public static ApiResult notAuthOperate() {
 		ApiResultCodeEnum resCode = ApiResultCodeEnum.NO_AUTH_OPERATE;
-		return error(resCode.getCode(), resCode.getMsg());
+		return error(resCode.code, resCode.msg);
 	}
 
 	public String toJsonString() {
