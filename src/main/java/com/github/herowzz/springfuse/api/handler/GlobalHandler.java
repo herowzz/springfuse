@@ -22,8 +22,6 @@ import com.github.herowzz.springfuse.api.dto.ApiResult;
 import com.github.herowzz.springfuse.api.dto.refrence.ApiResultCodeEnum;
 import com.github.herowzz.springfuse.core.exception.service.ServiceException;
 
-import io.jsonwebtoken.JwtException;
-
 public class GlobalHandler {
 
 	private static Logger logger = LoggerFactory.getLogger(GlobalHandler.class);
@@ -82,12 +80,6 @@ public class GlobalHandler {
 		ApiResult dto = new ApiResult();
 		dto.msg = ((ServiceException) ex).getMessage();
 		dto.code = ((ServiceException) ex).getCode();
-		return new ResponseEntity<ApiResult>(dto, HttpStatus.OK);
-	}
-
-	@ExceptionHandler(JwtException.class)
-	public ResponseEntity<ApiResult> JwtException(HttpServletRequest request, JwtException ex) {
-		ApiResult dto = ApiResult.invalidToken();
 		return new ResponseEntity<ApiResult>(dto, HttpStatus.OK);
 	}
 

@@ -15,11 +15,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import com.github.herowzz.springfuse.core.bean.page.PageCommon;
 import com.github.herowzz.springfuse.example.domain.Book;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 import com.github.herowzz.springfuse.example.service.BookService;
@@ -45,7 +45,7 @@ public class BookControllerTest {
 		List<Book> bookList = Arrays.asList(book1);
 		Page<Book> page = new PageImpl<>(bookList);
 
-		given(bookService.findPage(PageCommon.getPage(null))).willReturn(page);
+		given(bookService.findPage(PageRequest.of(1, 10))).willReturn(page);
 
 		mvc.perform(post("/book/list").accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk()).andExpect(jsonPath("$.code").value(1)).andExpect(jsonPath("$.data.content[0].name").value("aaa"));
 	}

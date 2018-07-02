@@ -12,25 +12,16 @@ public class TokenFactory {
 	public TokenFactory() {
 	}
 
-	public TokenFactory(int expireSeconds, String type) {
-		this.expireSeconds = expireSeconds;
-		this.type = TokenEnum.getByValue(type);
-	}
-
-	public TokenFactory(boolean isMultiLogin, String type) {
-		this.isMultiLogin = isMultiLogin;
-		this.type = TokenEnum.getByValue(type);
-	}
-
-	public TokenFactory(int expireSeconds, boolean isMultiLogin) {
+	/**
+	 * 实例化TokenFactory
+	 * @param expireSeconds 过期时间
+	 * @param isMultiLogin 是否支持同一用户多终端登陆
+	 * @param type 存储类型
+	 */
+	public TokenFactory(int expireSeconds, boolean isMultiLogin, TokenEnum type) {
 		this.expireSeconds = expireSeconds;
 		this.isMultiLogin = isMultiLogin;
-	}
-
-	public TokenFactory(int expireSeconds, boolean isMultiLogin, String type) {
-		this.expireSeconds = expireSeconds;
-		this.isMultiLogin = isMultiLogin;
-		this.type = TokenEnum.getByValue(type);
+		this.type = type;
 	}
 
 	public ITokenManager createTokenManager() {

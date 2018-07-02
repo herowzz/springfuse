@@ -7,6 +7,7 @@ import org.springframework.data.web.config.EnableSpringDataWebSupport;
 
 import com.github.herowzz.springfuse.security.manager.ITokenManager;
 import com.github.herowzz.springfuse.security.manager.TokenFactory;
+import com.github.herowzz.springfuse.security.model.TokenEnum;
 
 @Configuration
 @EnableJpaAuditing
@@ -15,7 +16,7 @@ public class ExampleConfig {
 
 	@Bean
 	public ITokenManager TokenManager() {
-		TokenFactory tokenFactory = new TokenFactory(3600, false);
+		TokenFactory tokenFactory = new TokenFactory(3600, false, TokenEnum.Memory);
 		return tokenFactory.createTokenManager();
 	}
 

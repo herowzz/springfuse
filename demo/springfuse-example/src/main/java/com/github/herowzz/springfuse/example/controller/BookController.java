@@ -6,6 +6,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,12 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.herowzz.springfuse.api.dto.ApiResult;
 import com.github.herowzz.springfuse.api.dto.param.IdParam;
-import com.github.herowzz.springfuse.api.dto.param.PageParam;
-import com.github.herowzz.springfuse.core.bean.page.PageCommon;
 import com.github.herowzz.springfuse.example.domain.Book;
 import com.github.herowzz.springfuse.example.domain.User;
 import com.github.herowzz.springfuse.example.dto.book.BookDto;
 import com.github.herowzz.springfuse.example.dto.book.param.AddBookParam;
+import com.github.herowzz.springfuse.example.dto.book.param.SearchBookParam;
 import com.github.herowzz.springfuse.example.dto.book.param.UpdateBookParam;
 import com.github.herowzz.springfuse.example.service.BookService;
 
@@ -32,11 +32,10 @@ public class BookController {
 	private BookService bookService;
 
 	@PostMapping(value = "/list")
-	public ApiResult list(@RequestBody(required = false) @Valid PageParam pageParam, @ModelAttribute("user") User user) {
+	public ApiResult list(Pageable pageable, @RequestBody(required = false) SearchBookParam searchParam, @ModelAttribute("user") User user) {
 		System.out.println(user);
 		System.out.println(user.getId() + "---" + user.getUsername());
-		Page<Book> bookPage = bookService.findPage(PageCommon.getPage(pageParam));
-		Page<BookDto> bookDtoPage = bookPage.map(e -> BookDto.copy(e));
+		Page<BookDto> bookDtoPage = bookService.findPage(pageable, searchParam.build()).map(e -> BookDto.copy(e));
 		return ApiResult.build(bookDtoPage);
 	}
 

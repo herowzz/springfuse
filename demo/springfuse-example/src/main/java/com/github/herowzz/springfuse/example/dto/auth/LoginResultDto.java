@@ -22,7 +22,7 @@ public class LoginResultDto {
 
 	public static LoginResultDto build(User user, String token, Long expireTime) {
 		LoginResultDto dto = new LoginResultDto();
-		dto.sessionId = user.getId() + "";
+		dto.sessionId = user.getId();
 		dto.username = user.getUsername();
 		dto.realname = user.getRealname();
 		dto.avatar = user.getAvatar();

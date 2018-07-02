@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Lock;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.query.Param;
 
@@ -21,7 +22,7 @@ import org.springframework.data.repository.query.Param;
  * @param <PK> Model Id key Class Type
  */
 @NoRepositoryBean
-public interface IBaseDao<T, PK extends Serializable> extends JpaRepository<T, PK>, JpaSpecificationExecutor<T> {
+public interface IBaseDao<T, PK extends Serializable> extends JpaRepository<T, PK>, JpaSpecificationExecutor<T>, QuerydslPredicateExecutor<T> {
 
 	/**
 	 * 根据主键带锁查询实体(for update)<br>

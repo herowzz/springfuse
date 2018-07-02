@@ -38,6 +38,8 @@ public class MyWebMvcConfigurer implements WebMvcConfigurer {
 		interceptor.excludePathPatterns("/static/**");
 		interceptor.excludePathPatterns("/regiest/**");
 		interceptor.excludePathPatterns("/randomImage/**");
+
+		interceptor.excludePathPatterns("/error**");
 	}
 
 }
