@@ -7,7 +7,6 @@ public class TokenFactory {
 
 	private int expireSeconds = 60 * 60 * 24;
 	private boolean isMultiLogin = true;
-	private TokenEnum type = TokenEnum.Memory;
 
 	public TokenFactory() {
 	}
@@ -18,14 +17,13 @@ public class TokenFactory {
 	 * @param isMultiLogin 是否支持同一用户多终端登陆
 	 * @param type 存储类型
 	 */
-	public TokenFactory(int expireSeconds, boolean isMultiLogin, TokenEnum type) {
+	public TokenFactory(int expireSeconds, boolean isMultiLogin) {
 		this.expireSeconds = expireSeconds;
 		this.isMultiLogin = isMultiLogin;
-		this.type = type;
 	}
 
-	public ITokenManager createTokenManager() {
-		switch (this.type) {
+	public ITokenManager createTokenManager(TokenEnum type) {
+		switch (type) {
 		case Memory:
 			return new MemoryTokenManager(expireSeconds, isMultiLogin);
 		case Redis:

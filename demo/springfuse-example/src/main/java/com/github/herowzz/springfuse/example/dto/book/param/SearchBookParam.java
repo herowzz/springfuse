@@ -2,6 +2,7 @@ package com.github.herowzz.springfuse.example.dto.book.param;
 
 import org.springframework.util.StringUtils;
 
+import com.github.herowzz.springfuse.core.bean.valid.EnumValue;
 import com.github.herowzz.springfuse.example.domain.QBook;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 import com.querydsl.core.BooleanBuilder;
@@ -11,6 +12,7 @@ public class SearchBookParam {
 
 	public String name;
 
+	@EnumValue
 	public BookTypeEnum bookType;
 
 	public Predicate build() {

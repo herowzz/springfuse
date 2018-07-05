@@ -13,6 +13,8 @@ import com.github.herowzz.springfuse.data.jpa.dao.IBaseDao;
 import com.github.herowzz.springfuse.data.jpa.service.BaseService;
 import com.github.herowzz.springfuse.example.dao.BookDao;
 import com.github.herowzz.springfuse.example.domain.Book;
+import com.github.herowzz.springfuse.example.domain.QBook;
+import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 
 @Service
 public class BookService extends BaseService<Book, String> {
@@ -33,6 +35,13 @@ public class BookService extends BaseService<Book, String> {
 			query.orderBy(cb.desc(expression));
 			return query.getRestriction();
 		});
+	}
+
+	public List<Book> findDD(String name, BookTypeEnum bookType) {
+		QBook book = QBook.book;
+		com.querydsl.core.types.Predicate p = book.shop.name.like(name).and(book.bookType.eq(bookType));
+		Iterable<Book> it = bookDao.findAll(p);
+		return (List<Book>) it;
 	}
 
 }

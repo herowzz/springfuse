@@ -16,8 +16,8 @@ public class ExampleConfig {
 
 	@Bean
 	public ITokenManager TokenManager() {
-		TokenFactory tokenFactory = new TokenFactory(3600, false, TokenEnum.Memory);
-		return tokenFactory.createTokenManager();
+		TokenFactory tokenFactory = new TokenFactory(3600, false);
+		return tokenFactory.createTokenManager(TokenEnum.Memory);
 	}
 
 }
