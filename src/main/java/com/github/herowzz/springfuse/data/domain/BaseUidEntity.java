@@ -1,4 +1,4 @@
-package com.github.herowzz.springfuse.data.jpa.domain;
+package com.github.herowzz.springfuse.data.domain;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;

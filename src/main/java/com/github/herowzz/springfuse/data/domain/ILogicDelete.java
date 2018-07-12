@@ -1,4 +1,4 @@
-package com.github.herowzz.springfuse.data.jpa.domain;
+package com.github.herowzz.springfuse.data.domain;
 
 /**
  * 提供实体逻辑删除功能

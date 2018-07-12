@@ -1,4 +1,4 @@
-package com.github.herowzz.springfuse.data.jpa.domain.support;
+package com.github.herowzz.springfuse.data.domain.support;
 
 import java.io.Serializable;
 
