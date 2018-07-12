@@ -23,7 +23,7 @@ import org.hibernate.envers.RevisionTimestamp;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import com.github.herowzz.springfuse.data.jpa.domain.support.RevisionEntityListener;
+import com.github.herowzz.springfuse.data.domain.support.RevisionEntityListener;
 
 @Entity
 @Table(name = "version_info")

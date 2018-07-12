@@ -14,6 +14,7 @@ import com.github.herowzz.springfuse.core.exception.service.ServiceException;
 import com.github.herowzz.springfuse.example.domain.User;
 import com.github.herowzz.springfuse.example.service.UserService;
 import com.github.herowzz.springfuse.security.manager.ITokenManager;
+import com.github.herowzz.springfuse.security.manager.UserSessionManager;
 
 @ControllerAdvice
 public class ResourceHandler extends GlobalHandler {
@@ -33,6 +34,7 @@ public class ResourceHandler extends GlobalHandler {
 				throw new ServiceException("Permission Error(Incorrect token), token: " + token + "find user id:" + uid + ", find user is not exist!", ApiResultCodeEnum.OBJECT_NOT_FOUND.code);
 			}
 			model.addAttribute("user", userOptional.get());
+			UserSessionManager.setUser(userOptional.get());
 		}
 	}
 

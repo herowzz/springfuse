@@ -31,14 +31,14 @@ public class AuthController {
 
 	@RequestMapping(value = "/login")
 	public ApiResult login(@RequestBody @Valid LoginParam param, HttpServletRequest request) {
-		User user = userService.login(param.username, param.password);
+		User user = userService.findByUsernameAndPassword(param.username, param.password);
 		if (user == null)
 			return ResultEnum.USER_PASSWORD_ERROR.toResult();
 		if (user.getEnableType() == EnableEnum.Disable)
 			return ResultEnum.USER_IS_DISABLED.toResult();
 
 		TokenModel tokenModel = tokenManager.createToken(user.getId());
-		userService.updateLoginInfo(user, request.getRemoteAddr());
+		userService.login(user, request.getRemoteAddr());
 		return ApiResult.build(LoginResultDto.build(user, tokenModel.getToken(), tokenModel.getExpireTime()));
 	}
 

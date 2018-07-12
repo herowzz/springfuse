@@ -21,14 +21,28 @@ public class UserService extends BaseService<User, String> {
 		return userDao;
 	}
 
-	public User login(String username, String password) {
+	/**
+	 * 根据用户登录名密码查询用户对象
+	 * @param username 登录名
+	 * @param password 登录密码
+	 * @return 用户对象.不存在返回Null
+	 */
+	public User findByUsernameAndPassword(String username, String password) {
 		return userDao.findByUsernameAndPassword(username, password);
 	}
 
-	public User updateLoginInfo(User user, String ip) {
+	/**
+	 * 登录逻辑<br>
+	 * 记录登录IP和登录时间
+	 * @param user 登录用户
+	 * @param ip 访问IP地址
+	 * @return 处理后的用户对象
+	 */
+	public User login(User user, String ip) {
 		user.setLastLoginIp(ip);
 		user.setLastLoginTime(LocalDateTime.now());
-		return userDao.save(user);
+		user = userDao.save(user);
+		return user;
 	}
 
 }

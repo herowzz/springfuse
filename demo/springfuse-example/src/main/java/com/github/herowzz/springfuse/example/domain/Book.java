@@ -14,7 +14,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.envers.Audited;
 
-import com.github.herowzz.springfuse.data.jpa.domain.BaseUidEntity;
+import com.github.herowzz.springfuse.data.domain.BaseUidEntity;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 
 @Entity
