@@ -80,6 +80,7 @@
 			<plugin>
 				<groupId>com.querydsl</groupId>
 				<artifactId>querydsl-maven-plugin</artifactId>
+				<version>4.2.1</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>
@@ -88,7 +89,7 @@
 						</goals>
 						<configuration>
 							<targetFolder>target/generated-sources/java</targetFolder>
-							<packages>com.github.herowzz.springfuse.example.domain,com.github.herowzz.springfuse.data.jpa.domain</packages>
+							<packages>com.github.herowzz.springfuse.example.domain,com.github.herowzz.springfuse.data.domain</packages>
 						</configuration>
 					</execution>
 				</executions>
