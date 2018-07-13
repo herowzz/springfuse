@@ -1,4 +1,4 @@
-package com.github.herowzz.springfuse.example.domain;
+package com.github.herowzz.springfuse.example.domain.account;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

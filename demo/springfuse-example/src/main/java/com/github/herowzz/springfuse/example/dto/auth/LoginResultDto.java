@@ -1,6 +1,6 @@
 package com.github.herowzz.springfuse.example.dto.auth;
 
-import com.github.herowzz.springfuse.example.domain.User;
+import com.github.herowzz.springfuse.example.domain.account.User;
 
 public class LoginResultDto {
 

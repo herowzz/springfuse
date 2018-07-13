@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.herowzz.springfuse.api.dto.ApiResult;
 import com.github.herowzz.springfuse.api.dto.param.IdParam;
 import com.github.herowzz.springfuse.example.domain.Book;
-import com.github.herowzz.springfuse.example.domain.User;
+import com.github.herowzz.springfuse.example.domain.account.User;
 import com.github.herowzz.springfuse.example.dto.book.BookDto;
 import com.github.herowzz.springfuse.example.dto.book.param.AddBookParam;
 import com.github.herowzz.springfuse.example.dto.book.param.SearchBookParam;

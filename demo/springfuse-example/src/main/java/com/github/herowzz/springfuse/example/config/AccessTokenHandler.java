@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import com.github.herowzz.springfuse.api.dto.refrence.ApiResultCodeEnum;
 import com.github.herowzz.springfuse.api.handler.GlobalHandler;
 import com.github.herowzz.springfuse.core.exception.service.ServiceException;
-import com.github.herowzz.springfuse.example.domain.User;
+import com.github.herowzz.springfuse.example.domain.account.User;
 import com.github.herowzz.springfuse.example.service.UserService;
 import com.github.herowzz.springfuse.security.manager.ITokenManager;
 import com.github.herowzz.springfuse.security.manager.UserSessionManager;

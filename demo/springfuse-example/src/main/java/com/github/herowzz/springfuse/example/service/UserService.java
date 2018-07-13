@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.github.herowzz.springfuse.data.jpa.dao.IBaseDao;
 import com.github.herowzz.springfuse.data.jpa.service.BaseService;
 import com.github.herowzz.springfuse.example.dao.UserDao;
-import com.github.herowzz.springfuse.example.domain.User;
+import com.github.herowzz.springfuse.example.domain.account.User;
 
 @Service
 public class UserService extends BaseService<User, String> {

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.herowzz.springfuse.api.dto.ApiResult;
 import com.github.herowzz.springfuse.core.bean.enumtype.EnableEnum;
-import com.github.herowzz.springfuse.example.domain.User;
+import com.github.herowzz.springfuse.example.domain.account.User;
 import com.github.herowzz.springfuse.example.dto.ResultEnum;
 import com.github.herowzz.springfuse.example.dto.auth.LoginResultDto;
 import com.github.herowzz.springfuse.example.dto.auth.param.LoginParam;
