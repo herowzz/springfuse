@@ -62,7 +62,7 @@ public class ServiceTest {
 		
 		bookDao.findTb("a");
 		
-		bookDao.findTa("1");
+//		bookDao.findTa("1");
 		
 		//
 		// Shop shop = book.getShop();
