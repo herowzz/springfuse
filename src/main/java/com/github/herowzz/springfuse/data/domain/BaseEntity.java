@@ -8,6 +8,7 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
+import com.github.herowzz.springfuse.core.bean.enumtype.WhetherEnum;
 import com.github.herowzz.springfuse.security.manager.UserSessionManager;
 
 /**
@@ -18,6 +19,11 @@ import com.github.herowzz.springfuse.security.manager.UserSessionManager;
 public abstract class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * 逻辑删除查询条件
+	 */
+	public static final String SOFT_DELETED_CLAUSE = "is_deleted = 0";
 
 	/**
 	 * 创建时间
@@ -54,8 +60,15 @@ public abstract class BaseEntity implements Serializable {
 	 */
 	protected LocalDateTime updateTime;
 
+	/**
+	 * 是否删除<br>
+	 * 0:未删除,1:已删除
+	 */
+	@Column(name = "is_deleted")
+	protected WhetherEnum isDeleted = WhetherEnum.No;
+
 	@PrePersist
-	protected void onCreate() {
+	public void onCreate() {
 		this.createTime = LocalDateTime.now();
 		BaseUser user = UserSessionManager.getUser();
 		if (user != null) {
@@ -65,7 +78,7 @@ public abstract class BaseEntity implements Serializable {
 	}
 
 	@PreUpdate
-	protected void onUpdate() {
+	public void onUpdate() {
 		this.updateTime = LocalDateTime.now();
 		BaseUser user = UserSessionManager.getUser();
 		if (user != null) {
@@ -74,52 +87,65 @@ public abstract class BaseEntity implements Serializable {
 		}
 	}
 
-	protected LocalDateTime getCreateTime() {
+	public void onRemove() {
+		this.isDeleted = WhetherEnum.Yes;
+		this.onUpdate();
+	}
+
+	public LocalDateTime getCreateTime() {
 		return createTime;
 	}
 
-	protected void setCreateTime(LocalDateTime createTime) {
+	public void setCreateTime(LocalDateTime createTime) {
 		this.createTime = createTime;
 	}
 
-	protected String getCreateUserId() {
+	public String getCreateUserId() {
 		return createUserId;
 	}
 
-	protected void setCreateUserId(String createUserId) {
+	public void setCreateUserId(String createUserId) {
 		this.createUserId = createUserId;
 	}
 
-	protected String getCreateUserName() {
+	public String getCreateUserName() {
 		return createUserName;
 	}
 
-	protected void setCreateUserName(String createUserName) {
+	public void setCreateUserName(String createUserName) {
 		this.createUserName = createUserName;
 	}
 
-	protected String getUpdateUserId() {
+	public String getUpdateUserId() {
 		return updateUserId;
 	}
 
-	protected void setUpdateUserId(String updateUserId) {
+	public void setUpdateUserId(String updateUserId) {
 		this.updateUserId = updateUserId;
 	}
 
-	protected String getUpdateUserName() {
+	public String getUpdateUserName() {
 		return updateUserName;
 	}
 
-	protected void setUpdateUserName(String updateUserName) {
+	public void setUpdateUserName(String updateUserName) {
 		this.updateUserName = updateUserName;
 	}
 
-	protected LocalDateTime getUpdateTime() {
+	public LocalDateTime getUpdateTime() {
 		return updateTime;
 	}
 
-	protected void setUpdateTime(LocalDateTime updateTime) {
+	public void setUpdateTime(LocalDateTime updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public WhetherEnum getIsDeleted() {
+		return isDeleted;
+	}
+
+	public void setIsDeleted(WhetherEnum isDeleted) {
+		this.isDeleted = isDeleted;
 	}
 
 }

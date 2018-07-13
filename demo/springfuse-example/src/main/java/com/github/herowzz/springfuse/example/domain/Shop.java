@@ -4,14 +4,12 @@ import javax.persistence.Entity;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.envers.Audited;
 
 import com.github.herowzz.springfuse.data.domain.BaseUidEntity;
 
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Audited
 public class Shop extends BaseUidEntity {
 
 	private static final long serialVersionUID = -1423036044397574897L;

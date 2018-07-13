@@ -16,6 +16,6 @@ public interface BookDao extends IBaseDao<Book, String> {
 	@Query("from Book b where b.name like ?1")
 	List<Book> findTb(String name);
 
-	@Query(value = "select * from book b where  b.id= :id and b.page = 11", nativeQuery = true)
-	List<Book> findTa(@Param("id") Integer id);
+	@Query(value = "select * from book b where b.id= :id and b.page = 11", nativeQuery = true)
+	List<Book> findTa(@Param("id") String id);
 }

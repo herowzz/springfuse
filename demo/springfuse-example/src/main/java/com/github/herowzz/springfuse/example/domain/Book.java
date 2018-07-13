@@ -12,15 +12,16 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.envers.Audited;
+import org.hibernate.annotations.Where;
 
+import com.github.herowzz.springfuse.data.domain.BaseEntity;
 import com.github.herowzz.springfuse.data.domain.BaseUidEntity;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Audited
+@Where(clause = BaseEntity.SOFT_DELETED_CLAUSE)
 public class Book extends BaseUidEntity {
 
 	private static final long serialVersionUID = -7001927790018290769L;
@@ -106,8 +107,11 @@ public class Book extends BaseUidEntity {
 		builder.append(sellPrice);
 		builder.append(", pubDate=");
 		builder.append(pubDate);
-		builder.append(", shop=");
-		builder.append(shop);
+		builder.append(", ");
+		if (shop != null) {
+			builder.append("shop=");
+			builder.append(shop.getId());
+		}
 		builder.append("]");
 		return builder.toString();
 	}

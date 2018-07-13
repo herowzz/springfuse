@@ -12,9 +12,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.github.herowzz.springfuse.example.dao.BookDao;
 import com.github.herowzz.springfuse.example.dao.ShopDao;
-import com.github.herowzz.springfuse.example.domain.Book;
-import com.github.herowzz.springfuse.example.domain.Shop;
 
+@SuppressWarnings("unused")
 @RunWith(SpringRunner.class)
 @Configuration
 @SpringBootTest
@@ -27,6 +26,7 @@ public class ServiceTest {
 	@Autowired
 	private ShopDao shopDao;
 
+	
 	@Autowired
 	private BookService bookService;
 
@@ -40,19 +40,30 @@ public class ServiceTest {
 		// shop.setName("1");
 		// shop = shopDao.save(shop);
 
-		Shop shop2 = shopDao.findById("aeffb574-4dac-4792-a189-4192405e52c4").get();
-		shop2.setAddress("61");
-		shop2.setName("61");
-		shopDao.save(shop2);
+//		Shop shop2 = shopDao.findById("aeffb574-4dac-4792-a189-4192405e52c4").get();
+//		shop2.setAddress("61");
+//		shop2.setName("61");
+//		shopDao.save(shop2);
+//
+//		Book book = new Book();
+//		book.setName("7771");
+//		book.setShop(shop2);
+//		bookDao.save(book);
 
-		Book book = new Book();
-		book.setName("7771");
-		book.setShop(shop2);
-		bookDao.save(book);
-
-		// Book book = bookDao.findById("1").get();
-		// book.setName("wzz111");
-		// bookDao.save(book);
+//		Optional<Book> bookOptional = bookDao.findById("1");
+//		bookOptional.ifPresent(book -> {
+//			book.setName("wzz111");
+//			bookDao.save(book);
+//			
+//			bookDao.delete(book);
+//		});
+		
+//		bookDao.deleteAll();
+		
+		bookDao.findTb("a");
+		
+		bookDao.findTa("1");
+		
 		//
 		// Shop shop = book.getShop();
 		// shop.setName("22222");
@@ -61,12 +72,19 @@ public class ServiceTest {
 		// Shop shopDel = shopDao.findById("4").get();
 		// shopDao.delete(shopDel);
 
-		bookService.findAll().stream().forEach(b -> System.out.println(b));
+//		bookService.findAll().stream().forEach(b -> System.out.println(b));
+//		bookService.findPage(PageRequest.of(0, 10));
+//		bookService.findDD("a", BookTypeEnum.ECONOMIC);
+//		bookService.findYY();
 
 		// bookService.findPageEq(PageRequest.of(0, 10), "shop.name", "t").stream().forEach(book -> System.out.println(book));
 
 		// bookDao.findTa(1).stream().forEach(book -> System.out.println(book));;
 		// bookService.findYY();
 		// bookDao.findTb("a").stream().forEach(book -> System.out.println(book));
+		
+//		bookService.findAll().stream().forEach(b -> {
+//			bookService.delete(b);
+//		});
 	}
 }

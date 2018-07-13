@@ -17,7 +17,7 @@ import com.github.herowzz.springfuse.security.manager.ITokenManager;
 import com.github.herowzz.springfuse.security.manager.UserSessionManager;
 
 @ControllerAdvice
-public class ResourceHandler extends GlobalHandler {
+public class AccessTokenHandler extends GlobalHandler {
 
 	@Autowired
 	private ITokenManager tokenManager;
