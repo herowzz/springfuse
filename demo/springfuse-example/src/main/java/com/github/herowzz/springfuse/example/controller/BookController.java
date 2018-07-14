@@ -9,7 +9,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +24,7 @@ import com.github.herowzz.springfuse.example.dto.book.param.AddBookParam;
 import com.github.herowzz.springfuse.example.dto.book.param.SearchBookParam;
 import com.github.herowzz.springfuse.example.dto.book.param.UpdateBookParam;
 import com.github.herowzz.springfuse.example.service.BookService;
+import com.github.herowzz.springfuse.security.annotation.CurrentUser;
 
 @RestController
 @RequestMapping(value = "/book")
@@ -34,7 +34,7 @@ public class BookController {
 	private BookService bookService;
 
 	@PostMapping(value = "/list")
-	public ApiResult list(Pageable pageable, @RequestBody(required = false) @Valid SearchBookParam searchParam, @ModelAttribute("user") User user) {
+	public ApiResult list(Pageable pageable, @RequestBody(required = false) @Valid SearchBookParam searchParam, @CurrentUser User user) {
 		System.out.println(user);
 		System.out.println(user.getId() + "---" + user.getUsername());
 		Page<BookDto> bookDtoPage = bookService.findPage(pageable, searchParam.build()).map(e -> BookDto.copy(e));
@@ -42,7 +42,7 @@ public class BookController {
 	}
 
 	@PostMapping(value = "/list2")
-	public ApiResult list2(Pageable pageable, @RequestBody(required = false) @Valid SearchBookParam searchParam, @ModelAttribute("user") User user) {
+	public ApiResult list2(Pageable pageable, @RequestBody(required = false) @Valid SearchBookParam searchParam, @CurrentUser User user) {
 		List<Book> bookList = bookService.findDD(searchParam.name, searchParam.bookType);
 		Stream<Object> bookDto = bookList.stream().map(e -> BookDto.copy(e));
 		return ApiResult.build(bookDto);

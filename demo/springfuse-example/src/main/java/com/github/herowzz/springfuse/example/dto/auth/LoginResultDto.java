@@ -4,8 +4,6 @@ import com.github.herowzz.springfuse.example.domain.account.User;
 
 public class LoginResultDto {
 
-	public String sessionId;
-
 	public String avatar;
 
 	public String username;
@@ -22,7 +20,6 @@ public class LoginResultDto {
 
 	public static LoginResultDto build(User user, String token, Long expireTime) {
 		LoginResultDto dto = new LoginResultDto();
-		dto.sessionId = user.getId();
 		dto.username = user.getUsername();
 		dto.realname = user.getRealname();
 		dto.avatar = user.getAvatar();

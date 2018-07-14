@@ -16,7 +16,7 @@ import com.github.herowzz.springfuse.data.jpa.interceptor.SoftDeleteEventListene
  * @author wangzz
  */
 @Configuration
-public class EntityListenerConfiguration {
+public class JpaListenerConfig {
 
 	@PersistenceUnit
 	private EntityManagerFactory entityManagerFactory;

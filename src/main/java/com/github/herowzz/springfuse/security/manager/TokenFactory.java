@@ -13,7 +13,7 @@ public class TokenFactory {
 
 	/**
 	 * 实例化TokenFactory
-	 * @param expireSeconds 过期时间
+	 * @param expireSeconds 过期时间(单位:秒)
 	 * @param isMultiLogin 是否支持同一用户多终端登陆
 	 * @param type 存储类型
 	 */

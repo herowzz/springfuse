@@ -9,21 +9,16 @@ import java.util.stream.IntStream;
 
 import javax.transaction.Transactional;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import com.github.herowzz.springfuse.example.domain.Book;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 // @DataJpaTest
-@TestPropertySource(locations = "classpath:application-test.properties")
+//@TestPropertySource(locations = "classpath:application-test.properties")
 public class BookDaoTest {
 
 	@Autowired
@@ -32,7 +27,7 @@ public class BookDaoTest {
 	@Autowired
 	private BookDao bookDao;
 
-	@Before
+//	@Before
 	@Transactional
 	public void initData() {
 		IntStream.rangeClosed(1, 10).forEach(i -> {
@@ -71,7 +66,7 @@ public class BookDaoTest {
 		// bookDao.save(book1);
 	}
 
-	@Test
+//	@Test
 	public void testFind() {
 		List<Book> bookList = bookDao.findByNameAndBookType("a1", BookTypeEnum.ECONOMIC);
 		System.out.println(bookList.size());
