@@ -66,6 +66,13 @@ public class FunctionPermission extends BaseUidEntity {
 		this.num = num;
 	}
 
+	public String getParentId() {
+		String parentId = "";
+		if (parent != null)
+			parentId = parent.getId();
+		return parentId;
+	}
+
 	public FunctionPermission getParent() {
 		return parent;
 	}

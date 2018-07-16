@@ -13,7 +13,7 @@ import com.github.herowzz.springfuse.example.domain.account.FunctionPermission;
 import com.github.herowzz.springfuse.example.domain.account.OperationPermission;
 import com.github.herowzz.springfuse.example.domain.account.Role;
 import com.github.herowzz.springfuse.example.domain.account.User;
-import com.github.herowzz.springfuse.example.service.account.PermissionService;
+import com.github.herowzz.springfuse.example.service.account.AuthService;
 import com.github.herowzz.springfuse.example.service.account.RoleService;
 import com.github.herowzz.springfuse.example.service.account.UserService;
 
@@ -32,16 +32,16 @@ public class DbAdminDataInit implements ApplicationRunner {
 	private RoleService roleService;
 
 	@Autowired
-	private PermissionService permissionService;
+	private AuthService authService;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		User admin = initAdminUser();
 		Role adminRole = initRole();
-		List<Role> adminRoleList = roleService.findRoleListByUser(admin.getId());
+		List<Role> adminRoleList = authService.findRoleListByUser(admin.getId());
 		Optional<Role> adminRoleOptional = adminRoleList.stream().filter(r -> r.getName().equals("超级管理员")).findAny();
 		if (!adminRoleOptional.isPresent()) {
-			roleService.addRole(admin, adminRole);
+			authService.relateUserRole(admin, adminRole);
 		}
 		initPermission(adminRole);
 	}
@@ -82,23 +82,24 @@ public class DbAdminDataInit implements ApplicationRunner {
 	 * 初始化权限
 	 */
 	private void initPermission(Role adminRole) {
-		if (permissionService.findAllFunctionPermission().isEmpty()) {
-			FunctionPermission functionBook = new FunctionPermission("bookManage", "书籍管理", 110000);
-			functionBook = permissionService.saveFunctionPermission(functionBook);
-
+		if (authService.findAllFunctionPermission().isEmpty()) {
 			List<FunctionPermission> functionBookPermissionList = new ArrayList<>();
+			FunctionPermission functionBook = new FunctionPermission("bookManage", "书籍管理", 110000);
+			functionBookPermissionList.add(functionBook);
+			functionBook = authService.saveFunctionPermission(functionBook);
+			
 			FunctionPermission functionBookList = new FunctionPermission(functionBook, "bookList", "书籍列表", 110100);
 			functionBookPermissionList.add(functionBookList);
 			FunctionPermission functionBookSetup = new FunctionPermission(functionBook, "bookSetup", "书籍配置", 110200);
 			functionBookPermissionList.add(functionBookSetup);
-			permissionService.saveFunctionPermissionList(functionBookPermissionList);
-			permissionService.addRoleFunctionPermission(adminRole, functionBookPermissionList);
+			authService.saveFunctionPermissionList(functionBookPermissionList);
+			authService.addRoleFunctionPermission(adminRole, functionBookPermissionList);
 
 			List<OperationPermission> operationBookPermissionList = new ArrayList<>();
 			operationBookPermissionList.add(new OperationPermission(functionBookList, "bookAdd", "添加书籍", 110101));
 			operationBookPermissionList.add(new OperationPermission(functionBookList, "bookEdit", "修改书籍", 110102));
 			operationBookPermissionList.add(new OperationPermission(functionBookSetup, "bookSetupSave", "配置保存", 110201));
-			permissionService.saveOperationPermissionList(operationBookPermissionList);
+			authService.saveOperationPermissionList(operationBookPermissionList);
 		}
 	}
 
