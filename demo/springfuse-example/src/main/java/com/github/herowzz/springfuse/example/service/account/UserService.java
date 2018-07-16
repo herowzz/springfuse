@@ -1,4 +1,4 @@
-package com.github.herowzz.springfuse.example.service;
+package com.github.herowzz.springfuse.example.service.account;
 
 import java.time.LocalDateTime;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.herowzz.springfuse.data.jpa.dao.IBaseDao;
 import com.github.herowzz.springfuse.data.jpa.service.BaseService;
-import com.github.herowzz.springfuse.example.dao.UserDao;
+import com.github.herowzz.springfuse.example.dao.account.UserDao;
 import com.github.herowzz.springfuse.example.domain.account.User;
 
 @Service

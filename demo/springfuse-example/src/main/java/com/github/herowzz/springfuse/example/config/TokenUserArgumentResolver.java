@@ -13,7 +13,7 @@ import org.springframework.web.method.support.ModelAndViewContainer;
 import com.github.herowzz.springfuse.api.dto.refrence.ApiResultCodeEnum;
 import com.github.herowzz.springfuse.core.exception.service.ServiceException;
 import com.github.herowzz.springfuse.example.domain.account.User;
-import com.github.herowzz.springfuse.example.service.UserService;
+import com.github.herowzz.springfuse.example.service.account.UserService;
 import com.github.herowzz.springfuse.security.annotation.CurrentUser;
 import com.github.herowzz.springfuse.security.manager.ITokenManager;
 import com.github.herowzz.springfuse.security.manager.UserSessionManager;

@@ -13,13 +13,13 @@ import org.hibernate.annotations.DynamicUpdate;
 import com.github.herowzz.springfuse.data.domain.BaseUidEntity;
 
 /**
- * 权限
+ * 功能权限
  * @author wangzz
  */
-@Entity
+@Entity(name = "function_permission")
 @DynamicInsert
 @DynamicUpdate
-public class Permission extends BaseUidEntity {
+public class FunctionPermission extends BaseUidEntity {
 
 	private static final long serialVersionUID = -1811543530179200527L;
 
@@ -28,7 +28,7 @@ public class Permission extends BaseUidEntity {
 	 */
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "none"))
-	private Permission parent;
+	private FunctionPermission parent;
 
 	/**
 	 * 权限码
@@ -41,20 +41,36 @@ public class Permission extends BaseUidEntity {
 	private String name;
 
 	/**
-	 * 权限访问URL
+	 * 序号
 	 */
-	private String url;
+	private Integer num;
 
 	/**
 	 * 备注
 	 */
 	private String comments;
 
-	public Permission getParent() {
+	public FunctionPermission() {
+	}
+
+	public FunctionPermission(String code, String name, Integer num) {
+		this.code = code;
+		this.name = name;
+		this.num = num;
+	}
+
+	public FunctionPermission(FunctionPermission parent, String code, String name, Integer num) {
+		this.parent = parent;
+		this.code = code;
+		this.name = name;
+		this.num = num;
+	}
+
+	public FunctionPermission getParent() {
 		return parent;
 	}
 
-	public void setParent(Permission parent) {
+	public void setParent(FunctionPermission parent) {
 		this.parent = parent;
 	}
 
@@ -74,12 +90,12 @@ public class Permission extends BaseUidEntity {
 		this.name = name;
 	}
 
-	public String getUrl() {
-		return url;
+	public Integer getNum() {
+		return num;
 	}
 
-	public void setUrl(String url) {
-		this.url = url;
+	public void setNum(Integer num) {
+		this.num = num;
 	}
 
 	public String getComments() {

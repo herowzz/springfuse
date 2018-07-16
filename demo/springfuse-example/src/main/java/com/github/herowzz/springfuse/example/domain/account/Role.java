@@ -24,9 +24,22 @@ public class Role extends BaseUidEntity {
 	private String name;
 
 	/**
+	 * 序号
+	 */
+	private Integer num;
+
+	/**
 	 * 备注
 	 */
 	private String comments;
+
+	public Role() {
+	}
+
+	public Role(String name, Integer num) {
+		this.name = name;
+		this.num = num;
+	}
 
 	public String getName() {
 		return name;
@@ -42,6 +55,14 @@ public class Role extends BaseUidEntity {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public Integer getNum() {
+		return num;
+	}
+
+	public void setNum(Integer num) {
+		this.num = num;
 	}
 
 }

@@ -15,7 +15,7 @@ import com.github.herowzz.springfuse.example.domain.account.User;
 import com.github.herowzz.springfuse.example.dto.ResultEnum;
 import com.github.herowzz.springfuse.example.dto.auth.LoginResultDto;
 import com.github.herowzz.springfuse.example.dto.auth.param.LoginParam;
-import com.github.herowzz.springfuse.example.service.UserService;
+import com.github.herowzz.springfuse.example.service.account.UserService;
 import com.github.herowzz.springfuse.security.manager.ITokenManager;
 import com.github.herowzz.springfuse.security.model.TokenModel;
 

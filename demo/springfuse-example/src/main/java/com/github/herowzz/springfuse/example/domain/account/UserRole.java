@@ -12,10 +12,10 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import com.github.herowzz.springfuse.data.domain.BaseUidEntity;
 
-@Entity(name = "role_user")
+@Entity(name = "user_role")
 @DynamicInsert
 @DynamicUpdate
-public class RoleUser extends BaseUidEntity {
+public class UserRole extends BaseUidEntity {
 
 	private static final long serialVersionUID = 983308626699223127L;
 
@@ -26,6 +26,14 @@ public class RoleUser extends BaseUidEntity {
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "none"))
 	private Role role;
+
+	public UserRole() {
+	}
+
+	public UserRole(User user, Role role) {
+		this.user = user;
+		this.role = role;
+	}
 
 	public User getUser() {
 		return user;
