@@ -9,10 +9,10 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import com.github.herowzz.springfuse.example.domain.account.FunctionPermission;
-import com.github.herowzz.springfuse.example.domain.account.OperationPermission;
+import com.github.herowzz.springfuse.example.domain.account.Permission;
 import com.github.herowzz.springfuse.example.domain.account.Role;
 import com.github.herowzz.springfuse.example.domain.account.User;
+import com.github.herowzz.springfuse.example.domain.refrence.PermissionTypeEnum;
 import com.github.herowzz.springfuse.example.service.account.AuthService;
 import com.github.herowzz.springfuse.example.service.account.RoleService;
 import com.github.herowzz.springfuse.example.service.account.UserService;
@@ -82,24 +82,28 @@ public class DbAdminDataInit implements ApplicationRunner {
 	 * 初始化权限
 	 */
 	private void initPermission(Role adminRole) {
-		if (authService.findAllFunctionPermission().isEmpty()) {
-			List<FunctionPermission> functionBookPermissionList = new ArrayList<>();
-			FunctionPermission functionBook = new FunctionPermission("bookManage", "书籍管理", 110000);
-			functionBookPermissionList.add(functionBook);
-			functionBook = authService.saveFunctionPermission(functionBook);
-			
-			FunctionPermission functionBookList = new FunctionPermission(functionBook, "bookList", "书籍列表", 110100);
-			functionBookPermissionList.add(functionBookList);
-			FunctionPermission functionBookSetup = new FunctionPermission(functionBook, "bookSetup", "书籍配置", 110200);
-			functionBookPermissionList.add(functionBookSetup);
-			authService.saveFunctionPermissionList(functionBookPermissionList);
-			authService.addRoleFunctionPermission(adminRole, functionBookPermissionList);
+		if (authService.findAllPermission().isEmpty()) {
+			List<Permission> permissionList = new ArrayList<>();
 
-			List<OperationPermission> operationBookPermissionList = new ArrayList<>();
-			operationBookPermissionList.add(new OperationPermission(functionBookList, "bookAdd", "添加书籍", 110101));
-			operationBookPermissionList.add(new OperationPermission(functionBookList, "bookEdit", "修改书籍", 110102));
-			operationBookPermissionList.add(new OperationPermission(functionBookSetup, "bookSetupSave", "配置保存", 110201));
-			authService.saveOperationPermissionList(operationBookPermissionList);
+			Permission functionBook = new Permission(null, "book:manage", "书籍管理", 110000, PermissionTypeEnum.MODULE);
+			Permission functionBookList = new Permission(functionBook, "book:list", "书籍列表", 110100, PermissionTypeEnum.MODULE);
+			Permission functionBookSetup = new Permission(functionBook, "book:setup", "书籍配置", 110200, PermissionTypeEnum.MODULE);
+
+			Permission functionBookAdd = new Permission(functionBookList, "book:list:add", "添加书籍", 110101, PermissionTypeEnum.BUTTON);
+			Permission functionBookEdit = new Permission(functionBookList, "book:list:edit", "修改书籍", 110102, PermissionTypeEnum.BUTTON);
+			Permission functionBookSetupSave = new Permission(functionBookSetup, "book:setup:save", "修改书籍", 110201, PermissionTypeEnum.BUTTON);
+
+			permissionList.add(functionBook);
+			permissionList.add(functionBookList);
+			permissionList.add(functionBookSetup);
+			permissionList.add(functionBookAdd);
+			permissionList.add(functionBookEdit);
+			permissionList.add(functionBookSetupSave);
+
+			authService.savePermissionList(permissionList);
+
+			authService.relateRolePermission(adminRole, permissionList);
+			roleService.save(adminRole);
 		}
 	}
 

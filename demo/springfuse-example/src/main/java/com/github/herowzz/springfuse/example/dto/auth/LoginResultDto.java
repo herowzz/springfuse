@@ -24,10 +24,10 @@ public class LoginResultDto {
 	/**
 	 * 权限列表
 	 */
-	public List<FunctionPermissionDto> functionPermissionList = new ArrayList<>();
+	public List<PermissionDto> permissionList = new ArrayList<>();
 
-	public void addFunctionPermission(FunctionPermissionDto functionPermission) {
-		this.functionPermissionList.add(functionPermission);
+	public void addPermission(PermissionDto permission) {
+		this.permissionList.add(permission);
 	}
 
 	public static LoginResultDto build(User user, String token, Long expireTime) {

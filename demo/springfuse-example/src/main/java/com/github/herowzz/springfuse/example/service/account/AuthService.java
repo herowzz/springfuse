@@ -2,7 +2,9 @@ package com.github.herowzz.springfuse.example.service.account;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -10,15 +12,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.github.herowzz.springfuse.example.dao.account.FunctionPermissionDao;
-import com.github.herowzz.springfuse.example.dao.account.OperationPermissionDao;
-import com.github.herowzz.springfuse.example.dao.account.RoleFunctionPermissionDao;
+import com.github.herowzz.springfuse.example.dao.account.PermissionDao;
+import com.github.herowzz.springfuse.example.dao.account.RolePermissionDao;
 import com.github.herowzz.springfuse.example.dao.account.UserDao;
 import com.github.herowzz.springfuse.example.dao.account.UserRoleDao;
-import com.github.herowzz.springfuse.example.domain.account.FunctionPermission;
-import com.github.herowzz.springfuse.example.domain.account.OperationPermission;
+import com.github.herowzz.springfuse.example.domain.account.Permission;
 import com.github.herowzz.springfuse.example.domain.account.Role;
-import com.github.herowzz.springfuse.example.domain.account.RoleFunctionPermission;
+import com.github.herowzz.springfuse.example.domain.account.RolePermission;
 import com.github.herowzz.springfuse.example.domain.account.User;
 import com.github.herowzz.springfuse.example.domain.account.UserRole;
 
@@ -33,13 +33,10 @@ public class AuthService {
 	private UserRoleDao userRoleDao;
 
 	@Autowired
-	private FunctionPermissionDao functionPermissionDao;
+	private PermissionDao permissionDao;
 
 	@Autowired
-	private RoleFunctionPermissionDao roleFunctionPermissionDao;
-
-	@Autowired
-	private OperationPermissionDao operationPermissionDao;
+	private RolePermissionDao rolePermissionDao;
 
 	/**
 	 * 根据用户登录名密码查询用户对象
@@ -78,6 +75,14 @@ public class AuthService {
 		}).collect(Collectors.toList());
 	}
 
+	public Set<Permission> findPermissions(List<Role> roleList) {
+		Set<Permission> permissions = new HashSet<>();
+		for (Role role : roleList) {
+			rolePermissionDao.findByRoleId(role.getId()).forEach(rp -> permissions.add(rp.getPermission()));
+		}
+		return permissions;
+	}
+
 	/**
 	 * 为用户关联角色
 	 * @param user 用户对象
@@ -88,51 +93,28 @@ public class AuthService {
 		return userRoleDao.save(new UserRole(user, role));
 	}
 
-	public FunctionPermission saveFunctionPermission(FunctionPermission functionPermission) {
-		return functionPermissionDao.save(functionPermission);
+	/**
+	 * 为角色关联权限
+	 * @param role 角色
+	 * @param permission 权限
+	 * @return 角色权限对象
+	 */
+	public void relateRolePermission(Role role, List<Permission> permission) {
+		List<RolePermission> rolePermissionList = new ArrayList<>();
+		permission.forEach(p -> rolePermissionList.add(new RolePermission(role, p)));
+		rolePermissionDao.saveAll(rolePermissionList);
 	}
 
-	public void saveFunctionPermissionList(List<FunctionPermission> functionPermissionList) {
-		functionPermissionDao.saveAll(functionPermissionList);
+	public List<Permission> findAllPermission() {
+		return permissionDao.findAll();
 	}
 
-	public List<FunctionPermission> findAllFunctionPermission() {
-		return functionPermissionDao.findAll();
+	public Permission savePermission(Permission permission) {
+		return permissionDao.save(permission);
 	}
 
-	public List<FunctionPermission> findFunctionPermissionByRole(List<Role> roleList) {
-		List<FunctionPermission> functionPermissionList = new ArrayList<>();
-		roleList.forEach(r -> {
-			roleFunctionPermissionDao.findByRoleId(r.getId()).stream().forEach(rf -> {
-				functionPermissionList.add(rf.getFunctionPermission());
-			});
-		});
-		functionPermissionList.sort((f1, f2) -> f1.getNum().compareTo(f2.getNum()));
-		return functionPermissionList;
-	}
-
-	public RoleFunctionPermission addRoleFunctionPermission(Role role, FunctionPermission functionPermission) {
-		return roleFunctionPermissionDao.save(new RoleFunctionPermission(role, functionPermission));
-	}
-
-	public void addRoleFunctionPermission(Role role, List<FunctionPermission> functionPermissionList) {
-		roleFunctionPermissionDao.saveAll(functionPermissionList.stream().map(r -> {
-			return new RoleFunctionPermission(role, r);
-		}).collect(Collectors.toList()));
-	}
-
-	public OperationPermission saveOperationPermission(OperationPermission operationPermission) {
-		return operationPermissionDao.save(operationPermission);
-	}
-
-	public void saveOperationPermissionList(List<OperationPermission> operationPermissionList) {
-		operationPermissionDao.saveAll(operationPermissionList);
-	}
-
-	public List<OperationPermission> findByFunctionPermission(String functionPermissionId) {
-		List<OperationPermission> operPermList = operationPermissionDao.findByFunctionPermissionId(functionPermissionId);
-		operPermList.sort((f1, f2) -> f1.getNum().compareTo(f2.getNum()));
-		return operPermList;
+	public void savePermissionList(List<Permission> permissionList) {
+		permissionDao.saveAll(permissionList);
 	}
 
 }

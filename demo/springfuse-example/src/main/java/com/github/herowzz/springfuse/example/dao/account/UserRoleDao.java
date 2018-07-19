@@ -7,6 +7,6 @@ import com.github.herowzz.springfuse.example.domain.account.UserRole;
 
 public interface UserRoleDao extends IBaseDao<UserRole, String> {
 
-	public List<UserRole> findByUserId(String userId);
+	List<UserRole> findByUserId(String userId);
 
 }

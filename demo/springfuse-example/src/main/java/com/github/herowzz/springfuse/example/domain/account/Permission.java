@@ -11,24 +11,25 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.github.herowzz.springfuse.data.domain.BaseUidEntity;
+import com.github.herowzz.springfuse.example.domain.refrence.PermissionTypeEnum;
 
 /**
- * 操作权限
+ * 权限
  * @author wangzz
  */
-@Entity(name = "operation_permission")
+@Entity
 @DynamicInsert
 @DynamicUpdate
-public class OperationPermission extends BaseUidEntity {
+public class Permission extends BaseUidEntity {
 
-	private static final long serialVersionUID = 2652015692350504513L;
+	private static final long serialVersionUID = 1812548452397582331L;
 
 	/**
-	 * 所属功能权限
+	 * 父级权限
 	 */
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "none"))
-	private FunctionPermission functionPermission;
+	private Permission parent;
 
 	/**
 	 * 权限码
@@ -46,32 +47,39 @@ public class OperationPermission extends BaseUidEntity {
 	private Integer num;
 
 	/**
+	 * 权限类型
+	 */
+	private PermissionTypeEnum type;
+
+	/**
 	 * 备注
 	 */
 	private String comments;
 
-	public OperationPermission() {
+	public Permission() {
 	}
 
-	public OperationPermission(String code, String name, Integer num) {
+	public Permission(Permission parent, String code, String name, Integer num, PermissionTypeEnum type) {
+		this.parent = parent;
 		this.code = code;
 		this.name = name;
 		this.num = num;
+		this.type = type;
 	}
 
-	public OperationPermission(FunctionPermission functionPermission, String code, String name, Integer num) {
-		this.functionPermission = functionPermission;
-		this.code = code;
-		this.name = name;
-		this.num = num;
+	public String getParentId() {
+		String parentId = "";
+		if (parent != null)
+			parentId = parent.getId();
+		return parentId;
 	}
 
-	public FunctionPermission getFunctionPermission() {
-		return functionPermission;
+	public Permission getParent() {
+		return parent;
 	}
 
-	public void setFunctionPermission(FunctionPermission functionPermission) {
-		this.functionPermission = functionPermission;
+	public void setParent(Permission parent) {
+		this.parent = parent;
 	}
 
 	public String getCode() {
@@ -104,6 +112,14 @@ public class OperationPermission extends BaseUidEntity {
 
 	public void setComments(String comments) {
 		this.comments = comments;
+	}
+
+	public PermissionTypeEnum getType() {
+		return type;
+	}
+
+	public void setType(PermissionTypeEnum type) {
+		this.type = type;
 	}
 
 }

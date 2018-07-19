@@ -36,6 +36,8 @@ public class Book extends BaseUidEntity {
 
 	private LocalDateTime pubDate;
 
+	private String address;
+
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "none"))
 	private Shop shop;
@@ -169,6 +171,14 @@ public class Book extends BaseUidEntity {
 		} else if (!shop.equals(other.shop))
 			return false;
 		return true;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 }

@@ -11,17 +11,15 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.github.herowzz.springfuse.data.domain.BaseUidEntity;
+import com.github.herowzz.springfuse.data.domain.annotation.Comment;
 
-/**
- * 角色权限
- * @author wangzz
- */
-@Entity(name = "role_function_permission")
+@Entity
 @DynamicInsert
 @DynamicUpdate
-public class RoleFunctionPermission extends BaseUidEntity {
+@Comment("角色权限关联")
+public class RolePermission extends BaseUidEntity {
 
-	private static final long serialVersionUID = 6226423822362602730L;
+	private static final long serialVersionUID = -4375741182420494096L;
 
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "none"))
@@ -29,14 +27,14 @@ public class RoleFunctionPermission extends BaseUidEntity {
 
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "none"))
-	private FunctionPermission functionPermission;
+	private Permission permission;
 
-	public RoleFunctionPermission() {
+	public RolePermission() {
 	}
 
-	public RoleFunctionPermission(Role role, FunctionPermission functionPermission) {
+	public RolePermission(Role role, Permission permission) {
 		this.role = role;
-		this.functionPermission = functionPermission;
+		this.permission = permission;
 	}
 
 	public Role getRole() {
@@ -47,12 +45,12 @@ public class RoleFunctionPermission extends BaseUidEntity {
 		this.role = role;
 	}
 
-	public FunctionPermission getFunctionPermission() {
-		return functionPermission;
+	public Permission getPermission() {
+		return permission;
 	}
 
-	public void setFunctionPermission(FunctionPermission functionPermission) {
-		this.functionPermission = functionPermission;
+	public void setPermission(Permission permission) {
+		this.permission = permission;
 	}
 
 }

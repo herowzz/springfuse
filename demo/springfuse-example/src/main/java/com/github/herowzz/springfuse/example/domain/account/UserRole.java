@@ -11,13 +11,15 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.github.herowzz.springfuse.data.domain.BaseUidEntity;
+import com.github.herowzz.springfuse.data.domain.annotation.Comment;
 
-@Entity(name = "user_role")
+@Entity
 @DynamicInsert
 @DynamicUpdate
+@Comment("用户角色关联")
 public class UserRole extends BaseUidEntity {
 
-	private static final long serialVersionUID = 983308626699223127L;
+	private static final long serialVersionUID = -5857118898737755873L;
 
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "none"))

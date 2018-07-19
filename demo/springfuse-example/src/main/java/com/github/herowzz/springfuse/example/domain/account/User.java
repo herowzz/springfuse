@@ -7,15 +7,18 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import com.github.herowzz.springfuse.data.domain.BaseUser;
+import com.github.herowzz.springfuse.data.domain.annotation.Comment;
 
 @Entity
 @DynamicInsert
 @DynamicUpdate
+@Comment("用户")
 public class User extends BaseUser {
 
 	private static final long serialVersionUID = 7541116354582183048L;
 
 	@Column(length = 20)
+	@Comment("电话")
 	private String phone;
 
 	@Column(length = 50)

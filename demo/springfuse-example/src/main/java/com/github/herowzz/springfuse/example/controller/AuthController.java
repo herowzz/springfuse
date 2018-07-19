@@ -1,6 +1,7 @@
 package com.github.herowzz.springfuse.example.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -13,14 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.github.herowzz.springfuse.api.dto.ApiResult;
 import com.github.herowzz.springfuse.core.bean.enumtype.EnableEnum;
-import com.github.herowzz.springfuse.example.domain.account.FunctionPermission;
-import com.github.herowzz.springfuse.example.domain.account.OperationPermission;
+import com.github.herowzz.springfuse.example.domain.account.Permission;
 import com.github.herowzz.springfuse.example.domain.account.Role;
 import com.github.herowzz.springfuse.example.domain.account.User;
 import com.github.herowzz.springfuse.example.dto.ResultEnum;
-import com.github.herowzz.springfuse.example.dto.auth.FunctionPermissionDto;
 import com.github.herowzz.springfuse.example.dto.auth.LoginResultDto;
-import com.github.herowzz.springfuse.example.dto.auth.OperationPermissionDto;
+import com.github.herowzz.springfuse.example.dto.auth.PermissionDto;
 import com.github.herowzz.springfuse.example.dto.auth.param.LoginParam;
 import com.github.herowzz.springfuse.example.service.account.AuthService;
 import com.github.herowzz.springfuse.security.manager.ITokenManager;
@@ -48,13 +47,11 @@ public class AuthController {
 		authService.login(user, request.getRemoteAddr());
 
 		LoginResultDto resultDto = LoginResultDto.build(user, tokenModel.getToken(), tokenModel.getExpireTime());
+
 		List<Role> roleList = authService.findRoleListByUser(user.getId());
-		List<FunctionPermission> funcPermissionList = authService.findFunctionPermissionByRole(roleList);
-		for (FunctionPermission funcPerm : funcPermissionList) {
-			FunctionPermissionDto functionPermissionDto = FunctionPermissionDto.copy(funcPerm);
-			List<OperationPermission> operPermList = authService.findByFunctionPermission(funcPerm.getId());
-			operPermList.stream().forEach(o -> functionPermissionDto.addOperationPermission(OperationPermissionDto.copy(o)));
-			resultDto.addFunctionPermission(functionPermissionDto);
+		Set<Permission> permissions = authService.findPermissions(roleList);
+		for (Permission permission : permissions) {
+			resultDto.addPermission(PermissionDto.copy(permission));
 		}
 		return ApiResult.build(resultDto);
 	}
