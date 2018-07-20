@@ -5,7 +5,7 @@ package com.github.herowzz.springfuse.core.bean.enumtype;
  * 0:否; 1:是
  * @author wangzz
  */
-public enum WhetherEnum {
+public enum WhetherEnum implements IBaseEnum {
 
 	No("否"),
 
@@ -17,6 +17,7 @@ public enum WhetherEnum {
 		this.title = title;
 	}
 
+	@Override
 	public String getTitle() {
 		return this.title;
 	}
@@ -30,10 +31,12 @@ public enum WhetherEnum {
 		return WhetherEnum.values()[index];
 	}
 
+	@Override
 	public String getName() {
 		return this.name();
 	}
 
+	@Override
 	public int getValue() {
 		return this.ordinal();
 	}

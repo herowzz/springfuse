@@ -22,12 +22,15 @@ public class User extends BaseUser {
 	private String phone;
 
 	@Column(length = 50)
+	@Comment("邮箱")
 	private String email;
 
 	@Column(length = 50)
+	@Comment("昵称")
 	private String nickname;
 
 	@Column(length = 200)
+	@Comment("头像")
 	private String avatar;
 
 	public String getPhone() {

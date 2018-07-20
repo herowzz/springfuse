@@ -5,7 +5,7 @@ package com.github.herowzz.springfuse.core.bean.enumtype;
  * 0:停用; 1:启用
  * @author wangzz
  */
-public enum EnableEnum {
+public enum EnableEnum implements IBaseEnum {
 
 	/**
 	 * 停用
@@ -23,6 +23,7 @@ public enum EnableEnum {
 		this.title = title;
 	}
 
+	@Override
 	public String getTitle() {
 		return this.title;
 	}
@@ -36,10 +37,12 @@ public enum EnableEnum {
 		return EnableEnum.values()[index];
 	}
 
+	@Override
 	public String getName() {
 		return this.name();
 	}
 
+	@Override
 	public int getValue() {
 		return this.ordinal();
 	}
