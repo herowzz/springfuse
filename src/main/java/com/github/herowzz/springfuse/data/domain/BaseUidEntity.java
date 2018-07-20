@@ -6,6 +6,8 @@ import javax.persistence.MappedSuperclass;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.github.herowzz.springfuse.data.domain.annotation.Comment;
+
 /**
  * 实体类基类,主键为UUID生成方式
  * @author wangzz
@@ -18,6 +20,7 @@ public abstract class BaseUidEntity extends BaseEntity {
 	@Id
 	@GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
 	@GeneratedValue(generator = "uuid")
+	@Comment("主键,UUID")
 	protected String id;
 
 	public String getId() {

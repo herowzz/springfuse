@@ -5,6 +5,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import com.github.herowzz.springfuse.data.domain.annotation.Comment;
+
 /**
  * 实体类基类,主键为递增生成方式
  * @author wangzz
@@ -16,6 +18,7 @@ public abstract class BaseIncreaseEntity extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Comment("主键,递增")
 	protected Long id;
 
 	public Long getId() {

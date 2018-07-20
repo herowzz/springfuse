@@ -9,6 +9,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 
 import com.github.herowzz.springfuse.core.bean.enumtype.WhetherEnum;
+import com.github.herowzz.springfuse.data.domain.annotation.Comment;
 import com.github.herowzz.springfuse.security.manager.UserSessionManager;
 
 /**
@@ -28,42 +29,49 @@ public abstract class BaseEntity implements Serializable {
 	/**
 	 * 创建时间
 	 */
+	@Comment("创建时间")
 	@Column(updatable = false, nullable = false)
 	protected LocalDateTime createTime;
 
 	/**
 	 * 创建人ID
 	 */
+	@Comment("创建人ID")
 	@Column(name = "create_user_id", updatable = false)
 	protected String createUserId;
 
 	/**
 	 * 创建人姓名
 	 */
+	@Comment("创建人姓名")
 	@Column(name = "create_user_name", updatable = false)
 	protected String createUserName;
 
 	/**
 	 * 修改人ID
 	 */
+	@Comment("修改人ID")
 	@Column(name = "update_user_id")
 	protected String updateUserId;
 
 	/**
 	 * 修改人姓名
 	 */
+	@Comment("修改人姓名")
 	@Column(name = "update_user_name")
 	protected String updateUserName;
 
 	/**
 	 * 修改时间
 	 */
+	@Comment("修改时间")
 	protected LocalDateTime updateTime;
 
 	/**
 	 * 是否删除<br>
 	 * 0:未删除,1:已删除
 	 */
+	@Comment("是否删除")
 	@Column(name = "is_deleted")
 	protected WhetherEnum isDeleted = WhetherEnum.No;
 
