@@ -12,4 +12,8 @@ import java.lang.annotation.Target;
 public @interface Comment {
 
 	String value() default "";
+
+	String desc() default "";
+
+	String remark() default "";
 }
