@@ -1,7 +1,7 @@
 package com.github.herowzz.springfuse.security.manager;
 
 import com.github.herowzz.springfuse.security.manager.impl.MemoryTokenManager;
-import com.github.herowzz.springfuse.security.model.TokenEnum;
+import com.github.herowzz.springfuse.security.model.TokenTypeEnum;
 
 public class TokenFactory {
 
@@ -22,7 +22,7 @@ public class TokenFactory {
 		this.isMultiLogin = isMultiLogin;
 	}
 
-	public ITokenManager createTokenManager(TokenEnum type) {
+	public ITokenManager createTokenManager(TokenTypeEnum type) {
 		switch (type) {
 		case Memory:
 			return new MemoryTokenManager(expireSeconds, isMultiLogin);
