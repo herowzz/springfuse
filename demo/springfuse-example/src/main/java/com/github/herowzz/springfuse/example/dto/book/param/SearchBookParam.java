@@ -2,12 +2,13 @@ package com.github.herowzz.springfuse.example.dto.book.param;
 
 import org.springframework.util.StringUtils;
 
+import com.github.herowzz.springfuse.api.dto.param.IBaseParam;
 import com.github.herowzz.springfuse.example.domain.QBook;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
-public class SearchBookParam {
+public class SearchBookParam implements IBaseParam {
 
 	public String name;
 

@@ -2,7 +2,9 @@ package com.github.herowzz.springfuse.example.dto.auth.param;
 
 import javax.validation.constraints.NotBlank;
 
-public class LoginParam {
+import com.github.herowzz.springfuse.api.dto.param.IBaseParam;
+
+public class LoginParam implements IBaseParam {
 
 	@NotBlank
 	public String username;
