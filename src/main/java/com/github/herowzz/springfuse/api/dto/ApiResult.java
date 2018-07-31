@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.herowzz.springfuse.api.dto.refrence.ApiResultCodeEnum;
 
 /**
@@ -111,9 +112,10 @@ public class ApiResult implements Serializable {
 		return error(resCode.code, resCode.msg);
 	}
 
-	public String toJsonString() {
+	public String toJson() {
 		String resultJson = "";
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.registerModule(new JavaTimeModule());
 		try {
 			resultJson = mapper.writeValueAsString(this);
 		} catch (JsonProcessingException e) {

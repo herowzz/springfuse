@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
  * @author wangzz
  *
  */
-public class IdParam {
+public class IdParam implements IBaseParam {
 
 	@NotBlank
 	public String id;
