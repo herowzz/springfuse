@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.github.herowzz.springfuse.api.dto.ApiResult;
+import com.github.herowzz.springfuse.api.log.annotation.Log;
 import com.github.herowzz.springfuse.core.bean.enumtype.EnableEnum;
 import com.github.herowzz.springfuse.example.domain.account.Permission;
 import com.github.herowzz.springfuse.example.domain.account.Role;
@@ -23,6 +24,7 @@ import com.github.herowzz.springfuse.example.dto.auth.PermissionDto;
 import com.github.herowzz.springfuse.example.dto.auth.param.LoginParam;
 import com.github.herowzz.springfuse.example.service.account.AuthService;
 import com.github.herowzz.springfuse.security.manager.ITokenManager;
+import com.github.herowzz.springfuse.security.manager.UserSessionManager;
 import com.github.herowzz.springfuse.security.model.TokenModel;
 
 @RestController
@@ -36,6 +38,7 @@ public class AuthController {
 	private ITokenManager tokenManager;
 
 	@RequestMapping(value = "/login")
+	@Log(name = "用户登录", value = "登录系统")
 	public ApiResult login(@RequestBody @Valid LoginParam param, HttpServletRequest request) {
 		User user = authService.findUserByUsernameAndPassword(param.username, param.password);
 		if (user == null)
@@ -53,6 +56,7 @@ public class AuthController {
 		for (Permission permission : permissions) {
 			resultDto.addPermission(PermissionDto.copy(permission));
 		}
+		UserSessionManager.setUser(user);
 		return ApiResult.build(resultDto);
 	}
 

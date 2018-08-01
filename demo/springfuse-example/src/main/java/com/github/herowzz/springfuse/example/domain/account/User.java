@@ -1,11 +1,17 @@
 package com.github.herowzz.springfuse.example.domain.account;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Where;
 
+import com.github.herowzz.springfuse.data.domain.BaseEntity;
 import com.github.herowzz.springfuse.data.domain.BaseUser;
 import com.github.herowzz.springfuse.data.domain.annotation.Comment;
 
@@ -13,6 +19,7 @@ import com.github.herowzz.springfuse.data.domain.annotation.Comment;
 @DynamicInsert
 @DynamicUpdate
 @Comment("用户")
+@Where(clause = BaseEntity.SOFT_DELETED_CLAUSE)
 public class User extends BaseUser {
 
 	private static final long serialVersionUID = 7541116354582183048L;
@@ -32,6 +39,9 @@ public class User extends BaseUser {
 	@Column(length = 200)
 	@Comment("头像")
 	private String avatar;
+
+	@Transient
+	public Map<String, Permission> permissionMap = new HashMap<>();
 
 	public String getPhone() {
 		return phone;
@@ -63,6 +73,14 @@ public class User extends BaseUser {
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public Map<String, Permission> getPermissionMap() {
+		return permissionMap;
+	}
+
+	public void setPermissionMap(Map<String, Permission> permissionMap) {
+		this.permissionMap = permissionMap;
 	}
 
 }

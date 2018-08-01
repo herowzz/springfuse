@@ -4,12 +4,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.github.herowzz.springfuse.example.dao.account.PermissionDao;
@@ -44,6 +47,7 @@ public class AuthService {
 	 * @param password 登录密码
 	 * @return 用户对象.不存在返回Null
 	 */
+	@Cacheable("user")
 	public User findUserByUsernameAndPassword(String username, String password) {
 		return userDao.findByUsernameAndPassword(username, password);
 	}
@@ -55,10 +59,18 @@ public class AuthService {
 	 * @param ip 访问IP地址
 	 * @return 处理后的用户对象
 	 */
+	@CachePut(value = "user", key = "#user.id")
 	public User login(User user, String ip) {
 		user.setLastLoginIp(ip);
 		user.setLastLoginTime(LocalDateTime.now());
 		user = userDao.save(user);
+		return user;
+	}
+
+	@Cacheable("user")
+	public User findUserPermission(User user) {
+		Map<String, Permission> userPermMap = this.findPermissionMap(user.getId());
+		user.setPermissionMap(userPermMap);
 		return user;
 	}
 
@@ -75,6 +87,21 @@ public class AuthService {
 		}).collect(Collectors.toList());
 	}
 
+	/**
+	 * 获取用户下的权限
+	 * @param userId 用户id
+	 * @return 权限Map(key:权限码,value:权限对象)
+	 */
+	public Map<String, Permission> findPermissionMap(String userId) {
+		List<Role> roleList = this.findRoleListByUser(userId);
+		return this.findPermissions(roleList).stream().collect(Collectors.toMap(p -> p.getCode(), p -> p));
+	}
+
+	/**
+	 * 获取角色下的权限
+	 * @param roleList 角色列表
+	 * @return 权限Set(去重)
+	 */
 	public Set<Permission> findPermissions(List<Role> roleList) {
 		Set<Permission> permissions = new HashSet<>();
 		for (Role role : roleList) {
@@ -105,14 +132,27 @@ public class AuthService {
 		rolePermissionDao.saveAll(rolePermissionList);
 	}
 
+	/**
+	 * 获取所有权限
+	 * @return 权限列表
+	 */
 	public List<Permission> findAllPermission() {
 		return permissionDao.findAll();
 	}
 
+	/**
+	 * 保存权限
+	 * @param permission 权限对象
+	 * @return 保存后的权限对象
+	 */
 	public Permission savePermission(Permission permission) {
 		return permissionDao.save(permission);
 	}
 
+	/**
+	 * 保存多条权限
+	 * @param permissionList 权限列表
+	 */
 	public void savePermissionList(List<Permission> permissionList) {
 		permissionDao.saveAll(permissionList);
 	}

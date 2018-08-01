@@ -26,14 +26,14 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 		String token = request.getHeader("token");
 		if (!StringUtils.hasText(token)) {
 			logger.warn("Remote IP:{}, Request Url:{} Not Authorized, not has token.", request.getRemoteAddr(), request.getRequestURI());
-			response.getWriter().write(ApiResult.invalidToken().toJsonString());
+			response.getWriter().write(ApiResult.invalidToken().toJson());
 			response.getWriter().flush();
 			return false;
 		} else {
 			String uid = tokenManager.getUidByToken(token);
 			if (uid == null) {
 				logger.warn("Remote IP:{}, Request Url:{} Not Authorized, token:{} is invalid!", request.getRemoteAddr(), request.getRequestURI(), token);
-				response.getWriter().write(ApiResult.invalidToken().toJsonString());
+				response.getWriter().write(ApiResult.invalidToken().toJson());
 				response.getWriter().flush();
 				return false;
 			}
