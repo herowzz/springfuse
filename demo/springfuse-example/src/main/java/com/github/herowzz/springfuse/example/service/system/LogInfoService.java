@@ -30,7 +30,6 @@ public class LogInfoService extends BaseService<LogInfo, String> implements ILog
 		info.setMessage(record.getMessage());
 		info.setModule(record.getModule());
 		info.setParamInfo(record.getParamInfo());
-		info.setResultInfo(record.getResultInfo());
 		info.setUserId(record.getUserId());
 		info.setUserName(record.getUserName());
 		logInfoDao.save(info);

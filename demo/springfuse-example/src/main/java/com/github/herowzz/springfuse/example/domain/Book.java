@@ -16,30 +16,39 @@ import org.hibernate.annotations.Where;
 
 import com.github.herowzz.springfuse.data.domain.BaseEntity;
 import com.github.herowzz.springfuse.data.domain.BaseUidEntity;
+import com.github.herowzz.springfuse.data.domain.annotation.Comment;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 
 @Entity
 @DynamicInsert
 @DynamicUpdate
 @Where(clause = BaseEntity.SOFT_DELETED_CLAUSE)
+@Comment("图书")
 public class Book extends BaseUidEntity {
 
 	private static final long serialVersionUID = -7001927790018290769L;
 
+	@Comment("名称")
 	private String name;
 
+	@Comment("类别")
 	private BookTypeEnum bookType;
 
+	@Comment("页码")
 	private int page;
 
+	@Comment("销售价格")
 	private BigDecimal sellPrice;
 
+	@Comment("发布时间")
 	private LocalDateTime pubDate;
 
+	@Comment("地址")
 	private String address;
 
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "none"))
+	@Comment("所属门店")
 	private Shop shop;
 
 	public String getName() {

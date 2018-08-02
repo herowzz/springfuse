@@ -3,11 +3,11 @@ package com.github.herowzz.springfuse.example.domain.system;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -38,13 +38,9 @@ public class LogInfo implements Serializable {
 	@Comment("操作内容")
 	private String message;
 
-	@Lob
+	@Column(length = 3000)
 	@Comment("请求参数")
 	private String paramInfo;
-
-	@Lob
-	@Comment("返回结果")
-	private String resultInfo;
 
 	@Comment("创建时间")
 	private LocalDateTime createTime;
@@ -87,14 +83,6 @@ public class LogInfo implements Serializable {
 
 	public void setParamInfo(String paramInfo) {
 		this.paramInfo = paramInfo;
-	}
-
-	public String getResultInfo() {
-		return resultInfo;
-	}
-
-	public void setResultInfo(String resultInfo) {
-		this.resultInfo = resultInfo;
 	}
 
 	public LocalDateTime getCreateTime() {

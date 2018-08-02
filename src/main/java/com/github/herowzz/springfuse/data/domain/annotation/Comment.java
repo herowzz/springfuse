@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Target({ ElementType.TYPE, ElementType.FIELD })
 public @interface Comment {
 
-	String value() default "";
+	String value();
 
 	String desc() default "";
 
