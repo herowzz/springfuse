@@ -23,10 +23,12 @@ public class UserRole extends BaseUidEntity {
 
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "none"))
+	@Comment("用户")
 	private User user;
 
 	@ManyToOne(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinColumn(foreignKey = @ForeignKey(name = "none"))
+	@Comment("角色")
 	private Role role;
 
 	public UserRole() {

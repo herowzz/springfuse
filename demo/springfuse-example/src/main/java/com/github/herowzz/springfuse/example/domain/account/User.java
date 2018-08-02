@@ -15,7 +15,7 @@ import com.github.herowzz.springfuse.data.domain.BaseEntity;
 import com.github.herowzz.springfuse.data.domain.BaseUser;
 import com.github.herowzz.springfuse.data.domain.annotation.Comment;
 
-@Entity
+@Entity(name = "user")
 @DynamicInsert
 @DynamicUpdate
 @Comment("用户")

@@ -7,11 +7,12 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import com.github.herowzz.springfuse.api.dto.param.IBaseParam;
 import com.github.herowzz.springfuse.example.domain.Book;
 import com.github.herowzz.springfuse.example.domain.Shop;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 
-public class UpdateBookParam {
+public class UpdateBookParam implements IBaseParam {
 
 	@NotBlank
 	public String id;
