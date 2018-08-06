@@ -6,37 +6,26 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
-import com.github.herowzz.springfuse.data.jpa.doc.IGenerateDoc;
-import com.github.herowzz.springfuse.data.jpa.doc.vo.DbTable;
+import com.github.herowzz.springfuse.data.jpa.doc.AbstractGenerateDoc;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 
-public class GenerateHtmlDoc implements IGenerateDoc {
+public class GenerateHtmlDoc extends AbstractGenerateDoc {
 
 	private Configuration cfg = new Configuration(Configuration.getVersion());
 	private Template htmlTemp;
-	private Map<String, List<DbTable>> tbMap = new TreeMap<>();
 
-	public GenerateHtmlDoc(String entityBasePackage) {
-		init(entityBasePackage);
-	}
-
-	public void init(String entityBasePackage) {
+	@Override
+	public void initConfig() {
 		try {
 			cfg.setClassForTemplateLoading(GenerateHtmlDoc.class, "/generate/");
 			cfg.setDefaultEncoding("UTF-8");
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 			htmlTemp = cfg.getTemplate("doc/html.ftl");
-			tbMap = this.getDbCharKeyMap(entityBasePackage);
-			StringBuilder sb = new StringBuilder();
-			tbMap.forEach((k, v) -> v.stream().forEach(c -> sb.append(c.getClassName()).append("\n")));
-			logger.info("加载实体类:\n{}", sb.toString());
 		} catch (Exception e) {
 			logger.error("GenerateHtmlDoc初始化模板异常!", e);
 			System.exit(1);

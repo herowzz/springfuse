@@ -12,7 +12,6 @@ import org.springframework.util.ReflectionUtils;
 import com.github.herowzz.springfuse.core.bean.enumtype.IBaseEnum;
 import com.github.herowzz.springfuse.core.util.StringUtils;
 import com.github.herowzz.springfuse.data.domain.annotation.Comment;
-import com.github.herowzz.springfuse.data.jpa.doc.DocFieldType;
 
 public class DbParam {
 
