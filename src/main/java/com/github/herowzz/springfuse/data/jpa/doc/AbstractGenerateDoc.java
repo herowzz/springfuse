@@ -1,6 +1,5 @@
 package com.github.herowzz.springfuse.data.jpa.doc;
 
-import java.beans.Transient;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +8,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import javax.persistence.Entity;
+import javax.persistence.Transient;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -26,6 +26,7 @@ public class GenerateHtmlDoc extends AbstractGenerateDoc {
 			cfg.setDefaultEncoding("UTF-8");
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 			htmlTemp = cfg.getTemplate("doc/html.ftl");
+			logger.info("加载模板：{}", "doc/html.ftl");
 		} catch (Exception e) {
 			logger.error("GenerateHtmlDoc初始化模板异常!", e);
 			System.exit(1);
@@ -42,7 +43,7 @@ public class GenerateHtmlDoc extends AbstractGenerateDoc {
 
 			Map<String, Object> root = new HashMap<>();
 			root.put("projectName", projectName);
-			root.put("tbMap", tbMap);
+			root.put("tbMap", super.tbMap);
 
 			String newFilePath = exportPath + "\\dbDoc.html";
 			try (Writer out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(newFilePath), "UTF-8"))) {

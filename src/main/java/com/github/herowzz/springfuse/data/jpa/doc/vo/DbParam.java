@@ -56,7 +56,7 @@ public class DbParam {
 			for (Object obj : fieldType.getEnumConstants()) {
 				if (obj instanceof IBaseEnum) {
 					IBaseEnum oEnum = (IBaseEnum) obj;
-					enumDesc += oEnum.getValue() + "：" + oEnum.getTitle() + "</br>";
+					enumDesc += oEnum.getValue() + "：" + oEnum.getTitle() + ";  ";
 				}
 			}
 			param.desc = enumDesc;
