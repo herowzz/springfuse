@@ -4,7 +4,7 @@
 
 	<groupId>com.github.herowzz</groupId>
 	<artifactId>springfuse</artifactId>
-	<version>1.0</version>
+	<version>1.0.0-RELEASE</version>
 	<packaging>jar</packaging>
 
 	<name>springfuse</name>
@@ -100,6 +100,17 @@
 		<dependency>
 			<groupId>com.querydsl</groupId>
 			<artifactId>querydsl-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.5.13</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf.tool</groupId>
+			<artifactId>xmlworker</artifactId>
+			<version>5.5.13</version>
 		</dependency>
 
 		<dependency>

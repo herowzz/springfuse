@@ -52,7 +52,7 @@ public class GenerateWordDoc extends AbstractGenerateDoc {
 			}
 			logger.info("DB文件生成：{}", newFilePath);
 		} catch (Exception e) {
-			logger.error("GenerateWordDoc生成html异常!", e);
+			logger.error("GenerateWordDoc生成word异常!", e);
 		}
 	}
 
