@@ -39,7 +39,7 @@ public class BookController {
 	public ApiResult list(Pageable pageable, @RequestBody(required = false) @Valid SearchBookParam searchParam, @ModelAttribute("user") User user) {
 		System.out.println(user);
 		System.out.println(user.getId() + "---" + user.getUsername());
-		Page<BookDto> bookDtoPage = bookService.findPage(pageable, searchParam.build()).map(e -> BookDto.copy(e));
+		Page<BookDto> bookDtoPage = bookService.findPage(pageable, searchParam != null ? searchParam.build() : null).map(e -> BookDto.copy(e));
 		return ApiResult.build(bookDtoPage);
 	}
 
