@@ -1,4 +1,4 @@
-package com.github.herowzz.springfuse.data.jpa.doc.vo;
+package com.github.herowzz.springfuse.doc.db.vo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

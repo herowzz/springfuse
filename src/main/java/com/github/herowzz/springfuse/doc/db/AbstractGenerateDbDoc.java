@@ -1,4 +1,4 @@
-package com.github.herowzz.springfuse.data.jpa.doc;
+package com.github.herowzz.springfuse.doc.db;
 
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
@@ -15,12 +15,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.util.ReflectionUtils;
 
 import com.github.herowzz.springfuse.core.util.ReflectUtils;
-import com.github.herowzz.springfuse.data.jpa.doc.vo.DbParam;
-import com.github.herowzz.springfuse.data.jpa.doc.vo.DbTable;
+import com.github.herowzz.springfuse.doc.db.vo.DbParam;
+import com.github.herowzz.springfuse.doc.db.vo.DbTable;
 
 public abstract class AbstractGenerateDbDoc extends GenerateDbDocBuilder {
 
 	public static final Logger logger = LoggerFactory.getLogger(AbstractGenerateDbDoc.class);
+
+	protected static final String templatePath = "/generate/doc/db/";
 
 	protected Map<String, List<DbTable>> tbMap = new TreeMap<>();
 

@@ -1,4 +1,4 @@
-package com.github.herowzz.springfuse.data.jpa.doc;
+package com.github.herowzz.springfuse.doc.db;
 
 public class GenerateDocDirector {
 

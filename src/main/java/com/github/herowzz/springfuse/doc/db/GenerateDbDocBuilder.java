@@ -1,4 +1,6 @@
-package com.github.herowzz.springfuse.data.jpa.doc;
+package com.github.herowzz.springfuse.doc.db;
+
+import com.github.herowzz.springfuse.doc.IGenerateDoc;
 
 public abstract class GenerateDbDocBuilder implements IGenerateDoc {
 

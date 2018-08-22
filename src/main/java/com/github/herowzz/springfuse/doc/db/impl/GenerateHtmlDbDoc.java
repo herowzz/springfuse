@@ -1,4 +1,4 @@
-package com.github.herowzz.springfuse.data.jpa.doc.impl;
+package com.github.herowzz.springfuse.doc.db.impl;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.herowzz.springfuse.data.jpa.doc.AbstractGenerateDbDoc;
+import com.github.herowzz.springfuse.doc.db.AbstractGenerateDbDoc;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -22,11 +22,11 @@ public class GenerateHtmlDbDoc extends AbstractGenerateDbDoc {
 	@Override
 	public void initConfig() {
 		try {
-			cfg.setClassForTemplateLoading(GenerateHtmlDbDoc.class, "/generate/");
+			cfg.setClassForTemplateLoading(GenerateHtmlDbDoc.class, templatePath);
 			cfg.setDefaultEncoding("UTF-8");
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-			htmlTemp = cfg.getTemplate("doc/html.ftl");
-			logger.info("加载模板：{}", "doc/html.ftl");
+			htmlTemp = cfg.getTemplate("html.ftl");
+			logger.info("加载模板：{}", "html.ftl");
 		} catch (Exception e) {
 			logger.error("GenerateHtmlDoc初始化模板异常!", e);
 			System.exit(1);

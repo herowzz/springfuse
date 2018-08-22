@@ -1,4 +1,4 @@
-package com.github.herowzz.springfuse.data.jpa.doc.impl;
+package com.github.herowzz.springfuse.doc.db.impl;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.herowzz.springfuse.data.jpa.doc.AbstractGenerateDbDoc;
+import com.github.herowzz.springfuse.doc.db.AbstractGenerateDbDoc;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -27,11 +27,11 @@ public class GeneratePdfDbDoc extends AbstractGenerateDbDoc {
 	@Override
 	public void initConfig() {
 		try {
-			cfg.setClassForTemplateLoading(GeneratePdfDbDoc.class, "/generate/");
+			cfg.setClassForTemplateLoading(GeneratePdfDbDoc.class, templatePath);
 			cfg.setDefaultEncoding("UTF-8");
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
-			htmlTemp = cfg.getTemplate("doc/pdf.ftl");
-			logger.info("加载模板：{}", "doc/pdf.ftl");
+			htmlTemp = cfg.getTemplate("pdf.ftl");
+			logger.info("加载模板：{}", "pdf.ftl");
 		} catch (Exception e) {
 			logger.error("GeneratePdfDoc初始化模板异常!", e);
 			System.exit(1);
