@@ -8,13 +8,13 @@ import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.herowzz.springfuse.data.jpa.doc.AbstractGenerateDoc;
+import com.github.herowzz.springfuse.data.jpa.doc.AbstractGenerateDbDoc;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 
-public class GenerateWordDoc extends AbstractGenerateDoc {
+public class GenerateWordDbDoc extends AbstractGenerateDbDoc {
 
 	private Configuration cfg = new Configuration(Configuration.getVersion());
 	private Template htmlTemp;
@@ -22,7 +22,7 @@ public class GenerateWordDoc extends AbstractGenerateDoc {
 	@Override
 	public void initConfig() {
 		try {
-			cfg.setClassForTemplateLoading(GenerateHtmlDoc.class, "/generate/");
+			cfg.setClassForTemplateLoading(GenerateHtmlDbDoc.class, "/generate/");
 			cfg.setDefaultEncoding("UTF-8");
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 			htmlTemp = cfg.getTemplate("doc/word.ftl");

@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.herowzz.springfuse.data.jpa.doc.AbstractGenerateDoc;
+import com.github.herowzz.springfuse.data.jpa.doc.AbstractGenerateDbDoc;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -19,7 +19,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 
-public class GeneratePdfDoc extends AbstractGenerateDoc {
+public class GeneratePdfDbDoc extends AbstractGenerateDbDoc {
 
 	private Configuration cfg = new Configuration(Configuration.getVersion());
 	private Template htmlTemp;
@@ -27,7 +27,7 @@ public class GeneratePdfDoc extends AbstractGenerateDoc {
 	@Override
 	public void initConfig() {
 		try {
-			cfg.setClassForTemplateLoading(GeneratePdfDoc.class, "/generate/");
+			cfg.setClassForTemplateLoading(GeneratePdfDbDoc.class, "/generate/");
 			cfg.setDefaultEncoding("UTF-8");
 			cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 			htmlTemp = cfg.getTemplate("doc/pdf.ftl");

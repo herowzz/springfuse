@@ -18,9 +18,9 @@ import com.github.herowzz.springfuse.core.util.ReflectUtils;
 import com.github.herowzz.springfuse.data.jpa.doc.vo.DbParam;
 import com.github.herowzz.springfuse.data.jpa.doc.vo.DbTable;
 
-public abstract class AbstractGenerateDoc extends GenerateDocBuilder {
+public abstract class AbstractGenerateDbDoc extends GenerateDbDocBuilder {
 
-	public static final Logger logger = LoggerFactory.getLogger(AbstractGenerateDoc.class);
+	public static final Logger logger = LoggerFactory.getLogger(AbstractGenerateDbDoc.class);
 
 	protected Map<String, List<DbTable>> tbMap = new TreeMap<>();
 

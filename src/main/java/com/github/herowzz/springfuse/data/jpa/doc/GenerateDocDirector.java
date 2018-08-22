@@ -2,9 +2,9 @@ package com.github.herowzz.springfuse.data.jpa.doc;
 
 public class GenerateDocDirector {
 
-	private GenerateDocBuilder builder;
+	private GenerateDbDocBuilder builder;
 
-	public GenerateDocDirector(String packagePath, GenerateDocBuilder builder) {
+	public GenerateDocDirector(String packagePath, GenerateDbDocBuilder builder) {
 		this.builder = builder;
 		this.builder.loadClass(packagePath);
 		this.builder.initConfig();
