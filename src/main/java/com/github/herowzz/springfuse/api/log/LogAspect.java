@@ -21,7 +21,7 @@ public class LogAspect {
 	public void log(JoinPoint joinPoint, Log log, Object result) {
 		if (!(result instanceof ApiResult))
 			return;
-		ApiResult resObj = (ApiResult) result;
+		ApiResult<?> resObj = (ApiResult<?>) result;
 		if (resObj.result != 1)
 			return;
 
