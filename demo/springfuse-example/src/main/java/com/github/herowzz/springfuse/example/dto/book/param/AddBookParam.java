@@ -14,26 +14,36 @@ import com.github.herowzz.springfuse.example.domain.Book;
 import com.github.herowzz.springfuse.example.domain.Shop;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(description = "新增图书对象")
 public class AddBookParam implements IBaseParam {
 
 	@NotBlank
+	@ApiModelProperty("图书名称")
 	public String name;
 
 	@NotBlank
+	@ApiModelProperty("所属商店Id")
 	public String shopId;
 
 	@Max(100)
 	@Min(10)
 	@NotNull
+	@ApiModelProperty("页码")
 	public Integer page;
 
 	@NotNull
+	@ApiModelProperty("图书类型")
 	public BookTypeEnum bookType;
 
 	@NotNull
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	@ApiModelProperty("发布时间")
 	public LocalDateTime pubDate;
 
+	@ApiModelProperty("销售价格")
 	public BigDecimal sellPrice;
 
 	public Book copy() {

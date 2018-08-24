@@ -13,5 +13,6 @@
 	</root>
 
 	<logger name="jdbc.sqltiming" level="INFO" />
+	<logger name="io.swagger" level="ERROR" />
 
 </configuration>

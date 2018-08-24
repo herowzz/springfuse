@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.github.herowzz.springfuse.security.handler.SecurityInterceptor;
@@ -54,9 +55,16 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		interceptor.excludePathPatterns("/static/**");
 		interceptor.excludePathPatterns("/regiest/**");
 		interceptor.excludePathPatterns("/randomImage/**");
-
 		interceptor.excludePathPatterns("/error**");
+		interceptor.excludePathPatterns("/swagger**");
+		interceptor.excludePathPatterns("/webjars/**");
+		interceptor.excludePathPatterns("/swagger-resources/**");
+	}
 
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
+		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
 
 }

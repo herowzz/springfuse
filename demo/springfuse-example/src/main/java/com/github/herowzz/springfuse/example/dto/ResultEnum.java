@@ -24,7 +24,7 @@ public enum ResultEnum {
 		return msg;
 	}
 
-	public ApiResult toResult() {
-		return ApiResult.error(code, msg);
+	public <T> ApiResult<T> toResult(ApiResult<T> apiResult) {
+		return apiResult.errorResult(code, msg);
 	}
 }

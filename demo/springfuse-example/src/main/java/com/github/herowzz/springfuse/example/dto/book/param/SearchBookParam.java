@@ -8,10 +8,14 @@ import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Predicate;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class SearchBookParam implements IBaseParam {
 
+	@ApiModelProperty("图书名称")
 	public String name;
 
+	@ApiModelProperty("图书类型")
 	public BookTypeEnum bookType;
 
 	public Predicate build() {
