@@ -1,23 +1,23 @@
 package com.github.herowzz.springfuse.example.generator;
 
-import com.github.herowzz.springfuse.data.jpa.doc.GenerateDocDirector;
-import com.github.herowzz.springfuse.data.jpa.doc.impl.GenerateHtmlDoc;
-import com.github.herowzz.springfuse.data.jpa.doc.impl.GeneratePdfDoc;
-import com.github.herowzz.springfuse.data.jpa.doc.impl.GenerateWordDoc;
+import com.github.herowzz.springfuse.doc.db.GenerateDocDirector;
+import com.github.herowzz.springfuse.doc.db.impl.GenerateHtmlDbDoc;
+import com.github.herowzz.springfuse.doc.db.impl.GeneratePdfDbDoc;
+import com.github.herowzz.springfuse.doc.db.impl.GenerateWordDbDoc;
 
-public class TestGenerateDoc {
+public class TestGenerateDbDoc {
 
 	static String EntityBasePackage = "com.github.herowzz.springfuse.example.domain";
 
 	public static void main(String[] args) throws Exception {
 
-		GenerateDocDirector director = new GenerateDocDirector(EntityBasePackage, new GenerateHtmlDoc());
+		GenerateDocDirector director = new GenerateDocDirector(EntityBasePackage, new GenerateHtmlDbDoc());
 		director.export("SpringFuse", "E:\\temp");
 
-		director = new GenerateDocDirector(EntityBasePackage, new GenerateWordDoc());
+		director = new GenerateDocDirector(EntityBasePackage, new GenerateWordDbDoc());
 		director.export("SpringFuse", "E:\\temp");
 
-		director = new GenerateDocDirector(EntityBasePackage, new GeneratePdfDoc());
+		director = new GenerateDocDirector(EntityBasePackage, new GeneratePdfDbDoc());
 		director.export("SpringFuse", "E:\\temp");
 
 	}
