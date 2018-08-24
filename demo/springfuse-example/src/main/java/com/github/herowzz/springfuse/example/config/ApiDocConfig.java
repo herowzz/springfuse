@@ -33,7 +33,8 @@ public class ApiDocConfig {
 				.paths(PathSelectors.any())
 				.build().ignoredParameterTypes(ModelAttribute.class, Pageable.class)
 				.securitySchemes(securitySchemes())
-                .securityContexts(securityContexts());
+                .securityContexts(securityContexts())
+                .useDefaultResponseMessages(false);
 	}
 
 	private ApiInfo apiInfo() {
