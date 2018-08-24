@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import io.swagger.annotations.Api;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -29,7 +30,7 @@ public class ApiDocConfig {
 	public Docket createRestApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.apiInfo(apiInfo()).select()
-				.apis(RequestHandlerSelectors.basePackage("com.github.herowzz.springfuse.example.controller"))
+				.apis(RequestHandlerSelectors.withClassAnnotation(Api.class))
 				.paths(PathSelectors.any())
 				.build().ignoredParameterTypes(ModelAttribute.class, Pageable.class)
 				.securitySchemes(securitySchemes())

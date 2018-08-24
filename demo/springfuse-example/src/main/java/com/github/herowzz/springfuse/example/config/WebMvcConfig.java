@@ -6,6 +6,7 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -59,12 +60,20 @@ public class WebMvcConfig implements WebMvcConfigurer {
 		interceptor.excludePathPatterns("/swagger**");
 		interceptor.excludePathPatterns("/webjars/**");
 		interceptor.excludePathPatterns("/swagger-resources/**");
+		interceptor.excludePathPatterns("/");
+		interceptor.excludePathPatterns("/csrf");
+	}
+
+	@Override
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
 	}
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("static/**").addResourceLocations("classpath:/static/");
 		registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
-		registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
+		registry.addResourceHandler("/static/api/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/");
 	}
 
 }
