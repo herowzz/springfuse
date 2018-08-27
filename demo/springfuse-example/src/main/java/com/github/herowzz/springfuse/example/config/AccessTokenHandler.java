@@ -31,7 +31,7 @@ public class AccessTokenHandler extends GlobalHandler {
 			String uid = tokenManager.getUidByToken(token);
 			Optional<User> userOptional = userService.findById(uid);
 			if (!userOptional.isPresent()) {
-				throw new ServiceException("Permission Error(Incorrect token), token: " + token + "find user id:" + uid + ", find user is not exist!", ApiResultCodeEnum.OBJECT_NOT_FOUND.code);
+				throw new ServiceException("Permission Error(Incorrect token), token: " + token + ", find user id:" + uid + ", find user is not exist!", ApiResultCodeEnum.OBJECT_NOT_FOUND.code);
 			}
 			model.addAttribute("user", userOptional.get());
 			UserSessionManager.setUser(userOptional.get());

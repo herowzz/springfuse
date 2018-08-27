@@ -7,22 +7,36 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.github.herowzz.springfuse.example.domain.Book;
+import com.github.herowzz.springfuse.example.domain.account.User;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
+import com.github.herowzz.springfuse.example.dto.book.param.SearchBookParam;
 import com.github.herowzz.springfuse.example.service.BookService;
+import com.github.herowzz.springfuse.example.service.account.UserService;
+import com.github.herowzz.springfuse.security.manager.ITokenManager;
 
-//@RunWith(SpringRunner.class)
-//@WebMvcTest(BookController.class)
+@RunWith(SpringRunner.class)
+@WebMvcTest(BookController.class)
+@EnableSpringDataWebSupport
 public class BookControllerTest {
+
+	public static final String TOKEN = "1";
 
 	@Autowired
 	private MockMvc mvc;
@@ -30,7 +44,22 @@ public class BookControllerTest {
 	@MockBean
 	private BookService bookService;
 
-//	@Test
+	@MockBean
+	private UserService userService;
+
+	@MockBean
+	private ITokenManager tokenManager;
+
+	@Before
+	public void before() {
+		given(tokenManager.getUidByToken(TOKEN)).willReturn("1");
+		User user = new User();
+		user.setId("1");
+		user.setUsername("spring");
+		given(userService.findById(TOKEN)).willReturn(Optional.of(user));
+	}
+
+	@Test
 	public void testList() throws Exception {
 		Book book1 = new Book();
 		book1.setBookType(BookTypeEnum.ECONOMIC);
@@ -41,9 +70,10 @@ public class BookControllerTest {
 		List<Book> bookList = Arrays.asList(book1);
 		Page<Book> page = new PageImpl<>(bookList);
 
-		given(bookService.findPage(PageRequest.of(1, 10))).willReturn(page);
+		SearchBookParam searchParam = null;
+		given(bookService.findPage(PageRequest.of(0, 20), searchParam != null ? searchParam.build() : null)).willReturn(page);
 
-		mvc.perform(post("/book/list").accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk()).andExpect(jsonPath("$.code").value(1)).andExpect(jsonPath("$.data.content[0].name").value("aaa"));
+		mvc.perform(post("/book/list").header("token", TOKEN).accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk()).andExpect(jsonPath("$.code").value(1)).andExpect(jsonPath("$.data.content[0].name").value("aaa"));
 	}
 
 }
