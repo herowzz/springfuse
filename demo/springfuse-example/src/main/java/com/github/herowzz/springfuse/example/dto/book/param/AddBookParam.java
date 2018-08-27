@@ -35,7 +35,7 @@ public class AddBookParam implements IBaseParam {
 	public Integer page;
 
 	@NotNull
-	@ApiModelProperty("图书类型")
+	@ApiModelProperty(value = "图书类型", allowableValues = "LITERATURE(0):文学,POLITICAL(1):政治,ECONOMIC(2):经济", example = "0")
 	public BookTypeEnum bookType;
 
 	@NotNull
