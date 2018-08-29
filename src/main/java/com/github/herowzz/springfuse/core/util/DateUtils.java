@@ -37,6 +37,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 将date类型转换成字符串'yyyy-MM-dd HH:mm:ss'格式
+	 * @param date 需要转换的date
+	 * @return 格式化后的字符串
 	 */
 	public static String dateTimeToString(Date date) {
 		return dateToDateString(date, DATATIMEF_FORMAT);
@@ -44,6 +46,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 将date类型转换成字符串'yyyy-MM-dd'格式
+	 * @param date 需要转换的date
+	 * @return 格式化后的字符串
 	 */
 	public static String dateToString(Date date) {
 		return dateToDateString(date, DATA_FORMAT);
@@ -51,6 +55,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 将date类型转换成字符串'yyyy年MM月dd日'格式
+	 * @param date 需要转换的date
+	 * @return 格式化后的字符串
 	 */
 	public static String dateToZhString(Date date) {
 		return dateToDateString(date, DATA_ZH_FORMAT);
@@ -58,6 +64,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 将date类型转换成字符串'yyyy年MM月dd日HH时mm分ss秒'格式
+	 * @param date 需要转换的date
+	 * @return 格式化后的字符串
 	 */
 	public static String dateTimeToZhString(Date date) {
 		return dateToDateString(date, DATATIMEF_ZH_FORMAT);
@@ -105,6 +113,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期的当日开始时间（0点0时0秒）
+	 * @param dt 需要转换的LocalDateTime类型
+	 * @return 转换后的当日开始时间（0点0时0秒）
 	 */
 	public static LocalDateTime getDayBegin(LocalDateTime dt) {
 		if (dt == null)
@@ -114,6 +124,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期的当日开始时间（0点0时0秒）
+	 * @param date 需要转换的Date类型
+	 * @return 转换后的当日开始时间（0点0时0秒）
 	 */
 	public static LocalDateTime getDayBegin(Date date) {
 		LocalDateTime dt = LocalDateTime.now();
@@ -124,6 +136,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期的当日最后时间（23点59时59秒9999）
+	 * @param dt 需要转换的LocalDateTime类型
+	 * @return 转换后的当日最后时间（23点59时59秒9999）
 	 */
 	public static LocalDateTime getDayEnd(LocalDateTime dt) {
 		if (dt == null)
@@ -133,6 +147,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期的当日最后时间（23点59时59秒9999）
+	 * @param date 需要转换的Date类型
+	 * @return 转换后的当日最后时间（23点59时59秒9999）
 	 */
 	public static LocalDateTime getDayEnd(Date date) {
 		LocalDateTime dt = LocalDateTime.now();
@@ -143,6 +159,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月第一天
+	 * @param date 需要转换的LocalDate类型
+	 * @return 转换后的当月第一天
 	 */
 	public static LocalDate getMonthFirstDay(LocalDate date) {
 		if (date == null)
@@ -152,6 +170,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月第一天
+	 * @param date 需要转换的Date类型
+	 * @return 转换后的当月第一天
 	 */
 	public static LocalDate getMonthFirstDay(Date date) {
 		LocalDate dt = LocalDate.now();
@@ -162,6 +182,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月第一天00:00:00
+	 * @param date 需要转换的LocalDateTime类型
+	 * @return 转换后的当月第一天00:00:00
 	 */
 	public static LocalDateTime getMonthFirstDayTime(LocalDateTime date) {
 		if (date == null)
@@ -171,6 +193,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月第一天00:00:00
+	 * @param date 需要转换的Date类型
+	 * @return 转换后的当月第一天00:00:00
 	 */
 	public static LocalDateTime getMonthFirstDayTime(Date date) {
 		LocalDateTime dt = LocalDateTime.now();
@@ -181,6 +205,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月最后一天
+	 * @param date 需要转换的LocalDate类型
+	 * @return 转换后的当月最后一天
 	 */
 	public static LocalDate getMonthLastDay(LocalDate date) {
 		if (date == null)
@@ -190,6 +216,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月最后一天
+	 * @param date 需要转换的Date类型
+	 * @return 转换后的当月最后一天
 	 */
 	public static LocalDate getMonthLastDay(Date date) {
 		LocalDate dt = LocalDate.now();
@@ -200,6 +228,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月最后一天23:59:59
+	 * @param date 需要转换的LocalDateTime类型
+	 * @return 转换后的当月最后一天23:59:59
 	 */
 	public static LocalDateTime getMonthLastDayTime(LocalDateTime date) {
 		if (date == null)
@@ -209,6 +239,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月最后一天23:59:59
+	 * @param date 需要转换的Date类型
+	 * @return 转换后的当月最后一天23:59:59
 	 */
 	public static LocalDateTime getMonthLastDayTime(Date date) {
 		LocalDateTime dt = LocalDateTime.now();
@@ -219,6 +251,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年第一天
+	 * @param date 需要转换的LocalDate类型
+	 * @return 转换后的所属当年第一天
 	 */
 	public static LocalDate getYearFirstDay(LocalDate date) {
 		if (date == null)
@@ -228,6 +262,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年第一天
+	 * @param date 需要转换的Date类型
+	 * @return 转换后的所属当年第一天
 	 */
 	public static LocalDate getYearFirstDay(Date date) {
 		LocalDate dt = LocalDate.now();
@@ -238,6 +274,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年第一天00:00:00
+	 * @param date 需要转换的LocalDateTime类型
+	 * @return 转换后的所属当年第一天00:00:00
 	 */
 	public static LocalDateTime getYearFirstDayTime(LocalDateTime date) {
 		if (date == null)
@@ -247,6 +285,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年第一天00:00:00
+	 * @param date 需要转换的Date类型
+	 * @return 转换后的所属当年第一天00:00:00
 	 */
 	public static LocalDateTime getYearFirstDayTime(Date date) {
 		LocalDateTime dt = LocalDateTime.now();
@@ -257,6 +297,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年最后一天
+	 * @param date 需要转换的LocalDate类型
+	 * @return 转换后的所属当年最后一天
 	 */
 	public static LocalDate getYearLastDay(LocalDate date) {
 		if (date == null)
@@ -266,6 +308,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年最后一天
+	 * @param date 需要转换的Date类型
+	 * @return 转换后的所属当年最后一天
 	 */
 	public static LocalDate getYearLastDay(Date date) {
 		LocalDate dt = LocalDate.now();
@@ -276,6 +320,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年最后一天23:59:59
+	 * @param date 需要转换的LocalDateTime类型
+	 * @return 转换后的所属当年最后一天23:59:59
 	 */
 	public static LocalDateTime getYearLastDayTime(LocalDateTime date) {
 		if (date == null)
@@ -285,6 +331,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年最后一天23:59:59
+	 * @param date 需要转换的Date类型
+	 * @return 转换后的所属当年最后一天23:59:59
 	 */
 	public static LocalDateTime getYearLastDayTime(Date date) {
 		LocalDateTime dt = LocalDateTime.now();
@@ -295,6 +343,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 判断给定日期是否在当前日期后
+	 * @param date 需要判断的日期
+	 * @return 在当前日期后则返回true
 	 */
 	public static boolean isAfterToday(LocalDateTime date) {
 		LocalDateTime today = LocalDateTime.now();
@@ -303,6 +353,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 判断给定日期是否在当前日期后
+	 * @param date 需要判断的日期
+	 * @return 在当前日期后则返回true
 	 */
 	public static boolean isAfterToday(LocalDate date) {
 		LocalDate today = LocalDate.now();
@@ -311,6 +363,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 判断给定日期是否在当前日期前
+	 * @param date 需要判断的日期
+	 * @return 在当前日期前则返回true
 	 */
 	public static boolean isBeforeToday(LocalDateTime date) {
 		LocalDateTime today = LocalDateTime.now();
@@ -319,6 +373,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 判断给定日期是否在当前日期前
+	 * @param date 需要判断的日期
+	 * @return 在当前日期前则返回true
 	 */
 	public static boolean isBeforeToday(LocalDate date) {
 		LocalDate today = LocalDate.now();

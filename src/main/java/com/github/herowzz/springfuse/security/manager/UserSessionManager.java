@@ -8,6 +8,7 @@ public abstract class UserSessionManager {
 
 	/**
 	 * 把当前用户放入当前线程session中
+	 * @param <T> Extends User Class Type
 	 * @param user 用户对象
 	 */
 	public static <T extends BaseUser> void setUser(T user) {

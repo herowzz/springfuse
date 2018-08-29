@@ -114,7 +114,7 @@ public class SpringFuseGenerator {
 				root.put("entityPackageName", entityPackageName); // 实体所在包的路径
 				root.put("entityPackageRoot", entityPackageRoot); // 实体所在包的根路径
 				root.put("entitySimpleName", entitySimpleName); // 实体名称(小写)
-				root.put("autowiredPackege", autowiredPackege); // 需要注入的类所属包名
+				root.put("autowiredPackege", autowiredPackege); // 需要注入的autowired所属包名
 				root.put("dtoPackage", dtoPackage);
 
 				List<DtoField> fieldList = new ArrayList<>();
@@ -160,6 +160,7 @@ public class SpringFuseGenerator {
 
 	/**
 	 * 生成dao文件
+	 * @param daoPackage dao所在包
 	 */
 	public void buildDao(String daoPackage) {
 		exportByType(ExportType.Dao, daoPackage, "", "");
@@ -167,6 +168,8 @@ public class SpringFuseGenerator {
 
 	/**
 	 * 生成Service文件
+	 * @param servicePackage service所在包
+	 * @param daoPackage dao所在包
 	 */
 	public void buildService(String servicePackage, String daoPackage) {
 		exportByType(ExportType.Service, servicePackage, daoPackage, "");
@@ -174,6 +177,7 @@ public class SpringFuseGenerator {
 
 	/**
 	 * 生成Dto文件
+	 * @param dtoPackage dto所在包
 	 */
 	public void buildDto(String dtoPackage) {
 		exportByType(ExportType.Dto, dtoPackage, "", "");
@@ -181,11 +185,18 @@ public class SpringFuseGenerator {
 
 	/**
 	 * 生成Controller文件
+	 * @param controllerPackage controller所在包
+	 * @param servicePackage service所在包
+	 * @param dtoPackage dto所在包
 	 */
 	public void buildController(String controllerPackage, String servicePackage, String dtoPackage) {
 		exportByType(ExportType.Controller, controllerPackage, servicePackage, dtoPackage);
 	}
 
+	/**
+	 * 生成所有文件
+	 * @param packageName dao,service,controller所在包的上层
+	 */
 	public void buildAll(String packageName) {
 		String daoPackage = packageName + ".dao";
 		String servicePackage = packageName + ".service";

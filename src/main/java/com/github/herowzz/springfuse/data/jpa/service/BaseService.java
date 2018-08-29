@@ -33,7 +33,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 根据Id查询实体<br>
-	 * @param id
+	 * @param id 实体主键
 	 * @return 实体
 	 * @throws javax.persistence.EntityNotFoundException if no entity exists for given {@code id}.
 	 */
@@ -44,7 +44,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 根据Id查询实体<br>
-	 * @param id
+	 * @param id 实体主键
 	 * @return 实体Optional
 	 */
 	@Transactional(readOnly = true)
@@ -61,7 +61,9 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 更新实体
+	 * @param <S> 继承本实体的对象类型
 	 * @param entity 实体对象
+	 * @return 更新后的实体
 	 */
 	public <S extends T> S saveAndFlush(@NonNull S entity) {
 		return getEntityDao().saveAndFlush(entity);
@@ -69,7 +71,9 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 更新实体
+	 * @param <S> 继承本实体的对象类型
 	 * @param entity 实体对象
+	 * @return 更新后的实体
 	 */
 	public <S extends T> S save(@NonNull S entity) {
 		return getEntityDao().save(entity);
@@ -77,7 +81,9 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 批量更新实体
-	 * @param entityList 实体列表
+	 * @param <S> 实体类型
+	 * @param entities 实体列表
+	 * @return 更新后的实体
 	 */
 	public <S extends T> List<S> saveAll(@NonNull Iterable<S> entities) {
 		return getEntityDao().saveAll(entities);
@@ -85,7 +91,9 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 批量更新实体
-	 * @param entityList 实体列表
+	 * @param <S> 实体类型
+	 * @param entities 实体列表
+	 * @return 更新后的实体
 	 */
 	public <S extends T> List<S> saveAll(@NonNull S[] entities) {
 		return saveAll(Arrays.asList(entities));
@@ -101,7 +109,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 根据Id删除实体
-	 * @param id
+	 * @param id 主键
 	 */
 	public void delete(@NonNull ID id) {
 		Optional<T> optionalT = this.findById(id);
@@ -112,6 +120,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 根据Id数组批量删除实体
+	 * @param ids 实体主键列表
 	 */
 	public void delete(@NonNull ID[] ids) {
 		for (ID id : ids) {
@@ -121,6 +130,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 根据实体列表批量删除
+	 * @param entities 实体列表
 	 */
 	public void deleteAll(@NonNull Iterable<? extends T> entities) {
 		getEntityDao().deleteAll(entities);
@@ -128,6 +138,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 根据实体列表批量删除
+	 * @param entities 实体列表
 	 */
 	public void deleteAll(@NonNull T[] entities) {
 		for (T entity : entities) {
@@ -144,6 +155,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 删除所有实体(批量)
+	 * @param entities 实体列表
 	 */
 	public void deleteInBatch(@NonNull Iterable<T> entities) {
 		getEntityDao().deleteInBatch(entities);
@@ -187,6 +199,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 根据查询条件返回符合条件结果数量
+	 * @param <S> 实体类型
 	 * @param example 查询条件
 	 * @return 实体个数
 	 */
@@ -207,6 +220,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 判断匹配的条件是否存在
+	 * @param <S> 实体类型
 	 * @param example 匹配条件
 	 * @return 存在返回true
 	 */
@@ -221,7 +235,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return 存在返回true
 	 */
 	@Transactional(readOnly = true)
-	public <S extends T> boolean exists(com.querydsl.core.types.Predicate predicate) {
+	public boolean exists(com.querydsl.core.types.Predicate predicate) {
 		return getEntityDao().exists(predicate);
 	}
 
@@ -290,6 +304,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 根据查询条件查询所有实体
+	 * @param <S> 实体类型
 	 * @param example 查询条件
 	 * @return 查询结果集
 	 */
@@ -300,6 +315,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 根据查询条件查询所有实体
+	 * @param <S> 实体类型
 	 * @param example 查询条件
 	 * @param sort 排序参数
 	 * @return 查询结果集
@@ -518,8 +534,8 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @param pageable 分页参数
 	 * @param queryName 查询条件
 	 * @param queryValue 查询值
-	 * @param orderName 需要排序字段
-	 * @param order 排序方式[desc,asc]
+	 * @param orderBy 需要排序字段
+	 * @param orderDirect 排序方式[desc,asc]
 	 * @return 分页列表
 	 */
 	@Transactional(readOnly = true)

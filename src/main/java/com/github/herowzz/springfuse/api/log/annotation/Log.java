@@ -13,11 +13,13 @@ public @interface Log {
 
 	/**
 	 * 模块名
+	 * @return 模块名
 	 */
 	String name() default "";
 
 	/**
 	 * 记录内容
+	 * @return 记录内容
 	 */
 	String value() default "";
 }

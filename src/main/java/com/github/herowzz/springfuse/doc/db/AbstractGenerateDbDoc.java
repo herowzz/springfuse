@@ -1,5 +1,6 @@
 package com.github.herowzz.springfuse.doc.db;
 
+import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,10 +43,10 @@ public abstract class AbstractGenerateDbDoc extends GenerateDbDocBuilder {
 	/**
 	 * 获取实体对象Map并以首字母为key
 	 * @param entityBasePackage 实体所在包
-	 * @return map
-	 * @throws Exception
+	 * @return map 实体对象Map,以首字母为key
+	 * @throws IOException if the attempt to read class path resources (jar files or directories)failed
 	 */
-	public Map<String, List<DbTable>> getDbCharKeyMap(String entityBasePackage) throws Exception {
+	public Map<String, List<DbTable>> getDbCharKeyMap(String entityBasePackage) throws IOException {
 		Map<String, List<DbTable>> tbMap = new TreeMap<>();
 		List<Class<?>> entityClassList = ReflectUtils.getClassListByBasePackage(entityBasePackage, Entity.class);
 		Map<String, List<Class<?>>> charMap = ReflectUtils.convertCharKeyMap(entityClassList);

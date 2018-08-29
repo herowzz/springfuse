@@ -10,7 +10,7 @@ public interface ITokenManager {
 
 	/**
 	 * 创建一个token关联上指定用户
-	 * @param userId 指定用户的id
+	 * @param uid 用户id
 	 * @return 生成的token
 	 */
 	TokenModel createToken(String uid);

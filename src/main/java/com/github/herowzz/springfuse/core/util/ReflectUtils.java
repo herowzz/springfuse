@@ -1,5 +1,6 @@
 package com.github.herowzz.springfuse.core.util;
 
+import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +19,10 @@ public abstract class ReflectUtils {
 	 * @param basePackage 需要获取类的所在包
 	 * @param hasAnnotation 根据Annotation筛选
 	 * @return 包下的所有类组成List
-	 * @throws Exception
+	 * @throws IOException if the attempt to read class path resources (jar files or directories)failed.
 	 */
 	@SafeVarargs
-	public static List<Class<?>> getClassListByBasePackage(String basePackage, Class<? extends Annotation>... hasAnnotation) throws Exception {
+	public static List<Class<?>> getClassListByBasePackage(String basePackage, Class<? extends Annotation>... hasAnnotation) throws IOException {
 		List<Class<?>> entityClassList = new ArrayList<>();
 		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		ImmutableSet<ClassPath.ClassInfo> topLevelClasses = ClassPath.from(classLoader).getTopLevelClassesRecursive(basePackage);
@@ -40,7 +41,7 @@ public abstract class ReflectUtils {
 	 * 将给定类的list转化为首字母为key的map
 	 * @param classList 类list
 	 * @return map<br>
-	 * 		key为首字母大写,value为该首字母下的类list
+	 *         key为首字母大写,value为该首字母下的类list
 	 */
 	public static Map<String, List<Class<?>>> convertCharKeyMap(List<Class<?>> classList) {
 		return classList.stream().collect(Collectors.groupingBy(c -> StringUtils.left(c.getSimpleName(), 1)));
