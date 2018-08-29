@@ -15,7 +15,7 @@
 
 	<name>springfuse</name>
 	<url>https://github.com/herowzz/springfuse</url>
-	<description>Provide basic framework and class library based on Spring Framework.</description>
+	<description>Provide basic framework and class library based on Spring Boot Framework.</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
