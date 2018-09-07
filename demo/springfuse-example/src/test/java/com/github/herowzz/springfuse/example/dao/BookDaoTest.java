@@ -59,6 +59,7 @@ public class BookDaoTest {
 		Book book1 = bookDao.findOne((root, query, cb) -> cb.equal(root.get("name"), "a1")).get();
 		Book book2 = bookDao.findByIdForUpdate(book1.getId());
 		assertThat(book2.getPage()).isEqualTo(10);
+		assertThat(book2).hasFieldOrPropertyWithValue("name", "a1");
 	}
 
 }
