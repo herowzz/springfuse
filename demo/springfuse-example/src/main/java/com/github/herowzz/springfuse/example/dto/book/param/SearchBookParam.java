@@ -30,7 +30,7 @@ public class SearchBookParam implements IBaseParam {
 		if (bookType != null) {
 			qb.and(book.bookType.eq(bookType));
 		}
-		if (StringUtils.hasText(name)) {
+		if (StringUtils.hasText(shopId)) {
 			qb.and(book.shop.id.eq(shopId));
 		}
 		return qb;
