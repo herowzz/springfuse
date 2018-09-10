@@ -18,6 +18,9 @@ public class SearchBookParam implements IBaseParam {
 	@ApiModelProperty("图书类型")
 	public BookTypeEnum bookType;
 
+	@ApiModelProperty("所属商店Id")
+	public String shopId;
+
 	public Predicate build() {
 		QBook book = QBook.book;
 		BooleanBuilder qb = new BooleanBuilder();
@@ -26,6 +29,9 @@ public class SearchBookParam implements IBaseParam {
 		}
 		if (bookType != null) {
 			qb.and(book.bookType.eq(bookType));
+		}
+		if (StringUtils.hasText(name)) {
+			qb.and(book.shop.id.eq(shopId));
 		}
 		return qb;
 	}

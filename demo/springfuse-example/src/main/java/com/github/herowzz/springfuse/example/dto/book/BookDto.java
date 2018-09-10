@@ -32,6 +32,12 @@ public class BookDto {
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	public LocalDateTime pubDate;
 
+	@ApiModelProperty(value = "所属商店Id")
+	public String shopId;
+
+	@ApiModelProperty(value = "所属商店名称")
+	public String shopName;
+
 	public static BookDto copy(Book book) {
 		BookDto dto = new BookDto();
 		if (book != null) {
@@ -41,6 +47,8 @@ public class BookDto {
 			dto.page = book.getPage();
 			dto.pubDate = book.getPubDate();
 			dto.sellPrice = book.getSellPrice();
+			dto.shopId = book.getShop().getId();
+			dto.shopName = book.getShop().getName();
 		}
 		return dto;
 	}
