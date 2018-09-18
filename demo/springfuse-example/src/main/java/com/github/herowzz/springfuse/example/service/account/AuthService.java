@@ -24,6 +24,7 @@ import com.github.herowzz.springfuse.example.domain.account.Role;
 import com.github.herowzz.springfuse.example.domain.account.RolePermission;
 import com.github.herowzz.springfuse.example.domain.account.User;
 import com.github.herowzz.springfuse.example.domain.account.UserRole;
+import com.github.herowzz.springfuse.integration.event.IEventService;
 
 @Service
 @Transactional
@@ -40,6 +41,9 @@ public class AuthService {
 
 	@Autowired
 	private RolePermissionDao rolePermissionDao;
+
+	@Autowired
+	private IEventService eventService;
 
 	/**
 	 * 根据用户登录名密码查询用户对象
@@ -64,6 +68,7 @@ public class AuthService {
 		user.setLastLoginIp(ip);
 		user.setLastLoginTime(LocalDateTime.now());
 		user = userDao.save(user);
+		eventService.post(user);
 		return user;
 	}
 

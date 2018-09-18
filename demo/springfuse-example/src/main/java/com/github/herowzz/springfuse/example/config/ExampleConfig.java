@@ -11,12 +11,13 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import com.github.herowzz.springfuse.api.log.LogAspect;
 import com.github.herowzz.springfuse.data.jpa.config.JpaListenerConfig;
 import com.github.herowzz.springfuse.example.service.system.LogInfoService;
+import com.github.herowzz.springfuse.integration.event.EventListenerConfig;
 import com.github.herowzz.springfuse.security.manager.ITokenManager;
 import com.github.herowzz.springfuse.security.manager.TokenFactory;
 import com.github.herowzz.springfuse.security.model.TokenTypeEnum;
 
 @Configuration
-@Import(JpaListenerConfig.class)
+@Import({ JpaListenerConfig.class, EventListenerConfig.class })
 @EnableAsync
 @EnableCaching
 @EnableSpringDataWebSupport
