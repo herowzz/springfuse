@@ -24,7 +24,7 @@ You also can see the folder demo and this have a example project.
 * JPA Enhance
 	* Add BaseDao and BaseService to provide basic CURD method
 	* Provide Soft-Delete feature
-	* Entity class generate to doc(html,word,pdf) file
+	* Entity class generate to DB Doc(html,word,pdf) file
 * Rest Api Enhance
 	* Unified the return ApiResult
 	* Base ExceptionHandler to process exception
