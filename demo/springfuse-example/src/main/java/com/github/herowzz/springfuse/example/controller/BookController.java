@@ -44,16 +44,19 @@ public class BookController {
 	@Log(name = "图书管理", value = "查询图书")
 	@ApiOperation(value = "查看图书列表", notes = "可以通过查询条件查询图书列表,包括分页信息")
 	@ApiPageable
-	public ApiResult<Page<BookDto>> list(Pageable pageable, @RequestBody(required = false) @Valid @ApiParam("查询参数") SearchBookParam searchParam, @ModelAttribute("user") User user) {
+	public ApiResult<Page<BookDto>> list(Pageable pageable, @RequestBody @Valid @ApiParam("查询参数") SearchBookParam searchParam, @ModelAttribute("user") User user) {
 		System.out.println(user);
 		System.out.println(user.getId() + "---" + user.getUsername());
-		Page<BookDto> bookDtoPage = bookService.findPage(pageable, searchParam != null ? searchParam.build() : null).map(e -> BookDto.copy(e));
+		System.out.println(searchParam.name);
+		System.out.println(searchParam.bookType);
+		System.out.println(searchParam.shopId);
+		Page<BookDto> bookDtoPage = bookService.findBy(pageable, searchParam.name, searchParam.bookType, searchParam.shopId).map(e -> BookDto.copy(e));
 		return ApiResult.build(bookDtoPage);
 	}
 
 	@PostMapping(value = "/list2")
 	public ApiResult<Stream<BookDto>> list2(Pageable pageable, @RequestBody(required = false) @Valid SearchBookParam searchParam, @ModelAttribute("user") User user) {
-		List<Book> bookList = bookService.findDD(searchParam.name, searchParam.bookType);
+		List<Book> bookList = bookService.findAll();
 		Stream<BookDto> bookDto = bookList.stream().map(e -> BookDto.copy(e));
 		return ApiResult.build(bookDto);
 	}

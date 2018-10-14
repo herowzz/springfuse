@@ -26,7 +26,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.github.herowzz.springfuse.example.domain.Book;
 import com.github.herowzz.springfuse.example.domain.account.User;
 import com.github.herowzz.springfuse.example.domain.refrence.BookTypeEnum;
-import com.github.herowzz.springfuse.example.dto.book.param.SearchBookParam;
 import com.github.herowzz.springfuse.example.service.BookService;
 import com.github.herowzz.springfuse.example.service.account.UserService;
 import com.github.herowzz.springfuse.security.manager.ITokenManager;
@@ -70,10 +69,11 @@ public class BookControllerTest {
 		List<Book> bookList = Arrays.asList(book1);
 		Page<Book> page = new PageImpl<>(bookList);
 
-		SearchBookParam searchParam = null;
-		given(bookService.findPage(PageRequest.of(0, 20), searchParam != null ? searchParam.build() : null)).willReturn(page);
+		given(bookService.findBy(PageRequest.of(0, 20), "", null, "")).willReturn(page);
 
-		mvc.perform(post("/book/list").header("token", TOKEN).accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk()).andExpect(jsonPath("$.code").value(1)).andExpect(jsonPath("$.data.content[0].name").value("aaa"));
+		String requestBody = "{\"name\":\"\", \"bookType\": null, \"shopId\":\"\"}";
+		mvc.perform(post("/book/list").header("token", TOKEN).contentType(MediaType.APPLICATION_JSON_UTF8).content(requestBody)
+				.accept(MediaType.APPLICATION_JSON_UTF8)).andExpect(status().isOk()).andExpect(jsonPath("$.code").value(1)).andExpect(jsonPath("$.data.content[0].name").value("aaa"));
 	}
 
 }

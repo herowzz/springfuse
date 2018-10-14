@@ -47,8 +47,10 @@ public class BookDto {
 			dto.page = book.getPage();
 			dto.pubDate = book.getPubDate();
 			dto.sellPrice = book.getSellPrice();
-			dto.shopId = book.getShop().getId();
-			dto.shopName = book.getShop().getName();
+			if (book.getShop() != null) {
+				dto.shopId = book.getShop().getId();
+				dto.shopName = book.getShop().getName();
+			}
 		}
 		return dto;
 	}

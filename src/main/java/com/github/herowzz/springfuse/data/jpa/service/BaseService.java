@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.github.herowzz.springfuse.data.jpa.dao.IBaseDao;
-import com.querydsl.core.types.OrderSpecifier;
 
 @Transactional
 public abstract class BaseService<T, ID extends Serializable> {
@@ -189,16 +188,6 @@ public abstract class BaseService<T, ID extends Serializable> {
 
 	/**
 	 * 根据查询条件返回符合条件结果数量
-	 * @param predicate querydsl查询条件
-	 * @return 实体个数
-	 */
-	@Transactional(readOnly = true)
-	public long count(com.querydsl.core.types.Predicate predicate) {
-		return getEntityDao().count(predicate);
-	}
-
-	/**
-	 * 根据查询条件返回符合条件结果数量
 	 * @param <S> 实体类型
 	 * @param example 查询条件
 	 * @return 实体个数
@@ -227,16 +216,6 @@ public abstract class BaseService<T, ID extends Serializable> {
 	@Transactional(readOnly = true)
 	public <S extends T> boolean exists(Example<S> example) {
 		return getEntityDao().exists(example);
-	}
-
-	/**
-	 * 判断匹配的条件是否存在
-	 * @param predicate querydsl匹配条件
-	 * @return 存在返回true
-	 */
-	@Transactional(readOnly = true)
-	public boolean exists(com.querydsl.core.types.Predicate predicate) {
-		return getEntityDao().exists(predicate);
 	}
 
 	/**
@@ -337,48 +316,6 @@ public abstract class BaseService<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 根据查询条件查询所有实体
-	 * @param predicate querydsl查询条件
-	 * @return 查询结果集
-	 */
-	@Transactional(readOnly = true)
-	public Iterable<T> findAll(com.querydsl.core.types.Predicate predicate) {
-		return getEntityDao().findAll(predicate);
-	}
-
-	/**
-	 * 根据查询条件查询所有实体
-	 * @param predicate querydsl查询条件
-	 * @param sort 排序条件
-	 * @return 查询结果集
-	 */
-	@Transactional(readOnly = true)
-	public Iterable<T> findAll(com.querydsl.core.types.Predicate predicate, Sort sort) {
-		return getEntityDao().findAll(predicate, sort);
-	}
-
-	/**
-	 * 根据查询条件查询所有实体
-	 * @param predicate querydsl查询条件
-	 * @param orders 排序条件
-	 * @return 查询结果集
-	 */
-	@Transactional(readOnly = true)
-	public Iterable<T> findAll(com.querydsl.core.types.Predicate predicate, OrderSpecifier<?>... orders) {
-		return getEntityDao().findAll(predicate, orders);
-	}
-
-	/**
-	 * 根据排序条件查询所有实体
-	 * @param orders 排序条件
-	 * @return 查询结果集
-	 */
-	@Transactional(readOnly = true)
-	public Iterable<T> findAll(OrderSpecifier<?>... orders) {
-		return getEntityDao().findAll(orders);
-	}
-
-	/**
 	 * 分页查询所有实体
 	 * @param pageable 分页条件
 	 * @return Page 分页查询结果,附带结果列表及所有查询时的参数.<br>
@@ -402,18 +339,6 @@ public abstract class BaseService<T, ID extends Serializable> {
 	}
 
 	/**
-	 * 根据查询条件分页查询
-	 * @param pageable 分页条件
-	 * @param predicate 查询条件
-	 * @return Page 分页查询结果,附带结果列表及所有查询时的参数.<br>
-	 *         可通过page.getResult()获取.
-	 */
-	@Transactional(readOnly = true)
-	public Page<T> findPage(Pageable pageable, com.querydsl.core.types.Predicate predicate) {
-		return getEntityDao().findAll(predicate, pageable);
-	}
-
-	/**
 	 * 根据查询条件查询单个对象
 	 * @param spec 查询条件
 	 * @return 实体对象Optional
@@ -421,15 +346,6 @@ public abstract class BaseService<T, ID extends Serializable> {
 	@Transactional(readOnly = true)
 	public Optional<T> findOne(Specification<T> spec) {
 		return getEntityDao().findOne(spec);
-	}
-
-	/**
-	 * 根据Id查询实体<br>
-	 * @param predicate querydsl查询条件
-	 * @return 实体对象Optional
-	 */
-	public Optional<T> findOne(com.querydsl.core.types.Predicate predicate) {
-		return getEntityDao().findOne(predicate);
 	}
 
 	/**
