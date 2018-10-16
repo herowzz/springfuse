@@ -14,7 +14,7 @@ Add the following dependency to your pom.xml:
 <dependency>
 	<groupId>com.github.herowzz</groupId>
 	<artifactId>springfuse</artifactId>
-	<version>1.0.0-RELEASE</version>
+	<version>1.0.1-RELEASE</version>
 </dependency>
 ```  
 

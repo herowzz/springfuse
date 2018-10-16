@@ -18,7 +18,7 @@
 		<dependency>
 			<groupId>com.github.herowzz</groupId>
 			<artifactId>springfuse</artifactId>
-			<version>1.0.1</version>
+			<version>1.0.1-RELEASE</version>
 		</dependency>
 		
 		<dependency>
