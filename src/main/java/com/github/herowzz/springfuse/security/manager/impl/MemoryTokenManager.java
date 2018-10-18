@@ -47,4 +47,9 @@ public class MemoryTokenManager implements ITokenManager {
 		return tokenIdCache.getIfPresent(token);
 	}
 
+	@Override
+	public void removeToken(String token) {
+		tokenIdCache.invalidate(token);
+	}
+
 }

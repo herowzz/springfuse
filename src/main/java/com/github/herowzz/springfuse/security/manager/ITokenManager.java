@@ -22,4 +22,10 @@ public interface ITokenManager {
 	 */
 	String getUidByToken(String token);
 
+	/**
+	 * 删除给定的token
+	 * @param token token字符
+	 */
+	void removeToken(String token);
+
 }
