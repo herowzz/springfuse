@@ -3,6 +3,7 @@ package com.github.herowzz.springfuse.api.dto.param;
 import javax.validation.constraints.NotBlank;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * Id请求参数
@@ -12,6 +13,7 @@ import io.swagger.annotations.ApiModel;
 public class IdParam implements IBaseParam {
 
 	@NotBlank
+	@ApiModelProperty(required = true)
 	public String id;
 
 	@Override
