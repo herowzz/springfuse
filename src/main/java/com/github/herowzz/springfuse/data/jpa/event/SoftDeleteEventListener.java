@@ -3,6 +3,7 @@ package com.github.herowzz.springfuse.data.jpa.event;
 import java.util.Set;
 
 import org.hibernate.HibernateException;
+import org.hibernate.annotations.Where;
 import org.hibernate.event.internal.DefaultDeleteEventListener;
 import org.hibernate.event.spi.DeleteEvent;
 
@@ -22,12 +23,13 @@ public class SoftDeleteEventListener extends DefaultDeleteEventListener {
 	public void onDelete(DeleteEvent event, Set transientEntities) throws HibernateException {
 		if (event.getObject() instanceof BaseEntity) {
 			BaseEntity entity = (BaseEntity) event.getObject();
-			entity.onRemove();
-			event.getSession().persist(entity);
-			event.getSession().update(entity);
+			if (entity.getClass().isAnnotationPresent(Where.class)) {
+				entity.onRemove();
+				event.getSession().persist(entity);
+				event.getSession().update(entity);
+			}
 		} else {
 			super.onDelete(event, transientEntities);
 		}
 	}
-
 }
