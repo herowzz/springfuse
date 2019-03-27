@@ -1,5 +1,7 @@
 package com.github.herowzz.springfuse.core.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 import org.apache.commons.text.RandomStringGenerator;
@@ -46,6 +48,30 @@ public abstract class CodeUtils {
 	 */
 	public static String getUUIDStr() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
+	}
+
+	/**
+	 * 返回当前时间字符串(年月日时分秒毫秒)
+	 * @return 返回当前时间年月日时分秒字符串
+	 */
+	public static String getNowDateStr() {
+		return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyMMddHHmmssSSS"));
+	}
+	
+	/**
+	 * 返回当前时间字符串
+	 * @return 返回当前时间字符串
+	 */
+	public static String getNowDateStr(String format) {
+		return LocalDateTime.now().format(DateTimeFormatter.ofPattern(format));
+	}
+
+	/**
+	 * 返回当前时间字符串
+	 * @return 返回当前时间字符串
+	 */
+	public static String getNowDateStr(String prefix, String format) {
+		return prefix + LocalDateTime.now().format(DateTimeFormatter.ofPattern(format));
 	}
 
 }
