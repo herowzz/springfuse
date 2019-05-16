@@ -25,10 +25,11 @@ public class PageParam implements IBaseParam {
 	public Integer size;
 
 	public Pageable getPage() {
-		if (num == null || num < 1) {
+		if (num == null || num < 1)
 			num = 1;
-		}
-		if (size == null || size > 1000)
+		if (size == null)
+			size = 10;
+		if (size > 1000)
 			size = 1000;
 		return PageRequest.of(num - 1, size);
 	}
