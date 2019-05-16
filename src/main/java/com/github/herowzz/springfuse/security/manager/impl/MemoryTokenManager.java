@@ -36,9 +36,9 @@ public class MemoryTokenManager implements ITokenManager {
 				tokenIdCache.invalidate(oldToken);
 				idTokenCache.invalidate(uid);
 			}
+			idTokenCache.put(uid, token);
 		}
 		tokenIdCache.put(token, uid);
-		idTokenCache.put(uid, token);
 		return model;
 	}
 
