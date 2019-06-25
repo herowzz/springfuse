@@ -109,7 +109,7 @@ public class GlobalHandler {
 	}
 
 	@ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-	public ResponseEntity<ApiResult<?>> HttpRequestMethodNotSupportedException2(HttpServletRequest request, HttpMediaTypeNotSupportedException ex) {
+	public ResponseEntity<ApiResult<?>> HttpMediaTypeNotSupportedException(HttpServletRequest request, HttpMediaTypeNotSupportedException ex) {
 		logger.error("Rest request error! URL: " + request.getRequestURI(), ex);
 		ApiResult<?> dto = new ApiResult<>();
 		dto.code = ApiResultCodeEnum.HTTP_MEDIATYPE_NOT_SUPPORT.code;
