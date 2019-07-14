@@ -5,6 +5,7 @@ package com.github.herowzz.springfuse.core.bean.enumtype;
  * 0:停用; 1:启用
  * @author wangzz
  */
+@EnumName("EnableType")
 public enum EnableEnum implements IBaseEnum {
 
 	/**

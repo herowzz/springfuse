@@ -5,6 +5,7 @@ package com.github.herowzz.springfuse.core.bean.enumtype;
  * 0:否; 1:是
  * @author wangzz
  */
+@EnumName("WhetherType")
 public enum WhetherEnum implements IBaseEnum {
 
 	No("否"),
