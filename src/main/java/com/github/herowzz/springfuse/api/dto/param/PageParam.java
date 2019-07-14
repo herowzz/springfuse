@@ -18,10 +18,10 @@ public class PageParam implements IBaseParam {
 
 	@NotNull
 	@Min(1)
-	@ApiModelProperty(value = "页码(从1开始)", required = true, allowableValues = "range[1, infinity]", example = "1")
+	@ApiModelProperty(value = "页码(从1开始)", required = true, allowableValues = "range[1, infinity]")
 	public Integer num;
 
-	@ApiModelProperty(value = "每页多少条记录", example = "10")
+	@ApiModelProperty(value = "每页多少条记录")
 	public Integer size;
 
 	public Pageable getPage() {

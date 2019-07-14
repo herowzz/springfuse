@@ -12,9 +12,9 @@ import io.swagger.annotations.ApiImplicitParams;
 @Retention(RetentionPolicy.RUNTIME)
 @ApiImplicitParams({
 		// 页码
-		@ApiImplicitParam(name = "page", dataType = "int", paramType = "query", value = "第几页，从0开始，默认为第0页"),
+		@ApiImplicitParam(name = "page", dataType = "int", paramType = "query", value = "第几页，从0开始，默认为第0页", defaultValue = "0"),
 		// 每页数量
-		@ApiImplicitParam(name = "size", dataType = "int", paramType = "query", value = "每一页的大小，默认为20"),
+		@ApiImplicitParam(name = "size", dataType = "int", paramType = "query", value = "每一页的大小，默认为20", defaultValue = "20"),
 		// 排序
 		@ApiImplicitParam(name = "sort", allowMultiple = true, dataType = "string", paramType = "query", value = "排序相关的信息(例如sort=firstname&sort=lastname,desc表示在按firstname正序排列基础上按lastname倒序排列)") })
 public @interface ApiPageable {
