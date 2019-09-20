@@ -23,4 +23,11 @@ public abstract class UserSessionManager {
 		return USER_LOCAL.get();
 	}
 
+	/**
+	 * 从当前线程session中移除用户信息
+	 */
+	public static void removeUser() {
+		USER_LOCAL.remove();
+	}
+
 }
