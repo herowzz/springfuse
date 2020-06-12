@@ -9,13 +9,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -25,6 +28,7 @@ import com.github.herowzz.springfuse.api.dto.ApiResult;
 import com.github.herowzz.springfuse.api.dto.refrence.ApiResultCodeEnum;
 import com.github.herowzz.springfuse.core.exception.service.ServiceException;
 
+@ControllerAdvice(annotations = { Controller.class, RestController.class })
 public class GlobalHandler {
 
 	private static Logger logger = LoggerFactory.getLogger(GlobalHandler.class);
