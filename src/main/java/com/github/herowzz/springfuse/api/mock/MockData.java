@@ -1,7 +1,5 @@
 package com.github.herowzz.springfuse.api.mock;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,8 +16,6 @@ public abstract class MockData {
 	static MockConfig config = new MockConfig();
 
 	static {
-		config.registerMocker(new LocalDateMock(), LocalDate.class);
-		config.registerMocker(new LocalDateTimeMock(), LocalDateTime.class);
 		config.intRange(0, 2);
 	}
 

@@ -6,7 +6,7 @@ public abstract class BeanUtils {
 
 	public static <F, T> T copy(F from, Class<T> to) {
 		try {
-			T t = to.newInstance();
+			T t = to.getDeclaredConstructor().newInstance();
 			BeanCopier beanCopier = BeanCopier.create(from.getClass(), t.getClass(), false);
 			beanCopier.copy(from, t, null);
 			return t;

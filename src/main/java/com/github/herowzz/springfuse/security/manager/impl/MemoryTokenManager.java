@@ -18,8 +18,8 @@ public class MemoryTokenManager implements ITokenManager {
 	private boolean isMultiLogin = true;
 
 	public MemoryTokenManager(int expireSeconds, boolean isMultiLogin) {
-		this.tokenIdCache = CacheBuilder.newBuilder().expireAfterWrite(expireSeconds, TimeUnit.SECONDS).build();
-		this.idTokenCache = CacheBuilder.newBuilder().expireAfterWrite(expireSeconds, TimeUnit.SECONDS).build();
+		this.tokenIdCache = CacheBuilder.newBuilder().expireAfterAccess(expireSeconds, TimeUnit.SECONDS).build();
+		this.idTokenCache = CacheBuilder.newBuilder().expireAfterAccess(expireSeconds, TimeUnit.SECONDS).build();
 		this.expireSeconds = expireSeconds;
 		this.isMultiLogin = isMultiLogin;
 	}
