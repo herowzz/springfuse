@@ -2,8 +2,8 @@
 
 [![Build Status](https://travis-ci.org/herowzz/springfuse.svg?branch=master)](https://travis-ci.org/herowzz/springfuse) 
 [![Maven](https://img.shields.io/maven-metadata/v/http/central.maven.org/maven2/com/github/herowzz/springfuse/maven-metadata.xml.svg?colorB=yellow)](https://oss.sonatype.org/#nexus-search;quick~springfuse)
-![jdk1.8+](https://img.shields.io/badge/jdk-1.8%2B-orange.svg) 
-![spring boot 2.1.8](https://img.shields.io/badge/spring%20boot-2.1.8-ff69b4.svg) 
+![jdk1.15+](https://img.shields.io/badge/jdk-1.15%2B-orange.svg) 
+![spring boot 2.4.3](https://img.shields.io/badge/spring%20boot-2.4.3-ff69b4.svg) 
 ![license](https://img.shields.io/hexpm/l/plug.svg)
 
 SpringFuse Provide basic framework and class library based on Spring Boot Framework
@@ -14,7 +14,7 @@ Add the following dependency to your pom.xml:
 <dependency>
 	<groupId>com.github.herowzz</groupId>
 	<artifactId>springfuse</artifactId>
-	<version>1.0.2-RELEASE</version>
+	<version>1.1.0-Release</version>
 </dependency>
 ```  
 
