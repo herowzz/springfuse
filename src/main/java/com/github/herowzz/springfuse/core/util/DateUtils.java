@@ -1,6 +1,7 @@
 package com.github.herowzz.springfuse.core.util;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -21,11 +22,12 @@ public abstract class DateUtils {
 	public static final String DATA_ZH_FORMAT = "yyyy年MM月dd日";
 	public static final String DATATIMEF_ZH_FORMAT = "yyyy年MM月dd日HH时mm分ss秒";
 	public static final String DATATIMEF_IN_FORMAT = "yyyyMMddHHmmss";
+	public static final String DATATIMEF_TICK_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS";
 
 	/**
 	 * 将date类型转换成字符串(若date为空则返回当前时间)
 	 * 
-	 * @param date 需要转换的date类型
+	 * @param date      需要转换的date类型
 	 * @param formatStr 转换格式
 	 * @return 格式化后的字符串
 	 */
@@ -37,6 +39,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 将date类型转换成字符串'yyyy-MM-dd HH:mm:ss'格式
+	 * 
 	 * @param date 需要转换的date
 	 * @return 格式化后的字符串
 	 */
@@ -46,6 +49,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 将date类型转换成字符串'yyyy-MM-dd'格式
+	 * 
 	 * @param date 需要转换的date
 	 * @return 格式化后的字符串
 	 */
@@ -55,6 +59,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 将date类型转换成字符串'yyyy年MM月dd日'格式
+	 * 
 	 * @param date 需要转换的date
 	 * @return 格式化后的字符串
 	 */
@@ -64,6 +69,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 将date类型转换成字符串'yyyy年MM月dd日HH时mm分ss秒'格式
+	 * 
 	 * @param date 需要转换的date
 	 * @return 格式化后的字符串
 	 */
@@ -113,6 +119,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期的当日开始时间（0点0时0秒）
+	 * 
 	 * @param dt 需要转换的LocalDateTime类型
 	 * @return 转换后的当日开始时间（0点0时0秒）
 	 */
@@ -124,6 +131,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期的当日开始时间（0点0时0秒）
+	 * 
 	 * @param date 需要转换的Date类型
 	 * @return 转换后的当日开始时间（0点0时0秒）
 	 */
@@ -136,6 +144,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期的当日最后时间（23点59时59秒9999）
+	 * 
 	 * @param dt 需要转换的LocalDateTime类型
 	 * @return 转换后的当日最后时间（23点59时59秒9999）
 	 */
@@ -147,6 +156,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期的当日最后时间（23点59时59秒9999）
+	 * 
 	 * @param date 需要转换的Date类型
 	 * @return 转换后的当日最后时间（23点59时59秒9999）
 	 */
@@ -159,6 +169,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月第一天
+	 * 
 	 * @param date 需要转换的LocalDate类型
 	 * @return 转换后的当月第一天
 	 */
@@ -170,6 +181,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月第一天
+	 * 
 	 * @param date 需要转换的Date类型
 	 * @return 转换后的当月第一天
 	 */
@@ -182,6 +194,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月第一天00:00:00
+	 * 
 	 * @param date 需要转换的LocalDateTime类型
 	 * @return 转换后的当月第一天00:00:00
 	 */
@@ -193,6 +206,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月第一天00:00:00
+	 * 
 	 * @param date 需要转换的Date类型
 	 * @return 转换后的当月第一天00:00:00
 	 */
@@ -205,6 +219,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月最后一天
+	 * 
 	 * @param date 需要转换的LocalDate类型
 	 * @return 转换后的当月最后一天
 	 */
@@ -216,6 +231,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月最后一天
+	 * 
 	 * @param date 需要转换的Date类型
 	 * @return 转换后的当月最后一天
 	 */
@@ -228,6 +244,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月最后一天23:59:59
+	 * 
 	 * @param date 需要转换的LocalDateTime类型
 	 * @return 转换后的当月最后一天23:59:59
 	 */
@@ -239,6 +256,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当月最后一天23:59:59
+	 * 
 	 * @param date 需要转换的Date类型
 	 * @return 转换后的当月最后一天23:59:59
 	 */
@@ -251,6 +269,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年第一天
+	 * 
 	 * @param date 需要转换的LocalDate类型
 	 * @return 转换后的所属当年第一天
 	 */
@@ -262,6 +281,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年第一天
+	 * 
 	 * @param date 需要转换的Date类型
 	 * @return 转换后的所属当年第一天
 	 */
@@ -274,6 +294,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年第一天00:00:00
+	 * 
 	 * @param date 需要转换的LocalDateTime类型
 	 * @return 转换后的所属当年第一天00:00:00
 	 */
@@ -285,6 +306,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年第一天00:00:00
+	 * 
 	 * @param date 需要转换的Date类型
 	 * @return 转换后的所属当年第一天00:00:00
 	 */
@@ -297,6 +319,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年最后一天
+	 * 
 	 * @param date 需要转换的LocalDate类型
 	 * @return 转换后的所属当年最后一天
 	 */
@@ -308,6 +331,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年最后一天
+	 * 
 	 * @param date 需要转换的Date类型
 	 * @return 转换后的所属当年最后一天
 	 */
@@ -320,6 +344,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年最后一天23:59:59
+	 * 
 	 * @param date 需要转换的LocalDateTime类型
 	 * @return 转换后的所属当年最后一天23:59:59
 	 */
@@ -331,6 +356,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期所属当年最后一天23:59:59
+	 * 
 	 * @param date 需要转换的Date类型
 	 * @return 转换后的所属当年最后一天23:59:59
 	 */
@@ -343,6 +369,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 判断给定日期是否在当前日期后
+	 * 
 	 * @param date 需要判断的日期
 	 * @return 在当前日期后则返回true
 	 */
@@ -353,6 +380,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 判断给定日期是否在当前日期后
+	 * 
 	 * @param date 需要判断的日期
 	 * @return 在当前日期后则返回true
 	 */
@@ -363,6 +391,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 判断给定日期是否在当前日期前
+	 * 
 	 * @param date 需要判断的日期
 	 * @return 在当前日期前则返回true
 	 */
@@ -373,6 +402,7 @@ public abstract class DateUtils {
 
 	/**
 	 * 判断给定日期是否在当前日期前
+	 * 
 	 * @param date 需要判断的日期
 	 * @return 在当前日期前则返回true
 	 */
@@ -383,7 +413,8 @@ public abstract class DateUtils {
 
 	/**
 	 * 获取给定日期的格式化字符串
-	 * @param date LocalDateTime日期
+	 * 
+	 * @param date   LocalDateTime日期
 	 * @param format 需要返回的格式
 	 * @return 格式化字符串
 	 */
@@ -394,6 +425,7 @@ public abstract class DateUtils {
 	/**
 	 * 获取给定日期的格式化字符串<br>
 	 * 格式化形式为:yyyyMMddHHmmss
+	 * 
 	 * @param date LocalDateTime日期
 	 * @return 格式化字符串
 	 */
@@ -404,10 +436,45 @@ public abstract class DateUtils {
 	/**
 	 * 获取当前日期的格式化字符串<br>
 	 * 格式化形式为:yyyyMMddHHmmss
+	 * 
 	 * @return 格式化字符串
 	 */
 	public static String getNowDateTimeInFormat() {
 		return getDateTimeInFormat(LocalDateTime.now());
+	}
+
+	/**
+	 * 获取给定Tick时间的最后时间（xx时xx分xx秒9999）
+	 * 
+	 * @param dt 需要转换的LocalDateTime类型
+	 * @return 转换后Tick最后时间（xx时xx分xx秒9999）
+	 */
+	public static LocalDateTime getTickEnd(LocalDateTime dt) {
+		if (dt == null)
+			dt = LocalDateTime.now();
+		return dt.withNano(999999999);
+	}
+
+	/**
+	 * 将LocalDateTime类型转换成Tick字符串'yyyy-MM-dd'T'HH:mm:ss.SSS'格式
+	 * 
+	 * @param dt 需要转换的LocalDateTime
+	 * @return 格式化后的字符串
+	 */
+	public static String tickFormat(LocalDateTime dt) {
+		return dt.format(DateTimeFormatter.ofPattern(DATATIMEF_TICK_FORMAT));
+	}
+
+	/**
+	 * 将LocalDateTime类型转换成Tick字符串'yyyy-MM-dd'T'HH:mm:ss.SSS'格式
+	 * 
+	 * @param dt 需要转换的LocalDateTime
+	 * @return 格式化后的字符串
+	 */
+	public static LocalDateTime longToLocalDateTime(long timestamp) {
+		Instant instant = Instant.ofEpochMilli(timestamp);
+		ZoneId zone = ZoneId.systemDefault();
+		return LocalDateTime.ofInstant(instant, zone);
 	}
 
 }

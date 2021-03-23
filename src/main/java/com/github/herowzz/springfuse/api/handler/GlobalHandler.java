@@ -10,8 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -80,6 +82,13 @@ public class GlobalHandler {
 		BindingResult bindingResult = ((MethodArgumentNotValidException) ex).getBindingResult();
 		for (FieldError fieldError : bindingResult.getFieldErrors()) {
 			sb.append(fieldError.getField()).append(fieldError.getDefaultMessage()).append(",");
+		}
+		if (bindingResult instanceof BeanPropertyBindingResult) {
+			BeanPropertyBindingResult beanRes = ((BeanPropertyBindingResult) bindingResult);
+			for (ObjectError error : beanRes.getAllErrors()) {
+				sb.append(error.getDefaultMessage()).append(",");
+			}
+			System.out.println(beanRes);
 		}
 		sb.deleteCharAt(sb.length() - 1);
 		sb.append(")");
