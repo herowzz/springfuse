@@ -466,10 +466,10 @@ public abstract class DateUtils {
 	}
 
 	/**
-	 * 将LocalDateTime类型转换成Tick字符串'yyyy-MM-dd'T'HH:mm:ss.SSS'格式
+	 * 将timestamp时间戳转换成LocalDateTime类型
 	 * 
-	 * @param dt 需要转换的LocalDateTime
-	 * @return 格式化后的字符串
+	 * @param timestamp 时间戳
+	 * @return LocalDateTime类型
 	 */
 	public static LocalDateTime longToLocalDateTime(long timestamp) {
 		Instant instant = Instant.ofEpochMilli(timestamp);
