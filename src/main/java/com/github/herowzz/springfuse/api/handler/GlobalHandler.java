@@ -88,7 +88,6 @@ public class GlobalHandler {
 			for (ObjectError error : beanRes.getAllErrors()) {
 				sb.append(error.getDefaultMessage()).append(",");
 			}
-			System.out.println(beanRes);
 		}
 		sb.deleteCharAt(sb.length() - 1);
 		sb.append(")");
