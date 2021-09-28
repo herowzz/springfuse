@@ -1,5 +1,6 @@
 package com.github.herowzz.springfuse.data.domain;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -10,6 +11,7 @@ import com.github.herowzz.springfuse.data.domain.annotation.Comment;
 
 /**
  * 实体类基类,主键为UUID生成方式
+ * 
  * @author wangzz
  */
 @MappedSuperclass
@@ -21,6 +23,7 @@ public abstract class BaseUidEntity extends BaseEntity {
 	@GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
 	@GeneratedValue(generator = "uuid")
 	@Comment("主键,UUID")
+	@Column(length = 50)
 	protected String id;
 
 	public String getId() {
