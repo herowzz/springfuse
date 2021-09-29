@@ -10,6 +10,7 @@ import com.github.herowzz.springfuse.data.domain.annotation.Comment;
 
 /**
  * 登录用户基类
+ * 
  * @author wangzz
  */
 @MappedSuperclass
@@ -17,7 +18,7 @@ public class BaseUser extends BaseUidEntity {
 
 	private static final long serialVersionUID = 1289678870273931913L;
 
-	@Column(length = 20)
+	@Column(unique = true, updatable = false, nullable = false, length = 20)
 	@Comment("用户名")
 	private String username;
 
