@@ -31,35 +31,35 @@ public abstract class BaseEntity implements Serializable {
 	 * 创建时间
 	 */
 	@Comment("创建时间")
-	@Column(updatable = false, nullable = false)
+	@Column(updatable = false)
 	protected LocalDateTime createTime;
 
 	/**
 	 * 创建人ID
 	 */
 	@Comment("创建人ID")
-	@Column(name = "create_user_id", updatable = false, length = 50)
+	@Column(updatable = false, length = 50)
 	protected String createUserId;
 
 	/**
 	 * 创建人姓名
 	 */
 	@Comment("创建人姓名")
-	@Column(name = "create_user_name", updatable = false, length = 50)
+	@Column(updatable = false, length = 50)
 	protected String createUserName;
 
 	/**
 	 * 修改人ID
 	 */
 	@Comment("修改人ID")
-	@Column(name = "update_user_id", length = 50)
+	@Column(length = 50)
 	protected String updateUserId;
 
 	/**
 	 * 修改人姓名
 	 */
 	@Comment("修改人姓名")
-	@Column(name = "update_user_name", length = 50)
+	@Column(length = 50)
 	protected String updateUserName;
 
 	/**
