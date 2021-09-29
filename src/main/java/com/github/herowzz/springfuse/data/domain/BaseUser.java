@@ -22,11 +22,9 @@ public class BaseUser extends BaseUidEntity {
 	@Comment("用户名")
 	private String username;
 
-	@Column(length = 20)
 	@Comment("密码")
 	private String password;
 
-	@Column(length = 50)
 	@Comment("真实姓名")
 	private String realname;
 
@@ -36,7 +34,6 @@ public class BaseUser extends BaseUidEntity {
 	@Comment("上次登录时间")
 	private LocalDateTime lastLoginTime;
 
-	@Column(length = 20)
 	@Comment("上次登录IP")
 	private String lastLoginIp;
 
